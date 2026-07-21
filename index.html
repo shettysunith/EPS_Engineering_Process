@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Engineering Process Hub</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="side-nav" aria-label="Primary">
+        <a class="brand" href="#/home" aria-label="Engineering Process Hub home">
+          <span class="brand-icon" aria-hidden="true"></span>
+          <span>
+            <strong>Engineering Processes</strong>
+            <small>Process workspace</small>
+          </span>
+        </a>
+        <nav>
+          <a href="#/home" data-nav="home">
+            <span class="nav-icon home-icon" aria-hidden="true"></span>
+            Home
+          </a>
+          <a href="#/process/system-architectural-design" data-nav="process">
+            <span class="nav-icon process-icon" aria-hidden="true"></span>
+            Process
+          </a>
+        </nav>
+        <div class="side-footer">
+          <div class="avatar" aria-hidden="true">EP</div>
+          <span>Process Team</span>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="top-bar">
+          <label class="search-field">
+            <span aria-hidden="true"></span>
+            <input id="globalSearch" type="search" placeholder="Search process content" autocomplete="off" />
+          </label>
+          <a class="home-link" href="#/home">Home</a>
+        </header>
+
+        <section id="app" class="page" aria-live="polite"></section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
