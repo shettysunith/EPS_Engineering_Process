@@ -337,11 +337,14 @@ function renderSearchResults(query) {
   const normalized = query.trim().toLowerCase();
   if (!normalized) return "";
 
-  const results = processes.filter((process) => {
+  const processResults = processes.filter((process) => {
     return `${process.title} ${process.group} ${process.summary}`.toLowerCase().includes(normalized);
   });
+  const aspiceResults = window.AspiceMatrix.searchEntries.filter((entry) => {
+    return `${entry.title} ${entry.detail} ${entry.keywords}`.toLowerCase().includes(normalized);
+  });
 
-  if (!results.length) {
+  if (!processResults.length && !aspiceResults.length) {
     return `<div class="empty-state">No matching process content found for "${escapeHtml(query)}".</div>`;
   }
 
@@ -349,12 +352,22 @@ function renderSearchResults(query) {
     <section class="search-results">
       <h2>Search results</h2>
       <div class="result-list">
-        ${results
+        ${processResults
           .map(
             (process) => `
               <a href="${processHref(process.id)}">
                 <strong>${escapeHtml(process.title)}</strong>
                 <small>${escapeHtml(process.group)}</small>
+              </a>
+            `
+          )
+          .join("")}
+        ${aspiceResults
+          .map(
+            (entry) => `
+              <a href="${entry.href}">
+                <strong>${escapeHtml(entry.title)}</strong>
+                <small>${escapeHtml(entry.detail)}</small>
               </a>
             `
           )
@@ -534,8 +547,13 @@ function renderDetail(id) {
 
 function updateActiveNav() {
   const isProcess = location.hash.startsWith("#/process/");
+  const isAspice = location.hash.startsWith("#/aspice");
   document.querySelectorAll("[data-nav]").forEach((link) => {
-    const shouldActivate = isProcess ? link.dataset.nav === "process" : link.dataset.nav === "home";
+    const shouldActivate = isAspice
+      ? link.dataset.nav === "aspice"
+      : isProcess
+        ? link.dataset.nav === "process"
+        : link.dataset.nav === "home";
     link.classList.toggle("active", shouldActivate);
   });
 }
@@ -543,7 +561,9 @@ function updateActiveNav() {
 function route() {
   updateActiveNav();
   const hash = location.hash || "#/home";
-  if (hash.startsWith("#/process/")) {
+  if (hash.startsWith("#/aspice")) {
+    app.innerHTML = window.AspiceMatrix.renderRoute(hash, searchInput.value);
+  } else if (hash.startsWith("#/process/")) {
     renderDetail(hash.replace("#/process/", ""));
   } else {
     renderHome();
