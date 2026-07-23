@@ -322,9 +322,7 @@
           <strong>Decision at each maturity</strong>
           <span class="decision-go">Go</span>
           <span class="decision-conditional">Conditional Go</span>
-          <span class="decision-hold">Hold</span>
-          <span class="decision-recycle">Recycle</span>
-          <span class="decision-stop">Kill</span>
+          <span class="decision-stop">No Go</span>
         </div>
       </section>
     `;
