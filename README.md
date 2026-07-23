@@ -5,11 +5,11 @@ stage-gate map and an ASPICE capability learning matrix.
 
 ## Live site
 
-https://arunjeeva90.github.io/Engineering-Process/#/home
+https://shettysunith.github.io/EPS_Engineering_Process/#/home
 
 ASPICE capability matrix:
 
-https://arunjeeva90.github.io/Engineering-Process/#/aspice
+https://shettysunith.github.io/EPS_Engineering_Process/#/aspice
 
 ## Run locally
 
