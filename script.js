@@ -336,16 +336,24 @@ function renderDiagram() {
 function renderSearchResults(query) {
   const normalized = query.trim().toLowerCase();
   if (!normalized) return "";
+  const terms = normalized.split(/\s+/);
+  const matchesSearch = (value) => {
+    const searchable = value.toLowerCase();
+    return terms.every((term) => searchable.includes(term));
+  };
 
   const processResults = processes.filter((process) => {
-    return `${process.title} ${process.group} ${process.summary}`.toLowerCase().includes(normalized);
+    return matchesSearch(`${process.title} ${process.group} ${process.summary}`);
   });
   const aspiceResults = window.AspiceMatrix.searchEntries.filter((entry) => {
-    return `${entry.title} ${entry.detail} ${entry.keywords}`.toLowerCase().includes(normalized);
+    return matchesSearch(`${entry.title} ${entry.detail} ${entry.keywords}`);
+  });
+  const maturityResults = window.MaturityMap.searchEntries.filter((entry) => {
+    return matchesSearch(`${entry.title} ${entry.detail} ${entry.keywords}`);
   });
 
-  if (!processResults.length && !aspiceResults.length) {
-    return `<div class="empty-state">No matching process content found for "${escapeHtml(query)}".</div>`;
+  if (!processResults.length && !aspiceResults.length && !maturityResults.length) {
+    return `<div class="empty-state">No matching content found for "${escapeHtml(query)}".</div>`;
   }
 
   return `
@@ -363,6 +371,16 @@ function renderSearchResults(query) {
           )
           .join("")}
         ${aspiceResults
+          .map(
+            (entry) => `
+              <a href="${entry.href}">
+                <strong>${escapeHtml(entry.title)}</strong>
+                <small>${escapeHtml(entry.detail)}</small>
+              </a>
+            `
+          )
+          .join("")}
+        ${maturityResults
           .map(
             (entry) => `
               <a href="${entry.href}">
@@ -411,6 +429,7 @@ function renderHome() {
         </div>
       </div>
       ${resultHtml}
+      ${window.MaturityMap.renderRail()}
       ${
         viewMode === "list"
           ? listHtml
@@ -548,10 +567,11 @@ function renderDetail(id) {
 function updateActiveNav() {
   const isProcess = location.hash.startsWith("#/process/");
   const isAspice = location.hash.startsWith("#/aspice");
+  const isMaturity = location.hash.startsWith("#/maturity/");
   document.querySelectorAll("[data-nav]").forEach((link) => {
     const shouldActivate = isAspice
       ? link.dataset.nav === "aspice"
-      : isProcess
+      : isProcess || isMaturity
         ? link.dataset.nav === "process"
         : link.dataset.nav === "home";
     link.classList.toggle("active", shouldActivate);
@@ -563,6 +583,8 @@ function route() {
   const hash = location.hash || "#/home";
   if (hash.startsWith("#/aspice")) {
     app.innerHTML = window.AspiceMatrix.renderRoute(hash, searchInput.value);
+  } else if (hash.startsWith("#/maturity/")) {
+    app.innerHTML = window.MaturityMap.renderRoute(hash);
   } else if (hash.startsWith("#/process/")) {
     renderDetail(hash.replace("#/process/", ""));
   } else {
