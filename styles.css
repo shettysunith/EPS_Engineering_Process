@@ -214,8 +214,17 @@ input {
   color: #ff6b72;
 }
 
+.side-nav nav a.utility-nav .nav-icon {
+  color: #b7c2ce;
+}
+
 .side-nav nav a.utility-nav.active,
 .side-nav nav a.utility-nav:hover {
+  color: #ffffff;
+}
+
+.side-nav nav a.utility-nav.active .nav-icon,
+.side-nav nav a.utility-nav:hover .nav-icon {
   color: #ffffff;
 }
 
@@ -258,21 +267,31 @@ input {
 .tools-icon::after { transform: rotate(-45deg); }
 
 .trainings-icon {
-  width: 27px;
-  height: 21px;
+  width: 30px;
+  height: 24px;
   border: 3px solid currentColor;
   border-top: 0;
-  transform: perspective(30px) rotateX(-20deg);
+  border-radius: 0 0 4px 4px;
 }
 
 .trainings-icon::before {
   position: absolute;
-  top: -8px;
-  left: 7px;
-  width: 8px;
-  height: 8px;
+  top: -17px;
+  left: 8px;
+  width: 10px;
+  height: 10px;
   border: 3px solid currentColor;
-  border-radius: 50%;
+  border-radius: 50% 50% 45% 45%;
+  content: "";
+}
+
+.trainings-icon::after {
+  position: absolute;
+  top: 5px;
+  left: 12px;
+  width: 3px;
+  height: 20px;
+  background: currentColor;
   content: "";
 }
 
@@ -542,19 +561,23 @@ input {
 }
 
 .mobility-icon::before {
-  width: 32px;
-  height: 17px;
-  border-radius: 8px 10px 4px 4px;
+  bottom: 14px;
+  width: 43px;
+  height: 25px;
+  border-radius: 9px 11px 4px 4px;
   background: currentColor;
+  clip-path: polygon(0 60%, 17% 60%, 34% 4%, 64% 4%, 84% 60%, 100% 60%, 100% 100%, 0 100%);
 }
 
 .mobility-icon::after {
-  bottom: 14px;
+  bottom: 8px;
+  left: 10px;
   width: 8px;
   height: 8px;
   border: 3px solid currentColor;
   border-radius: 50%;
-  box-shadow: 17px 0 0 -3px #fff, 17px 0 0 0 currentColor;
+  background: #ffffff;
+  box-shadow: 24px 0 0 -3px #fff, 24px 0 0 0 currentColor;
 }
 
 .robotics-icon::before {
