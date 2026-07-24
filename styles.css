@@ -209,6 +209,100 @@ input {
   line-height: 1.25;
 }
 
+.side-nav nav a.utility-nav {
+  min-height: 58px;
+  color: #ff6b72;
+}
+
+.side-nav nav a.utility-nav.active,
+.side-nav nav a.utility-nav:hover {
+  color: #ffffff;
+}
+
+.roles-icon {
+  width: 26px;
+  height: 18px;
+  border: 3px solid currentColor;
+  border-radius: 13px 13px 4px 4px;
+}
+
+.roles-icon::before {
+  position: absolute;
+  top: -15px;
+  left: 6px;
+  width: 9px;
+  height: 9px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  content: "";
+}
+
+.tools-icon {
+  width: 26px;
+  height: 26px;
+}
+
+.tools-icon::before,
+.tools-icon::after {
+  position: absolute;
+  top: 11px;
+  left: 0;
+  width: 27px;
+  height: 4px;
+  border-radius: 4px;
+  background: currentColor;
+  content: "";
+}
+
+.tools-icon::before { transform: rotate(45deg); }
+.tools-icon::after { transform: rotate(-45deg); }
+
+.trainings-icon {
+  width: 27px;
+  height: 21px;
+  border: 3px solid currentColor;
+  border-top: 0;
+  transform: perspective(30px) rotateX(-20deg);
+}
+
+.trainings-icon::before {
+  position: absolute;
+  top: -8px;
+  left: 7px;
+  width: 8px;
+  height: 8px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  content: "";
+}
+
+.organization-icon {
+  width: 28px;
+  height: 26px;
+  border-top: 3px solid currentColor;
+}
+
+.organization-icon::before,
+.organization-icon::after {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  content: "";
+}
+
+.organization-icon::before {
+  top: -8px;
+  left: 8px;
+}
+
+.organization-icon::after {
+  top: 15px;
+  left: 0;
+  box-shadow: 15px 0 0 -3px #263443, 15px 0 0 0 currentColor;
+}
+
 .side-footer {
   display: flex;
   align-items: center;
@@ -298,6 +392,59 @@ input {
 
 .page {
   padding: 28px 34px 44px;
+}
+
+.workspace-page {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.workspace-page .detail-hero {
+  margin-bottom: 24px;
+}
+
+.workspace-role-grid {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
+.workspace-role-grid .role-card {
+  min-height: 150px;
+}
+
+.workspace-role-grid .role-card small {
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.workspace-table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+}
+
+.workspace-table th,
+.workspace-table td {
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.workspace-table th {
+  background: var(--blue);
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.workspace-table tbody tr:nth-child(even) {
+  background: #f7f9fb;
 }
 
 .home-page {
