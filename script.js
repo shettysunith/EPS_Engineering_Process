@@ -279,6 +279,95 @@ const app = document.getElementById("app");
 const searchInput = document.getElementById("globalSearch");
 let viewMode = "map";
 
+const engineeringRoles = [
+  ["Project Manager", "Owns project scope, planning, resources, schedule, risks, stakeholder communication, and delivery decisions."],
+  ["System Engineer", "Translates stakeholder needs into complete system requirements and maintains technical consistency and traceability."],
+  ["Sys Architect", "Defines the system architecture, interfaces, allocations, technical constraints, and architecture decisions."],
+  ["Software Developer", "Designs, implements, reviews, and unit-verifies software in line with approved requirements and coding standards."],
+  ["System Tester", "Plans and executes system qualification tests, records evidence, manages defects, and reports verification status."],
+  ["Integration Engineer", "Plans and performs software, hardware, and system integration; resolves interface issues and records results."],
+  ["HW Engineer", "Develops, verifies, and maintains hardware requirements, design, prototypes, and compliance evidence."],
+  ["Mechanical Engineer", "Develops mechanical concepts, detailed designs, drawings, samples, tolerance evidence, and verification support."],
+  ["Functional Safety Manager", "Plans and governs the functional safety lifecycle, confirmation measures, safety case, and assessment closure."],
+  ["Cyber Security Manager", "Plans cybersecurity activities, oversees threat and risk analysis, and maintains cybersecurity case evidence."],
+  ["Configuration Manager", "Controls configuration items, baselines, version status, change records, and release integrity."],
+  ["QA", "Assures process compliance through audits, reviews, quality reporting, corrective actions, and continuous improvement."],
+  ["SQM", "Manages supplier quality planning, supplier performance, deliverable quality, escalation, and corrective actions."]
+];
+
+const toolMatrix = [
+  ["Project planning and tracking", "Jira, Microsoft Project"],
+  ["Requirements management and traceability", "IBM DOORS Next, Siemens Polarion"],
+  ["System and software architecture", "Sparx Enterprise Architect, Capella"],
+  ["Software development and version control", "Visual Studio Code, Git, GitLab"],
+  ["Continuous integration and build", "Jenkins, GitLab CI"],
+  ["Unit, integration, and system testing", "Vector CANoe, dSPACE, Jira Xray"],
+  ["Hardware design and simulation", "Altium Designer, LTspice"],
+  ["Mechanical design and data management", "CATIA, Siemens Teamcenter"],
+  ["Functional safety analysis", "Ansys medini analyze"],
+  ["Cybersecurity threat and risk analysis", "Ansys medini analyze, ThreatGet"],
+  ["Configuration and release management", "GitLab, Siemens Teamcenter"],
+  ["Quality, problem, and supplier management", "Jira, Confluence"]
+];
+
+const roleTraining = [
+  ["Project Manager", "Project management fundamentals; ASPICE awareness; risk and change management; leadership and stakeholder communication."],
+  ["System Engineer", "Systems engineering fundamentals; requirements engineering; ASPICE SYS.2/SYS.3; traceability and verification planning."],
+  ["Sys Architect", "System architecture and interface design; ASPICE SYS.3; model-based systems engineering; technical decision management."],
+  ["Software Developer", "Software development lifecycle; coding standard; Git workflow; unit testing; ASPICE SWE.3/SWE.4."],
+  ["System Tester", "Test design and execution; requirements-based testing; defect management; ASPICE SYS.5; test tool training."],
+  ["Integration Engineer", "Integration strategy; interface management; integration testing; ASPICE SYS.4/SWE.5."],
+  ["HW Engineer", "Hardware development lifecycle; schematic and PCB design; hardware verification; applicable EMC and reliability basics."],
+  ["Mechanical Engineer", "Mechanical design fundamentals; CAD and drawing control; GD&T; design verification and material selection."],
+  ["Functional Safety Manager", "ISO 26262 functional safety management; HARA; safety case development; confirmation measures."],
+  ["Cyber Security Manager", "ISO/SAE 21434 cybersecurity management; TARA; cybersecurity case; incident and vulnerability management."],
+  ["Configuration Manager", "Configuration management planning; baseline and release control; change control; Git or PLM administration."],
+  ["QA", "Quality assurance planning; ASPICE process assessment awareness; audit techniques; nonconformity and corrective action management."],
+  ["SQM", "Supplier quality management; APQP/PPAP awareness; supplier audits; 8D problem solving and escalation."]
+];
+
+function renderWorkspaceIntro(title, description) {
+  return `
+    <div class="workspace-page">
+      <div class="breadcrumb"><a href="#/home">Home</a><span>/</span><span>${escapeHtml(title)}</span></div>
+      <section class="detail-hero"><div class="hero-panel"><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p></div></section>
+    `;
+}
+
+function renderRolesPage() {
+  app.innerHTML = `
+    ${renderWorkspaceIntro("Roles", "Role responsibilities clarify accountability across planning, development, verification, quality, safety, cybersecurity, and supplier collaboration.")}
+      <section class="info-block"><h2>Engineering Roles and Responsibilities</h2><div class="role-grid workspace-role-grid">
+        ${engineeringRoles.map(([role, responsibility]) => `<article class="role-card"><strong>${escapeHtml(role)}</strong><small>${escapeHtml(responsibility)}</small></article>`).join("")}
+      </div></section>
+    </div>`;
+}
+
+function renderToolsPage() {
+  app.innerHTML = `
+    ${renderWorkspaceIntro("Tools", "The tool matrix provides a starting point for selecting controlled tools for engineering work. The Process Team must confirm the organization-approved toolset before use.")}
+      <section class="info-block"><h2>Activities and Tooling</h2><div class="table-scroll"><table class="workspace-table"><thead><tr><th>Activity</th><th>Proposed approved tools</th></tr></thead><tbody>
+        ${toolMatrix.map(([activity, tools]) => `<tr><td>${escapeHtml(activity)}</td><td>${escapeHtml(tools)}</td></tr>`).join("")}
+      </tbody></table></div></section>
+    </div>`;
+}
+
+function renderTrainingsPage() {
+  app.innerHTML = `
+    ${renderWorkspaceIntro("Trainings", "Each role should complete its baseline process and technical training before taking responsibility for related work products or approval decisions.")}
+      <section class="info-block"><h2>Minimum Role-Based Training</h2><div class="table-scroll"><table class="workspace-table"><thead><tr><th>Role</th><th>Minimum training</th></tr></thead><tbody>
+        ${roleTraining.map(([role, training]) => `<tr><td>${escapeHtml(role)}</td><td>${escapeHtml(training)}</td></tr>`).join("")}
+      </tbody></table></div></section>
+    </div>`;
+}
+
+function renderOrganizationUnitsPage() {
+  app.innerHTML = `
+    ${renderWorkspaceIntro("Organization Units", "Organization-unit ownership, contacts, and interfaces will be added when the organization structure is confirmed.")}
+      <section class="empty-state"><strong>Organization units are not defined yet</strong><span>This area is intentionally left blank for now.</span></section>
+    </div>`;
+}
+
 function escapeHtml(value) {
   return String(value)
     .replace(/&/g, "&amp;")
@@ -568,8 +657,11 @@ function updateActiveNav() {
   const isProcess = location.hash.startsWith("#/process/");
   const isAspice = location.hash.startsWith("#/aspice");
   const isMaturity = location.hash.startsWith("#/maturity/");
+  const section = (location.hash || "#/home").replace("#/", "").split("/")[0];
   document.querySelectorAll("[data-nav]").forEach((link) => {
-    const shouldActivate = isAspice
+    const shouldActivate = ["roles", "tools", "trainings", "organization-units"].includes(section)
+      ? link.dataset.nav === section
+      : isAspice
       ? link.dataset.nav === "aspice"
       : isProcess || isMaturity
         ? link.dataset.nav === "process"
@@ -587,6 +679,14 @@ function route() {
     app.innerHTML = window.MaturityMap.renderRoute(hash);
   } else if (hash.startsWith("#/process/")) {
     renderDetail(hash.replace("#/process/", ""));
+  } else if (hash === "#/roles") {
+    renderRolesPage();
+  } else if (hash === "#/tools") {
+    renderToolsPage();
+  } else if (hash === "#/trainings") {
+    renderTrainingsPage();
+  } else if (hash === "#/organization-units") {
+    renderOrganizationUnitsPage();
   } else {
     renderHome();
   }
