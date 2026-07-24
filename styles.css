@@ -447,6 +447,161 @@ input {
   background: #f7f9fb;
 }
 
+.organization-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(190px, 1fr));
+  gap: 24px;
+}
+
+.organization-card {
+  min-width: 0;
+}
+
+.organization-card header {
+  display: grid;
+  min-height: 154px;
+  place-items: center;
+  align-content: center;
+  gap: 12px;
+  padding: 20px;
+  border-radius: 10px;
+  color: #ffffff;
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(25, 38, 52, 0.2);
+}
+
+.organization-card h2 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.18;
+}
+
+.organization-content {
+  min-height: 236px;
+  margin-top: 14px;
+  padding: 14px 18px;
+  border: 1px solid var(--organization-accent);
+  border-radius: 10px;
+  background: var(--organization-soft);
+  box-shadow: 0 7px 16px rgba(25, 38, 52, 0.11);
+}
+
+.organization-content::before {
+  display: block;
+  height: 2px;
+  margin-bottom: 12px;
+  background: var(--organization-accent);
+  content: "";
+}
+
+.organization-content ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.organization-content li {
+  margin: 0 0 10px;
+  color: #243346;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.organization-power { --organization-accent: #29497f; --organization-soft: #e7eef9; }
+.organization-mobility { --organization-accent: #cf9900; --organization-soft: #fff5da; }
+.organization-robotics { --organization-accent: #315fae; --organization-soft: #e8effb; }
+.organization-esdm { --organization-accent: #65717f; --organization-soft: #f0f2f5; }
+.organization-strategic { --organization-accent: #376637; --organization-soft: #edf5eb; }
+.organization-power header { background: #29497f; }
+.organization-mobility header { background: #cf9900; }
+.organization-robotics header { background: #315fae; }
+.organization-esdm header { background: #65717f; }
+.organization-strategic header { background: #376637; }
+
+.organization-icon {
+  position: relative;
+  display: grid;
+  width: 62px;
+  height: 62px;
+  place-items: center;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.organization-icon::before,
+.organization-icon::after {
+  position: absolute;
+  color: var(--organization-accent);
+  content: "";
+}
+
+.power-icon::before {
+  width: 20px;
+  height: 34px;
+  background: currentColor;
+  clip-path: polygon(42% 0, 100% 0, 65% 42%, 95% 42%, 30% 100%, 43% 57%, 15% 57%);
+}
+
+.mobility-icon::before {
+  width: 32px;
+  height: 17px;
+  border-radius: 8px 10px 4px 4px;
+  background: currentColor;
+}
+
+.mobility-icon::after {
+  bottom: 14px;
+  width: 8px;
+  height: 8px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  box-shadow: 17px 0 0 -3px #fff, 17px 0 0 0 currentColor;
+}
+
+.robotics-icon::before {
+  width: 30px;
+  height: 22px;
+  border-radius: 5px;
+  background: currentColor;
+}
+
+.robotics-icon::after {
+  top: 13px;
+  width: 4px;
+  height: 6px;
+  border-radius: 4px;
+  background: currentColor;
+  box-shadow: -12px 10px 0 2px #fff, 12px 10px 0 2px #fff;
+}
+
+.esdm-icon::before {
+  width: 21px;
+  height: 31px;
+  border-radius: 4px;
+  background: currentColor;
+  box-shadow: -16px 0 0 -8px currentColor, 16px 0 0 -8px currentColor;
+}
+
+.esdm-icon::after {
+  width: 38px;
+  height: 38px;
+  border-top: 3px dotted currentColor;
+  border-bottom: 3px dotted currentColor;
+}
+
+.strategic-icon::before {
+  width: 28px;
+  height: 34px;
+  background: currentColor;
+  clip-path: polygon(50% 0, 100% 17%, 90% 68%, 50% 100%, 10% 68%, 0 17%);
+}
+
+.strategic-icon::after {
+  width: 8px;
+  height: 19px;
+  border-radius: 0 0 8px 8px;
+  background: #ffffff;
+}
+
 .home-page {
   max-width: 1480px;
   margin: 0 auto;
@@ -3246,6 +3401,10 @@ input {
 }
 
 @media (max-width: 1180px) {
+  .organization-grid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+
   .maturity-map-heading {
     align-items: start;
     flex-direction: column;
@@ -3430,6 +3589,14 @@ input {
 }
 
 @media (max-width: 860px) {
+  .organization-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .organization-content {
+    min-height: 0;
+  }
+
   .app-shell {
     grid-template-columns: 1fr;
   }
