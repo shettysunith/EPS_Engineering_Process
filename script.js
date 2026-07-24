@@ -367,7 +367,7 @@ function renderOrganizationUnitsPage() {
       <section class="organization-grid" aria-label="L&T EPS business verticals">
         ${[
           ["Power Electronics", "power", ["BESS", "PV Central Inverters", "EV Chargers", "Micro-grid Components"]],
-          ["Mobility", "mobility", ["L2 ADAS", "Traction Converters"]],
+          ["Mobility", "mobility", ["ADAS", "EV Powertrain", "Telematics Control Unit (TCU)"]],
           ["Industrial Robotics & Automation", "robotics", ["Construction Robots", "Industry 5.0 IoT automation products & services"]],
           ["Electronics System Design & Manufacturing", "esdm", ["Design & Engineering", "Manufacturing", "Testing & Validation", "Sourcing"]],
           ["Strategic Electronics", "strategic", ["RFSC Systems", "C2 Systems", "Avionics", "CBRNE", "UDA / Sonar Systems"]]
