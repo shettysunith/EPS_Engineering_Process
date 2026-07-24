@@ -282,7 +282,7 @@
   }
 
   function maturityHref(id) {
-    return `#/maturity/${id}`;
+    return `#/phases-and-milestones/${id}`;
   }
 
   function renderRail() {
@@ -459,9 +459,7 @@
     return `
       <div class="maturity-page" style="--maturity-color:${maturity.color}">
         <div class="breadcrumb">
-          <a href="#/home">Home</a>
-          <span>/</span>
-          <span>Maturity map</span>
+          <a href="#/phases-and-milestones">Phases and Milestones</a>
           <span>/</span>
           <span>${maturity.code}</span>
         </div>
@@ -546,12 +544,12 @@
               ${
                 previous
                   ? `<a href="${maturityHref(previous.id)}"><small>Previous</small><strong>${previous.code} - ${escapeHtml(previous.title)}</strong></a>`
-                  : `<a href="#/home"><small>Return</small><strong>Engineering process map</strong></a>`
+                  : `<a href="#/phases-and-milestones"><small>Return</small><strong>Phases and Milestones</strong></a>`
               }
               ${
                 next
                   ? `<a href="${maturityHref(next.id)}"><small>Next</small><strong>${next.code} - ${escapeHtml(next.title)}</strong></a>`
-                  : `<a href="#/home"><small>Complete</small><strong>Return to lifecycle map</strong></a>`
+                  : `<a href="#/phases-and-milestones"><small>Complete</small><strong>Return to phases and milestones</strong></a>`
               }
             </nav>
           </main>
@@ -561,7 +559,7 @@
   }
 
   function renderRoute(hash) {
-    const id = hash.replace("#/maturity/", "").split(/[/?]/)[0].toLowerCase();
+    const id = hash.replace("#/phases-and-milestones/", "").replace("#/maturity/", "").split(/[/?]/)[0].toLowerCase();
     return renderDetail(maturityById.get(id) || maturities[0]);
   }
 
