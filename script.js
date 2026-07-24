@@ -363,8 +363,20 @@ function renderTrainingsPage() {
 
 function renderOrganizationUnitsPage() {
   app.innerHTML = `
-    ${renderWorkspaceIntro("Organization Units", "Organization-unit ownership, contacts, and interfaces will be added when the organization structure is confirmed.")}
-      <section class="empty-state"><strong>Organization units are not defined yet</strong><span>This area is intentionally left blank for now.</span></section>
+    ${renderWorkspaceIntro("Organization Units", "L&T EPS operates across five major business verticals—Power Electronics, Mobility, Industrial Robotics & Automation, Electronics System Design & Manufacturing (ESDM), and Strategic Electronics—serving commercial, industrial, and defence markets.")}
+      <section class="organization-grid" aria-label="L&T EPS business verticals">
+        ${[
+          ["Power Electronics", "power", ["BESS", "PV Central Inverters", "EV Chargers", "Micro-grid Components"]],
+          ["Mobility", "mobility", ["L2 ADAS", "Traction Converters"]],
+          ["Industrial Robotics & Automation", "robotics", ["Construction Robots", "Industry 5.0 IoT automation products & services"]],
+          ["Electronics System Design & Manufacturing", "esdm", ["Design & Engineering", "Manufacturing", "Testing & Validation", "Sourcing"]],
+          ["Strategic Electronics", "strategic", ["RFSC Systems", "C2 Systems", "Avionics", "CBRNE", "UDA / Sonar Systems"]]
+        ].map(([title, icon, items]) => `
+          <article class="organization-card organization-${icon}">
+            <header><span class="organization-icon ${icon}-icon" aria-hidden="true"></span><h2>${escapeHtml(title)}</h2></header>
+            <div class="organization-content"><ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>
+          </article>`).join("")}
+      </section>
     </div>`;
 }
 
