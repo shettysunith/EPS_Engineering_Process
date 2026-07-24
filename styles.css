@@ -149,6 +149,42 @@ input {
   content: "";
 }
 
+.side-nav nav a.phases-nav {
+  min-height: 78px;
+  line-height: 1.2;
+}
+
+.phases-icon {
+  width: 30px;
+  height: 29px;
+}
+
+.phases-icon::before {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  bottom: 1px;
+  width: 4px;
+  border-radius: 4px;
+  background: currentColor;
+  content: "";
+}
+
+.phases-icon::after {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 16px;
+  height: 12px;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 0, 62% 50%, 100% 100%, 0 100%);
+  content: "";
+}
+
+.phases-page {
+  padding-top: 4px;
+}
+
 .process-icon {
   width: 28px;
   height: 26px;

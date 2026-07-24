@@ -530,12 +530,20 @@ function renderHome() {
         </div>
       </div>
       ${resultHtml}
-      ${window.MaturityMap.renderRail()}
       ${
         viewMode === "list"
           ? listHtml
           : renderDiagram()
       }
+    </div>
+  `;
+}
+
+function renderPhasesAndMilestonesPage() {
+  app.innerHTML = `
+    <div class="workspace-page phases-page">
+      <div class="breadcrumb"><a href="#/home">Home</a><span>/</span><span>Phases and Milestones</span></div>
+      ${window.MaturityMap.renderRail()}
     </div>
   `;
 }
@@ -668,10 +676,10 @@ function renderDetail(id) {
 function updateActiveNav() {
   const isProcess = location.hash.startsWith("#/process/");
   const isAspice = location.hash.startsWith("#/aspice");
-  const isMaturity = location.hash.startsWith("#/maturity/");
+  const isMaturity = location.hash.startsWith("#/phases-and-milestones/") || location.hash.startsWith("#/maturity/");
   const section = (location.hash || "#/home").replace("#/", "").split("/")[0];
   document.querySelectorAll("[data-nav]").forEach((link) => {
-    const shouldActivate = ["roles", "tools", "trainings", "organization-units"].includes(section)
+    const shouldActivate = ["roles", "tools", "trainings", "organization-units", "phases-and-milestones"].includes(section)
       ? link.dataset.nav === section
       : isAspice
       ? link.dataset.nav === "aspice"
@@ -687,7 +695,9 @@ function route() {
   const hash = location.hash || "#/home";
   if (hash.startsWith("#/aspice")) {
     app.innerHTML = window.AspiceMatrix.renderRoute(hash, searchInput.value);
-  } else if (hash.startsWith("#/maturity/")) {
+  } else if (hash === "#/phases-and-milestones") {
+    renderPhasesAndMilestonesPage();
+  } else if (hash.startsWith("#/phases-and-milestones/") || hash.startsWith("#/maturity/")) {
     app.innerHTML = window.MaturityMap.renderRoute(hash);
   } else if (hash.startsWith("#/process/")) {
     renderDetail(hash.replace("#/process/", ""));
