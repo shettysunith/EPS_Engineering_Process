@@ -185,6 +185,179 @@ input {
   padding-top: 4px;
 }
 
+.milestone-roadmap {
+  margin-top: 12px;
+}
+
+.roadmap-scroll {
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+.roadmap-canvas {
+  position: relative;
+  min-width: 850px;
+  height: 260px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.roadmap-band {
+  position: absolute;
+  top: 0;
+  height: 19px;
+  padding-top: 3px;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.roadmap-band-pre { left: 0; width: 16%; background: #72829a; }
+.roadmap-band-development { left: 16.7%; width: 66%; background: #2e73b2; }
+.roadmap-band-production { right: 0; width: 16%; background: #1ba164; }
+
+.roadmap-gate-row {
+  position: absolute;
+  top: 28px;
+  right: 0;
+  left: 0;
+  height: 50px;
+}
+
+.roadmap-entry,
+.roadmap-major-gate {
+  position: absolute;
+  display: grid;
+  height: 49px;
+  place-items: center;
+  color: #ffffff;
+  font-weight: 800;
+  line-height: 1.02;
+  text-align: center;
+}
+
+.roadmap-entry {
+  left: 0;
+  width: 16%;
+  background: #66738a;
+  font-size: 10px;
+  clip-path: polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%);
+}
+
+.roadmap-major-gate {
+  left: calc(var(--roadmap-x) - 8.3%);
+  width: 16.6%;
+  background: #2874bb;
+  clip-path: polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%, 12% 100%, 0 50%, 12% 0);
+}
+
+.roadmap-major-gate strong { font-size: 19px; }
+.roadmap-major-gate span {
+  position: absolute;
+  right: 9%;
+  bottom: 15px;
+  font-size: 6px;
+}
+.roadmap-major-2 { background: #c91766; }
+.roadmap-major-3 { background: #2f9dce; }
+.roadmap-major-4 { background: #7a3c9d; }
+.roadmap-major-5 { background: #1aa261; }
+
+.roadmap-milestone,
+.roadmap-lower-gate {
+  position: absolute;
+  z-index: 3;
+  left: calc(var(--roadmap-x) - 14px);
+  display: grid;
+  width: 28px;
+  justify-items: center;
+  color: #121c2b;
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.roadmap-milestone { top: 88px; }
+.roadmap-milestone i,
+.roadmap-lower-gate i {
+  display: block;
+  width: 0;
+  height: 0;
+  margin-top: 2px;
+  border-top: 11px solid var(--milestone-color, #11aee7);
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+}
+
+.roadmap-milestone i { filter: drop-shadow(0 0 0 #17243a); }
+.roadmap-milestone:hover strong,
+.roadmap-milestone:focus-visible strong { color: var(--milestone-color); }
+.roadmap-milestone:focus-visible { outline: 2px solid var(--milestone-color); outline-offset: 3px; }
+
+.roadmap-lower-gate { top: 120px; }
+.roadmap-lower-gate i { --milestone-color: #0da9df; }
+
+.roadmap-connector {
+  position: absolute;
+  z-index: 1;
+  top: 132px;
+  height: 16px;
+  border-bottom: 2px solid #121212;
+  border-left: 2px solid #121212;
+}
+
+.roadmap-connector::after {
+  position: absolute;
+  right: -1px;
+  bottom: -5px;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid #121212;
+  content: "";
+}
+
+.connector-1 { left: 8.7%; width: 6.3%; }
+.connector-2 { left: 20.2%; width: 12.9%; }
+.connector-3 { left: 50.6%; width: 5.8%; }
+.connector-4 { left: 61.8%; width: 6.2%; }
+.connector-5 { left: 70.8%; width: 8%; }
+
+.roadmap-phase-row {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: 1.2fr 0.92fr 1fr 1.13fr 3.5fr 1.27fr 1.25fr 1.26fr 1.04fr;
+  height: 45px;
+}
+
+.roadmap-phase {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+  border-right: 4px solid #ffffff;
+  background: #d7d7d7;
+  color: #2a2a2a;
+  font-size: 10px;
+  line-height: 1.12;
+  text-align: center;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%, 12px 50%);
+}
+
+.roadmap-phase:first-child { clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%, 12px 50%); }
+.phase-innovation { background: #04afe7; }
+.phase-quotation { background: #06a9df; }
+
+@media (max-width: 860px) {
+  .milestone-roadmap { margin-right: -16px; margin-left: -16px; }
+}
+
 .process-icon {
   width: 28px;
   height: 26px;

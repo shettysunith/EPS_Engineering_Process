@@ -286,43 +286,47 @@
   }
 
   function renderRail() {
+    const milestonePositions = {
+      m0: 2.6, m1: 5.6, m2: 8.6, m3: 20.2, m4: 43.8, m5: 47.2,
+      m6: 50.6, m7: 61.8, m8: 70.8, m9: 82.9, m10: 86.2
+    };
+    const phaseGates = [
+      ["G1", 17.1, "open"], ["G2", 34.0, "select"], ["G3", 50.8, "do"],
+      ["G4", 67.6, "implement"], ["G5", 84.5, "produce"]
+    ];
+    const lowerGates = [
+      ["G0", 15.0], ["G1", 33.1], ["G2", 56.4], ["G3", 68.0], ["G4", 78.8], ["G5", 89.1]
+    ];
     return `
-      <section class="maturity-map" aria-labelledby="maturity-map-title">
-        <div class="maturity-map-heading">
-          <div>
-            <span class="maturity-eyebrow">Stage-gate map</span>
-            <h2 id="maturity-map-title">Gates, Stages &amp; Deliverables - End to End</h2>
-          </div>
-          <p>Select a maturity to open its definition, artifacts, responsibilities, required work, and readiness checklist.</p>
-        </div>
-        <div class="maturity-map-scroll">
-          <div class="maturity-map-inner">
-            <div class="maturity-stage-bands" aria-hidden="true">
-              <span class="band-pre">Pre-development</span>
-              <span class="band-development">Development</span>
-              <span class="band-production">Series production</span>
+      <section class="milestone-roadmap" aria-label="Product development phases and milestones">
+        <div class="roadmap-scroll">
+          <div class="roadmap-canvas">
+            <div class="roadmap-band roadmap-band-pre">Pre-development</div>
+            <div class="roadmap-band roadmap-band-development">Development</div>
+            <div class="roadmap-band roadmap-band-production">Series production</div>
+            <div class="roadmap-gate-row">
+              <div class="roadmap-entry roadmap-opportunity">Opportunity<br />Screen/Business Case<br />Approval</div>
+              ${phaseGates.map(([gate, position, action], index) => `<div class="roadmap-major-gate roadmap-major-${index + 1}" style="--roadmap-x:${position}%"><strong>${gate}</strong><span>${action}</span></div>`).join("")}
             </div>
-            <div class="maturity-track">
-              ${maturities
-                .map(
-                  (maturity, index) => `
-                    <div class="maturity-step ${index === 0 ? "first" : ""}" style="--maturity-color:${maturity.color};--step-index:${index};">
-                      <a href="${maturityHref(maturity.id)}" aria-label="${maturity.code}: ${escapeHtml(maturity.title)}">
-                        <strong>${maturity.code}</strong>
-                        <small>${escapeHtml(maturity.title)}</small>
-                      </a>
-                    </div>
-                  `
-                )
-                .join("")}
+            ${maturities.map((maturity) => `<a class="roadmap-milestone" style="--roadmap-x:${milestonePositions[maturity.id]}%;--milestone-color:#c8358c" href="${maturityHref(maturity.id)}" aria-label="Open ${maturity.code}: ${escapeHtml(maturity.title)}"><strong>${maturity.code}</strong><i></i></a>`).join("")}
+            ${lowerGates.map(([gate, position]) => `<div class="roadmap-lower-gate" style="--roadmap-x:${position}%"><strong>${gate}</strong><i></i></div>`).join("")}
+            <span class="roadmap-connector connector-1" aria-hidden="true"></span>
+            <span class="roadmap-connector connector-2" aria-hidden="true"></span>
+            <span class="roadmap-connector connector-3" aria-hidden="true"></span>
+            <span class="roadmap-connector connector-4" aria-hidden="true"></span>
+            <span class="roadmap-connector connector-5" aria-hidden="true"></span>
+            <div class="roadmap-phase-row">
+              <span class="roadmap-phase phase-innovation">Innovation &amp;<br />Roadmap</span>
+              <span class="roadmap-phase phase-quotation">Quotation</span>
+              <span class="roadmap-phase">Project<br />Setup</span>
+              <span class="roadmap-phase">Concept<br />Refinement</span>
+              <span class="roadmap-phase phase-development">Development</span>
+              <span class="roadmap-phase">Industrialization</span>
+              <span class="roadmap-phase">Product<br />Validation</span>
+              <span class="roadmap-phase">Production<br />Ramp-Up</span>
+              <span class="roadmap-phase">Series<br />Production</span>
             </div>
           </div>
-        </div>
-        <div class="maturity-decision-legend" aria-label="Possible maturity decisions">
-          <strong>Decision at each maturity</strong>
-          <span class="decision-go">Go</span>
-          <span class="decision-conditional">Conditional Go</span>
-          <span class="decision-stop">No Go</span>
         </div>
       </section>
     `;
