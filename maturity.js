@@ -272,16 +272,6 @@
 
   const maturityById = new Map(maturities.map((maturity) => [maturity.id, maturity]));
 
-  const gateStages = [
-    { id: "g0", label: "Opportunity Screen/Business Case Approval", visualLabel: "Opportunity\nScreen/Business Case\nApproval", color: "#718098", lead: "Product Management; Sales & Marketing", support: "Engineering; Finance; PMO; Legal / Strategy", deliverables: ["Project charter", "Lead / opportunity qualification", "Voice of customer (VOC)", "Market analysis & sizing (TAM/SAM/SOM)", "Target customer & pricing hypothesis", "Competitive / win-loss analysis", "Value proposition & USP", "Business case", "Make vs Buy / M&A", "High-level product architecture", "High-level product cost", "Risk register", "Project schedule"] },
-    { id: "g1", label: "Product Conceptualization", visualLabel: "G1", color: "#2875bb", lead: "PMO", support: "R&D; Marketing; Finance; Product Management", deliverables: ["Product architecture finalisation", "Feature vs cost", "Mission profile completion", "Mfg-location identification", "High-level capex inputs", "EDVT / DVT / regulatory test plans", "EDVT / DVT / regulatory test results", "Mfg-location finalisation", "Measurement system analysis", "Functional safety", "Reliability test plan", "Documentation (QIG, manuals, labels, packing, ID)"] },
-    { id: "g2", label: "Design Freeze", visualLabel: "G2", color: "#c91766", lead: "PMO", support: "Quality; R&D; Product Management; Procurement", deliverables: ["Architecture freeze", "Design release", "Engineering proto development", "EDVT / DVT / regulatory test plans", "EDVT / DVT / regulatory test results", "Mfg-location finalisation", "Measurement system analysis", "Functional safety", "Reliability test plan", "Documentation (QIG, manuals, labels, packing, ID)"] },
-    { id: "g3", label: "Validation Sign-off", visualLabel: "G3", color: "#2f9dce", lead: "PMO", support: "R&D; Mfg; SCM; Quality; Product Management", deliverables: ["Pre-pilot sample development", "Pre-compliance (Safety, EMI-EMC)", "PDVT test results", "DFM / DFA analysis", "Assembly-line layout finalisation", "Field test plan", "Cybersecurity", "Safety review", "Literature review", "Component risk dashboards", "Supplier contracts", "VE activities", "Pilot design release", "Proposal to leadership on Capex"] },
-    { id: "g4", label: "Production Readiness", visualLabel: "G4", color: "#7a3c9d", lead: "PMO", support: "Mfg; SCM; R&D; Quality; Product Management", deliverables: ["Capex purchase (assembly line, tools)", "Pilot sample development", "Compliance test", "DVT test", "Pilot production", "FPY results review", "Service-person training", "Service manuals", "Field trials", "Reliability test results", "BOM scrubbing", "Component risk dashboard"] },
-    { id: "g5", label: "Launch / SOP", visualLabel: "G5", color: "#1aa261", lead: "Sales & Marketing", support: "Mfg; Quality; R&D; SCM; Product Management", deliverables: ["Series production", "Product demos / exhibition", "Product launch activities", "RPA manuals", "Units shipment to Distribution Centers"] }
-  ];
-  const gateById = new Map(gateStages.map((gate) => [gate.id, gate]));
-
   function escapeHtml(value) {
     return String(value)
       .replace(/&/g, "&amp;")
@@ -296,46 +286,49 @@
   }
 
   function renderRail() {
-    const actions = ["Open", "Select", "Do", "Implement", "Produce"];
+    const milestonePositions = {
+      m0: 2.6, m1: 5.6, m2: 8.6, m3: 20.2, m4: 43.8, m5: 47.2,
+      m6: 50.6, m7: 61.8, m8: 70.8, m9: 82.9, m10: 86.2
+    };
+    const phaseGates = [
+      ["G1", 17.1, "open"], ["G2", 34.0, "select"], ["G3", 50.8, "do"],
+      ["G4", 67.6, "implement"], ["G5", 84.5, "produce"]
+    ];
+    const lowerGates = [
+      ["G0", 15.0], ["G1", 33.1], ["G2", 56.4], ["G3", 68.0], ["G4", 78.8], ["G5", 89.1]
+    ];
     return `
-      <section class="gate-flow" aria-label="Product development gate flow">
-        <div class="gate-flow-scroll"><div class="gate-flow-canvas">
-          ${gateStages.map((gate, index) => `
-            ${index ? `<a class="gate-flow-action" href="#/phases-and-milestones/${gate.id}" aria-label="Open ${gate.label}" style="--gate-color:${gate.color}">${actions[index - 1]}</a>` : ""}
-            <a class="gate-flow-block ${gate.id}" href="#/phases-and-milestones/${gate.id}" style="--gate-color:${gate.color}" aria-label="Open Gate ${index}: ${gate.label}"><span>${escapeHtml(gate.visualLabel).replace(/\n/g, "<br />")}</span></a>
-          `).join("")}
-        </div></div>
-      </section>
-    `;
-  }
-
-  function deliverableTemplate(deliverable, gate) {
-    return `
-      <details class="gate-template">
-        <summary>${escapeHtml(deliverable)} template</summary>
-        <div>
-          <p><strong>Purpose:</strong> Record the approved evidence for ${escapeHtml(deliverable)} at ${escapeHtml(gate.label)}.</p>
-          <dl>
-            <div><dt>Owner</dt><dd>${escapeHtml(gate.lead)}</dd></div>
-            <div><dt>Contributors</dt><dd>${escapeHtml(gate.support)}</dd></div>
-            <div><dt>Minimum content</dt><dd>Scope, inputs, key decisions or results, risks or open actions, version history, and approval evidence.</dd></div>
-            <div><dt>Approval</dt><dd>Prepared, reviewed, and approved before the gate decision.</dd></div>
-          </dl>
+      <section class="milestone-roadmap" aria-label="Product development phases and milestones">
+        <div class="roadmap-scroll">
+          <div class="roadmap-canvas">
+            <div class="roadmap-band roadmap-band-pre">Pre-development</div>
+            <div class="roadmap-band roadmap-band-development">Development</div>
+            <div class="roadmap-band roadmap-band-production">Series production</div>
+            <div class="roadmap-gate-row">
+              <div class="roadmap-entry roadmap-opportunity">Opportunity<br />Screen/Business Case<br />Approval</div>
+              ${phaseGates.map(([gate, position, action], index) => `<div class="roadmap-major-gate roadmap-major-${index + 1}" style="--roadmap-x:${position}%"><strong>${gate}</strong><span>${action}</span></div>`).join("")}
+            </div>
+            ${maturities.map((maturity) => `<a class="roadmap-milestone" style="--roadmap-x:${milestonePositions[maturity.id]}%;--milestone-color:#c8358c" href="${maturityHref(maturity.id)}" aria-label="Open ${maturity.code}: ${escapeHtml(maturity.title)}"><strong>${maturity.code}</strong><i></i></a>`).join("")}
+            ${lowerGates.map(([gate, position]) => `<div class="roadmap-lower-gate" style="--roadmap-x:${position}%"><strong>${gate}</strong><i></i></div>`).join("")}
+            <span class="roadmap-connector connector-1" aria-hidden="true"></span>
+            <span class="roadmap-connector connector-2" aria-hidden="true"></span>
+            <span class="roadmap-connector connector-3" aria-hidden="true"></span>
+            <span class="roadmap-connector connector-4" aria-hidden="true"></span>
+            <span class="roadmap-connector connector-5" aria-hidden="true"></span>
+            <div class="roadmap-phase-row">
+              <span class="roadmap-phase phase-innovation">Innovation &amp;<br />Roadmap</span>
+              <span class="roadmap-phase phase-quotation">Quotation</span>
+              <span class="roadmap-phase">Project<br />Setup</span>
+              <span class="roadmap-phase">Concept<br />Refinement</span>
+              <span class="roadmap-phase phase-development">Development</span>
+              <span class="roadmap-phase">Industrialization</span>
+              <span class="roadmap-phase">Product<br />Validation</span>
+              <span class="roadmap-phase">Production<br />Ramp-Up</span>
+              <span class="roadmap-phase">Series<br />Production</span>
+            </div>
+          </div>
         </div>
-      </details>
-    `;
-  }
-
-  function renderGateDetail(gate) {
-    const gateNumber = gate.id.slice(1);
-    return `
-      <div class="gate-page" style="--gate-color:${gate.color}">
-        <div class="breadcrumb"><a href="#/phases-and-milestones">Phases and Milestones</a><span>/</span><span>Gate ${gateNumber}</span></div>
-        <header class="gate-detail-hero"><span>Gate ${gateNumber}</span><h1>${escapeHtml(gate.label)}</h1><p>Review the accountable roles, required deliverables, and template outlines before making the gate decision.</p></header>
-        <section class="gate-section"><h2>Roles and Responsibilities</h2><div class="table-scroll"><table class="gate-table"><thead><tr><th>Responsibility</th><th>Teams / roles</th></tr></thead><tbody><tr><td>Lead (A)</td><td>${escapeHtml(gate.lead)}</td></tr><tr><td>Support (R/C)</td><td>${escapeHtml(gate.support)}</td></tr></tbody></table></div></section>
-        <section class="gate-section"><h2>Deliverables</h2><div class="table-scroll"><table class="gate-table"><thead><tr><th>#</th><th>Deliverable</th><th>Template</th></tr></thead><tbody>${gate.deliverables.map((deliverable, index) => `<tr><td>${String(index + 1).padStart(2, "0")}</td><td>${escapeHtml(deliverable)}</td><td><a href="#template-${gate.id}-${index + 1}">View template</a></td></tr>`).join("")}</tbody></table></div></section>
-        <section class="gate-section"><h2>Deliverable Templates</h2><p class="gate-template-intro">Use the following editable template outlines as the minimum content for gate evidence.</p>${gate.deliverables.map((deliverable, index) => `<div id="template-${gate.id}-${index + 1}">${deliverableTemplate(deliverable, gate)}</div>`).join("")}</section>
-      </div>
+      </section>
     `;
   }
 
@@ -571,7 +564,6 @@
 
   function renderRoute(hash) {
     const id = hash.replace("#/phases-and-milestones/", "").replace("#/maturity/", "").split(/[/?]/)[0].toLowerCase();
-    if (gateById.has(id)) return renderGateDetail(gateById.get(id));
     return renderDetail(maturityById.get(id) || maturities[0]);
   }
 
