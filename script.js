@@ -367,15 +367,39 @@ function renderOrganizationUnitsPage() {
       <section class="organization-grid" aria-label="L&T EPS business verticals">
         ${[
           ["Power Electronics", "power", ["BESS", "PV Central Inverters", "EV Chargers", "Micro-grid Components"]],
-          ["Mobility", "mobility", ["ADAS", "EV Powertrain", "Telematics Control Unit (TCU)"]],
+          ["Mobility", "mobility", ["ADAS", "EV power train", "Telematics Control Unit (TCU)"]],
           ["Industrial Robotics & Automation", "robotics", ["Construction Robots", "Industry 5.0 IoT automation products & services"]],
           ["Electronics System Design & Manufacturing", "esdm", ["Design & Engineering", "Manufacturing", "Testing & Validation", "Sourcing"]],
           ["Strategic Electronics", "strategic", ["RFSC Systems", "C2 Systems", "Avionics", "CBRNE", "UDA / Sonar Systems"]]
         ].map(([title, icon, items]) => `
           <article class="organization-card organization-${icon}">
             <header><span class="organization-icon ${icon}-icon" aria-hidden="true"></span><h2>${escapeHtml(title)}</h2></header>
-            <div class="organization-content"><ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>
+            <div class="organization-content"><ul>${items.map((item) => `<li>${item === "EV power train" ? `<a href="#/organization-units/ev-power-train">${escapeHtml(item)}</a>` : escapeHtml(item)}</li>`).join("")}</ul></div>
           </article>`).join("")}
+      </section>
+    </div>`;
+}
+
+function renderEvPowerTrainPage() {
+  app.innerHTML = `
+    <div class="workspace-page">
+      <div class="breadcrumb">
+        <a href="#/home">Home</a><span>/</span>
+        <a href="#/organization-units">Organization Units</a><span>/</span>
+        <span>EV power train</span>
+      </div>
+      <section class="detail-hero"><div class="hero-panel">
+        <h1>EV power train</h1><p>Mobility engineering processes and workflows.</p>
+      </div></section>
+      <section class="info-block" aria-labelledby="requirements-management">
+        <h2 id="requirements-management">Requirements management</h2>
+        <p>Requirements status workflow.</p>
+        <figure class="requirements-workflow">
+          <a href="assets/ev-power-train-requirements-workflow.png" target="_blank" rel="noopener" aria-label="Open requirements status workflow at full size in a new tab">
+            <img src="assets/ev-power-train-requirements-workflow.png" width="853" height="624" alt="Requirements status workflow: TBD, NEW, Follow Up, Ready for Review, Agr for Impl, and Agreed, with NA, Changed, Rejected, and Deleted states and rework transitions.">
+          </a>
+          <figcaption><a href="assets/ev-power-train-requirements-workflow.png" target="_blank" rel="noopener">View workflow at full size (opens in a new tab)</a></figcaption>
+        </figure>
       </section>
     </div>`;
 }
@@ -707,6 +731,8 @@ function route() {
     renderToolsPage();
   } else if (hash === "#/trainings") {
     renderTrainingsPage();
+  } else if (hash === "#/organization-units/ev-power-train") {
+    renderEvPowerTrainPage();
   } else if (hash === "#/organization-units") {
     renderOrganizationUnitsPage();
   } else {

@@ -3913,3 +3913,18 @@ input {
     border-radius: 6px;
   }
 }
+.requirements-workflow {
+  margin: 1.5rem 0 0;
+}
+
+.requirements-workflow img {
+  display: block;
+  width: 100%;
+  max-width: 853px;
+  height: auto;
+  background: #fff;
+}
+
+.requirements-workflow figcaption {
+  margin-top: 1rem;
+}
