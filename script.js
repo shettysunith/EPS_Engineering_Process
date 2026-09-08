@@ -708,7 +708,7 @@ function updateActiveNav() {
   const isMaturity = location.hash.startsWith("#/phases-and-milestones/") || location.hash.startsWith("#/maturity/");
   const section = (location.hash || "#/home").replace("#/", "").split("/")[0];
   document.querySelectorAll("[data-nav]").forEach((link) => {
-    const shouldActivate = ["roles", "tools", "trainings", "organization-units", "phases-and-milestones"].includes(section)
+    const shouldActivate = ["roles", "tools", "trainings", "organization-units", "phases-and-milestones", "review-system"].includes(section)
       ? link.dataset.nav === section
       : isAspice
       ? link.dataset.nav === "aspice"
@@ -722,7 +722,9 @@ function updateActiveNav() {
 function route() {
   updateActiveNav();
   const hash = location.hash || "#/home";
-  if (hash.startsWith("#/aspice")) {
+  if (hash === "#/review-system" || hash.startsWith("#/review-system/")) {
+    app.innerHTML = window.ReviewSystem.renderRoute(hash);
+  } else if (hash.startsWith("#/aspice")) {
     app.innerHTML = window.AspiceMatrix.renderRoute(hash, searchInput.value);
   } else if (hash === "#/phases-and-milestones") {
     renderPhasesAndMilestonesPage();
