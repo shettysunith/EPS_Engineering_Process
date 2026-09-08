@@ -391,6 +391,11 @@ function renderEvPowerTrainPage() {
       <section class="detail-hero"><div class="hero-panel">
         <h1>EV power train</h1><p>Mobility engineering processes and workflows.</p>
       </div></section>
+      <section class="info-block">
+        <h2>Configuration and artifacts</h2>
+        <p>Review the product hierarchy, artifact coverage and traceability relationships.</p>
+        <a class="ev-page-link" href="#/organization-units/ev-power-train/configuration-structure">Configuration structure <span aria-hidden="true">→</span></a>
+      </section>
       <section class="info-block" aria-labelledby="requirements-management">
         <h2 id="requirements-management">Requirements management</h2>
         <p>Requirements status workflow.</p>
@@ -731,6 +736,10 @@ function route() {
     renderToolsPage();
   } else if (hash === "#/trainings") {
     renderTrainingsPage();
+  } else if (hash === "#/organization-units/ev-power-train/configuration-structure/review" && window.EvConfiguration) {
+    app.innerHTML = window.EvConfiguration.render();
+  } else if (hash === "#/organization-units/ev-power-train/configuration-structure" && window.EvStructure) {
+    app.innerHTML = window.EvStructure.render();
   } else if (hash === "#/organization-units/ev-power-train") {
     renderEvPowerTrainPage();
   } else if (hash === "#/organization-units") {
