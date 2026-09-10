@@ -4158,3 +4158,25 @@ input {
 .rs-page :is(a,button,input,select,textarea):focus-visible { outline: 3px solid #c38c27; outline-offset: 2px; }
 @media (max-width: 1000px) { .rs-review-details { grid-template-columns: 1fr 1fr; }.rs-review-details label:first-child { grid-column: 1/-1; }.rs-gates { grid-template-columns: repeat(6,minmax(0,1fr)); }.rs-gate-header { flex-wrap: wrap; } }
 @media (max-width: 600px) { .rs-hero { padding: 24px; }.rs-hero h1 { font-size: 30px; }.rs-review-details { grid-template-columns: minmax(0,1fr); }.rs-gates { grid-template-columns: repeat(4,minmax(0,1fr)); }.rs-artifact header { flex-direction: column; padding: 18px; } }
+
+/* Image-based home map: preserve the supplied image and scale targets together. */
+.image-map-help { color:var(--muted); line-height:1.5; margin:0 0 14px; }
+.reference-map-scroll { overflow-x:auto; border:1px solid var(--line); border-radius:10px; background:white; }
+.reference-process-map { position:relative; width:100%; min-width:0; aspect-ratio:1097 / 718; }
+.reference-process-map img { display:block; width:100%; height:auto; }
+.reference-process-map .reference-map-lower { position:absolute; left:0; top:5.0139%; clip-path:inset(92.3754% 18% 0 0); }
+.reference-process-map .reference-map-sidebar { position:absolute; left:0; top:0; clip-path:inset(0 0 0 82%); }
+.reference-process-map .reference-map-top { position:absolute; left:3.2817%; top:0; width:74.7493%; }
+.reference-process-map .reference-map-management { position:absolute; left:3.2817%; top:39.1365%; width:74.7493%; }
+.reference-process-map .reference-map-engineering { position:absolute; left:3.2817%; top:50.1393%; width:74.7493%; }
+.image-hotspot { position:absolute; display:block; padding:0; border:1px solid rgba(49,95,136,.28); border-radius:2px; background:transparent; cursor:pointer; }
+.image-hotspot:hover,.image-hotspot:focus-visible { background:rgba(255,215,95,.25); outline:3px solid #315f88; outline-offset:1px; z-index:1; }
+.image-process-directory { margin-top:24px; }
+.image-process-directory h2 { font-size:22px; }
+.image-process-directory details { margin:10px 0; background:white; border:1px solid var(--line); border-radius:8px; }
+.image-process-directory summary { padding:16px; cursor:pointer; font-weight:700; color:var(--blue-dark); }
+.image-process-directory summary span { float:right; font-size:13px; color:var(--muted); font-weight:400; }
+.image-process-links { display:grid; grid-template-columns:repeat(auto-fit,minmax(235px,1fr)); gap:8px; padding:0 16px 16px; }
+.image-process-links a { padding:12px; background:var(--blue-soft); border-radius:5px; font-size:14px; }
+.image-process-links a:hover,.image-process-links a:focus-visible { outline:2px solid var(--blue); }
+@media(max-width:600px) { .reference-process-map { min-width:960px; } .image-process-directory summary span { float:none; display:block; margin:6px 0 0 16px; } }

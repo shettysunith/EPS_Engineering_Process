@@ -451,16 +451,72 @@ function renderDiagramItem(layout) {
   `;
 }
 
+
+// Coordinates use the original, unmodified 1097 x 682 image.
+const imageProcessGroups = [
+  {id:'requirements', title:'Requirements Engineering', ids:['requirements-elicitation','system-requirements-analysis']},
+  {id:'electronics', title:'Electronic Engineering', ids:['hardware-requirement-analysis','hardware-design','verification-against-hardware-design','verification-against-hardware-requirements','hardware-software-interface']},
+  {id:'mechanical', title:'Mechanical Engineering', ids:['mee-component-requirement-analysis','mee-component-design','mee-component-sample-production','mee-test-against-mechanical-component-design','mee-test-against-mechanical-component-requirements']},
+  {id:'software', title:'Software Engineering', ids:['software-requirements-analysis','software-architectural-design','software-detailed-design-and-unit-construction','software-unit-verification','software-integration-and-integration-test','software-qualification-test']}
+];
+const imageHotspots = [
+  ['Project Management',36+286*820/1187,245+16*820/1187,880*820/1187,30*820/1187,'project-management'],
+  ['Risk Management',36+515*820/1187,245+53*820/1187,195*820/1187,25*820/1187,'risk-management'],
+  ['Change Management',36+743*820/1187,245+53*820/1187,195*820/1187,25*820/1187,'change-request-management'],
+  ['Problem Resolution Management',36+972*820/1187,245+53*820/1187,194*820/1187,25*820/1187,'problem-resolution-management'],
+  // Engineering image coordinates (1242 x 446), scaled to the existing map.
+  ...[
+    ['Engineering Releases',48,55,222,27,'product-release'],
+    ['System Analysis',48,126,222,27,'analysis'],
+    ['DV/PV — Calibration',48,231,222,28,'calibration'],
+    ['Configuration Management',48,338,222,27,'configuration-management'],
+    ['Quality Assurance',302,27,787,28,'quality-assurance'],
+    ['Safety Management',334,77,694,27,'functional-safety-management'],
+    ['Cyber Security Management',334,111,694,26,'cyber-security-management'],
+    ['Requirements Engineering',350,165,95,65,'@requirements'],
+    ['System Architecture',480,165,65,65,'system-architectural-design'],
+    ['System Integration & Integration Test',805,165,82,68,'system-integration-and-integration-test'],
+    ['System Verification & Validation',920,165,82,65,'system-qualification-test'],
+    ['Electronic Engineering',485,255,400,26,'@electronics'],
+    ['Mechanical Engineering',492,284,384,26,'@mechanical'],
+    ['Software Engineering',502,313,365,26,'@software']
+  ].map(([label,x,y,w,h,target]) => [label,36+x*820/1242,324+y*820/1242,w*820/1242,h*820/1242,target]),
+  ['Supplier Management',938,509,111,17,'supplier-monitoring'],
+  ['Structured Problem Solving',938,655,111,15,'problem-resolution-management'],
+  ['Process Management',938,254,111,17,'process-development-team'],
+  ['Innovation Management',938,448,111,19,'process-improvement-management'],
+  ['Training Courses — ASPICE Trainings',938,95,111,22,'aspice-trainings'],
+  ['Rule Overview — Glossary',938,146,111,22,'glossary']
+];
+
 function renderDiagram() {
+  const grouped = new Set(imageProcessGroups.flatMap(group => group.ids));
+  const remaining = processes.filter(process => !grouped.has(process.id));
+  const links = items => items.map(item => `<a href="${processHref(item.id)}">${escapeHtml(item.title)}</a>`).join('');
   return `
-    <div class="diagram-scroll" aria-label="Interactive engineering process map">
-      <div class="process-map">
-        ${diagramItems.map(renderDiagramItem).join("")}
-        ${diagramArrows.map((arrow) => `<span class="diagram-arrow" style="${diagramStyle(arrow)}" aria-hidden="true"></span>`).join("")}
-        ${diagramDividers.map((divider) => `<span class="diagram-divider" style="left:${(divider.x / 1817) * 100}%;top:${(divider.y / 1023) * 100}%;height:${(divider.h / 1023) * 100}%;" aria-hidden="true"></span>`).join("")}
+    <p class="image-map-help">Select a highlighted area to explore its processes. Engineering areas contain multiple process stages. All original process links are also available below.</p>
+    <div class="reference-map-scroll" role="region" aria-label="Interactive engineering process map" tabindex="0">
+      <div class="reference-process-map">
+        <img class="reference-map-lower" src="assets/engineering-process-stages.png" width="1097" height="682" alt="Project management, systems engineering, electronic, mechanical and software engineering processes." />
+        <img class="reference-map-sidebar" src="assets/engineering-process-stages.png" width="1097" height="682" alt="Quick links and supporting processes." />
+        <img class="reference-map-top" src="assets/engineering-lifecycle-top.png" width="1293" height="412" alt="Engineering lifecycle gates and material maturity milestones." />
+        <img class="reference-map-management" src="assets/project-management-section.png" width="1187" height="97" alt="Project Management, Tailoring for Reuse, Gate Releases, Risk Management, Change Management, and Problem Resolution." />
+        <img class="reference-map-engineering" src="assets/engineering-section.png" width="1242" height="446" alt="Engineering processes, Quality Assurance, Safety Management, Cyber Security Management, and the systems engineering V-model." />
+        ${imageHotspots.map(([label,x,y,w,h,target]) => {
+          const attributes = target.startsWith('@')
+            ? `type="button" data-image-group="${target.slice(1)}" aria-controls="image-group-${target.slice(1)}"`
+            : `href="${processHref(target)}"`;
+          const tag = target.startsWith('@') ? 'button' : 'a';
+          return `<${tag} class="image-hotspot" ${attributes} style="left:${x/1097*100}%;top:${(y + (x < 900 ? 36 : 0))/718*100}%;width:${w/1097*100}%;height:${h/718*100}%;" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}"></${tag}>`;
+        }).join('')}
+        <a class="image-hotspot" href="#/phases-and-milestones" style="left:3.2817%;top:0;width:74.7493%;height:36.3915%;" aria-label="Explore phases and milestones" title="Explore phases and milestones"></a>
       </div>
     </div>
-  `;
+    <section class="image-process-directory" aria-label="All original process links">
+      <h2>Explore process stages</h2>
+      ${imageProcessGroups.map(group => `<details id="image-group-${group.id}"><summary>${group.title}<span>${group.ids.length} processes</span></summary><div class="image-process-links">${links(group.ids.map(id => processById.get(id)))}</div></details>`).join('')}
+      <details open><summary>Management, system and support processes<span>${remaining.length} processes</span></summary><div class="image-process-links">${links(remaining)}</div></details>
+    </section>`;
 }
 
 function renderSearchResults(query) {
@@ -752,6 +808,14 @@ function route() {
 }
 
 document.addEventListener("click", (event) => {
+  const imageGroup = event.target.closest('[data-image-group]');
+  if (imageGroup) {
+    const panel = document.getElementById('image-group-' + imageGroup.dataset.imageGroup);
+    panel.open = true;
+    panel.scrollIntoView({block:'center'});
+    panel.querySelector('summary').focus({preventScroll:true});
+    return;
+  }
   const processButton = event.target.closest("[data-process-id]");
   if (processButton) {
     location.hash = processHref(processButton.dataset.processId);
