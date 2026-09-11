@@ -4162,13 +4162,14 @@ input {
 /* Image-based home map: preserve the supplied image and scale targets together. */
 .image-map-help { color:var(--muted); line-height:1.5; margin:0 0 14px; }
 .reference-map-scroll { overflow-x:auto; border:1px solid var(--line); border-radius:10px; background:white; }
-.reference-process-map { position:relative; width:100%; min-width:0; aspect-ratio:1097 / 718; }
+.reference-process-map { position:relative; width:100%; min-width:0; aspect-ratio:1097 / 900; }
 .reference-process-map img { display:block; width:100%; height:auto; }
-.reference-process-map .reference-map-lower { position:absolute; left:0; top:5.0139%; clip-path:inset(92.3754% 18% 0 0); }
-.reference-process-map .reference-map-sidebar { position:absolute; left:0; top:0; clip-path:inset(0 0 0 82%); }
+.reference-process-map .reference-map-quick { position:absolute; left:82.0419%; top:1.1111%; width:15.4968%; }
+.reference-process-map .reference-map-business { position:absolute; left:82.0419%; top:28.3333%; width:15.4968%; }
 .reference-process-map .reference-map-top { position:absolute; left:3.2817%; top:0; width:74.7493%; }
-.reference-process-map .reference-map-management { position:absolute; left:3.2817%; top:39.1365%; width:74.7493%; }
-.reference-process-map .reference-map-engineering { position:absolute; left:3.2817%; top:50.1393%; width:74.7493%; }
+.reference-process-map .reference-map-management { position:absolute; left:3.2817%; top:31.2222%; width:74.7493%; }
+.reference-process-map .reference-map-engineering { position:absolute; left:3.2817%; top:40%; width:74.7493%; }
+.reference-process-map .reference-map-operations { position:absolute; left:3.2817%; top:75.5556%; width:74.7493%; }
 .image-hotspot { position:absolute; display:block; padding:0; border:1px solid rgba(49,95,136,.28); border-radius:2px; background:transparent; cursor:pointer; }
 .image-hotspot:hover,.image-hotspot:focus-visible { background:rgba(255,215,95,.25); outline:3px solid #315f88; outline-offset:1px; z-index:1; }
 .image-process-directory { margin-top:24px; }

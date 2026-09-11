@@ -481,12 +481,16 @@ const imageHotspots = [
     ['Mechanical Engineering',492,284,384,26,'@mechanical'],
     ['Software Engineering',502,313,365,26,'@software']
   ].map(([label,x,y,w,h,target]) => [label,36+x*820/1242,324+y*820/1242,w*820/1242,h*820/1242,target]),
-  ['Supplier Management',938,509,111,17,'supplier-monitoring'],
-  ['Structured Problem Solving',938,655,111,15,'problem-resolution-management'],
-  ['Process Management',938,254,111,17,'process-development-team'],
-  ['Innovation Management',938,448,111,19,'process-improvement-management'],
-  ['Training Courses — ASPICE Trainings',938,95,111,22,'aspice-trainings'],
-  ['Rule Overview — Glossary',938,146,111,22,'glossary']
+  ...[
+    ['Supplier Management',9,474,193,27,'supplier-monitoring'],
+    ['Structured Problem Solving',9,696,193,27,'problem-resolution-management'],
+    ['Process Management',9,84,193,28,'process-development-team'],
+    ['Innovation Management',9,385,193,27,'process-improvement-management']
+  ].map(([label,x,y,w,h,target]) => [label,900+x*170/210,255+y*170/210,w*170/210,h*170/210,target,true]),
+  ...[
+    ['Training Courses — ASPICE Trainings',16,161,199,30,'aspice-trainings'],
+    ['Rule Overview — Glossary',16,263,199,30,'glossary']
+  ].map(([label,x,y,w,h,target]) => [label,900+x*170/229,10+y*170/229,w*170/229,h*170/229,target,true])
 ];
 
 function renderDiagram() {
@@ -497,19 +501,20 @@ function renderDiagram() {
     <p class="image-map-help">Select a highlighted area to explore its processes. Engineering areas contain multiple process stages. All original process links are also available below.</p>
     <div class="reference-map-scroll" role="region" aria-label="Interactive engineering process map" tabindex="0">
       <div class="reference-process-map">
-        <img class="reference-map-lower" src="assets/engineering-process-stages.png" width="1097" height="682" alt="Project management, systems engineering, electronic, mechanical and software engineering processes." />
-        <img class="reference-map-sidebar" src="assets/engineering-process-stages.png" width="1097" height="682" alt="Quick links and supporting processes." />
+        <img class="reference-map-quick" src="assets/quick-links.png" width="229" height="312" alt="Quick Links: Update Information, Rule Manager, Training Courses, KPIs, and Rule Overview." />
+        <img class="reference-map-business" src="assets/business-processes.png" width="210" height="758" alt="Company strategy, business review, innovation, supplier management, customer management, and continuous improvement." />
         <img class="reference-map-top" src="assets/engineering-lifecycle-top.png" width="1293" height="412" alt="Engineering lifecycle gates and material maturity milestones." />
         <img class="reference-map-management" src="assets/project-management-section.png" width="1187" height="97" alt="Project Management, Tailoring for Reuse, Gate Releases, Risk Management, Change Management, and Problem Resolution." />
         <img class="reference-map-engineering" src="assets/engineering-section.png" width="1242" height="446" alt="Engineering processes, Quality Assurance, Safety Management, Cyber Security Management, and the systems engineering V-model." />
-        ${imageHotspots.map(([label,x,y,w,h,target]) => {
+        <img class="reference-map-operations" src="assets/operations-section.png" width="1404" height="210" alt="Operations: Gate Releases, New Product Launch Management, Industrial Engineering: Test Engineering, and Industrial Engineering: Process Engineering." />
+        ${imageHotspots.map(([label,x,y,w,h,target,sidebar = false]) => {
           const attributes = target.startsWith('@')
             ? `type="button" data-image-group="${target.slice(1)}" aria-controls="image-group-${target.slice(1)}"`
             : `href="${processHref(target)}"`;
           const tag = target.startsWith('@') ? 'button' : 'a';
-          return `<${tag} class="image-hotspot" ${attributes} style="left:${x/1097*100}%;top:${(y + (x < 900 ? 36 : 0))/718*100}%;width:${w/1097*100}%;height:${h/718*100}%;" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}"></${tag}>`;
+          return `<${tag} class="image-hotspot" ${attributes} style="left:${x/1097*100}%;top:${(y + (sidebar ? 0 : 36))/900*100}%;width:${w/1097*100}%;height:${h/900*100}%;" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}"></${tag}>`;
         }).join('')}
-        <a class="image-hotspot" href="#/phases-and-milestones" style="left:3.2817%;top:0;width:74.7493%;height:36.3915%;" aria-label="Explore phases and milestones" title="Explore phases and milestones"></a>
+        <a class="image-hotspot" href="#/phases-and-milestones" style="left:3.2817%;top:0;width:74.7493%;height:29.0323%;" aria-label="Explore phases and milestones" title="Explore phases and milestones"></a>
       </div>
     </div>
     <section class="image-process-directory" aria-label="All original process links">
