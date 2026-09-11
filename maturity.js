@@ -286,50 +286,17 @@
   }
 
   function renderRail() {
-    const milestonePositions = {
-      m0: 2.6, m1: 5.6, m2: 8.6, m3: 20.2, m4: 43.8, m5: 47.2,
-      m6: 50.6, m7: 61.8, m8: 70.8, m9: 82.9, m10: 86.2
-    };
-    const phaseGates = [
-      ["G1", 17.1, "open"], ["G2", 34.0, "select"], ["G3", 50.8, "do"],
-      ["G4", 67.6, "implement"], ["G5", 84.5, "produce"]
-    ];
-    const lowerGates = [
-      ["G0", 15.0], ["G1", 33.1], ["G2", 56.4], ["G3", 68.0], ["G4", 78.8], ["G5", 89.1]
-    ];
+    // Pixel positions in the supplied 1242 x 415 image. M11 has no link.
+    const milestoneX = [30,110,225,412,517,619,694,758,822,898,1078];
     return `
-      <section class="milestone-roadmap" aria-label="Product development phases and milestones">
-        <div class="roadmap-scroll">
-          <div class="roadmap-canvas">
-            <div class="roadmap-band roadmap-band-pre">Pre-development</div>
-            <div class="roadmap-band roadmap-band-development">Development</div>
-            <div class="roadmap-band roadmap-band-production">Series production</div>
-            <div class="roadmap-gate-row">
-              <div class="roadmap-entry roadmap-opportunity">Opportunity<br />Screen/Business Case<br />Approval</div>
-              ${phaseGates.map(([gate, position, action], index) => `<div class="roadmap-major-gate roadmap-major-${index + 1}" style="--roadmap-x:${position}%"><strong>${gate}</strong><span>${action}</span></div>`).join("")}
-            </div>
-            ${maturities.map((maturity) => `<a class="roadmap-milestone" style="--roadmap-x:${milestonePositions[maturity.id]}%;--milestone-color:#c8358c" href="${maturityHref(maturity.id)}" aria-label="Open ${maturity.code}: ${escapeHtml(maturity.title)}"><strong>${maturity.code}</strong><i></i></a>`).join("")}
-            ${lowerGates.map(([gate, position]) => `<div class="roadmap-lower-gate" style="--roadmap-x:${position}%"><strong>${gate}</strong><i></i></div>`).join("")}
-            <span class="roadmap-connector connector-1" aria-hidden="true"></span>
-            <span class="roadmap-connector connector-2" aria-hidden="true"></span>
-            <span class="roadmap-connector connector-3" aria-hidden="true"></span>
-            <span class="roadmap-connector connector-4" aria-hidden="true"></span>
-            <span class="roadmap-connector connector-5" aria-hidden="true"></span>
-            <div class="roadmap-phase-row">
-              <span class="roadmap-phase phase-innovation">Innovation &amp;<br />Roadmap</span>
-              <span class="roadmap-phase phase-quotation">Quotation</span>
-              <span class="roadmap-phase">Project<br />Setup</span>
-              <span class="roadmap-phase">Concept<br />Refinement</span>
-              <span class="roadmap-phase phase-development">Development</span>
-              <span class="roadmap-phase">Industrialization</span>
-              <span class="roadmap-phase">Product<br />Validation</span>
-              <span class="roadmap-phase">Production<br />Ramp-Up</span>
-              <span class="roadmap-phase">Series<br />Production</span>
-            </div>
+      <section class="milestone-image-section" aria-label="Product development phases and milestones">
+        <div class="milestone-image-scroll" role="region" aria-label="Interactive maturity diagram" tabindex="0">
+          <div class="milestone-image-map">
+            <img src="assets/phases-and-milestones.png" width="1242" height="415" alt="Product development phases, gates, and maturity blocks M0 through M11. M0 through M10 open the existing maturity pages. M11 is shown for reference only." />
+            ${maturities.map((maturity, index) => `<a class="milestone-image-link" href="${maturityHref(maturity.id)}" style="left:${milestoneX[index]/1242*100}%;top:${247/415*100}%;width:${39/1242*100}%;height:${65/415*100}%;" aria-label="Open ${maturity.code}: ${escapeHtml(maturity.title)}" title="${maturity.code}: ${escapeHtml(maturity.title)}"></a>`).join('')}
           </div>
         </div>
-      </section>
-    `;
+      </section>`;
   }
 
   function renderMaturityNav(activeId) {

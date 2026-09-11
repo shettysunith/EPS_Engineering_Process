@@ -4164,6 +4164,12 @@ input {
 .reference-map-scroll { overflow-x:auto; border:1px solid var(--line); border-radius:10px; background:white; }
 .reference-process-map { position:relative; width:100%; min-width:0; aspect-ratio:1097 / 900; }
 .reference-process-map img { display:block; width:100%; height:auto; }
+.milestone-image-scroll { overflow-x:auto; background:#fff; }
+.milestone-image-map { position:relative; width:100%; min-width:0; }
+.milestone-image-map img { display:block; width:100%; height:auto; }
+.milestone-image-link { position:absolute; display:block; cursor:pointer; border-radius:2px; }
+.milestone-image-link:hover,.milestone-image-link:focus-visible { background:rgba(255,215,95,.25); outline:3px solid #23364a; outline-offset:2px; }
+@media(max-width:600px) { .milestone-image-map { min-width:1000px; } }
 .reference-process-map .reference-map-quick { position:absolute; left:82.0419%; top:1.1111%; width:15.4968%; }
 .reference-process-map .reference-map-business { position:absolute; left:82.0419%; top:28.3333%; width:15.4968%; }
 .reference-process-map .reference-map-top { position:absolute; left:3.2817%; top:0; width:74.7493%; }
