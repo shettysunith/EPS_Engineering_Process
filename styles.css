@@ -124,6 +124,13 @@ input {
   font-weight: 600;
 }
 
+.side-nav .supplied-nav-icon {
+  width: 40px;
+  height: 44px;
+  object-fit: contain;
+  border: 0;
+}
+
 .side-nav nav a.active,
 .side-nav nav a:hover {
   background: rgba(10, 20, 32, 0.22);
