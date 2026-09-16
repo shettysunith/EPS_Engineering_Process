@@ -335,10 +335,21 @@ function renderWorkspaceIntro(title, description) {
 }
 
 function renderRolesPage() {
+  const disciplines = [
+    ["System Engineering", ["Technical Lead", "System Lead Engineer", "Systems Engineer", "Project Functional Safety Manager", "Project Security and Privacy Manager", "PTS Engineer", "Requirements Manager", "Homologation Engineer"]],
+    ["Software Engineering", ["SW Solution Manager", "ART/SW Solution Engineering Team", "SW Solution Train Architect", "SW Solution Train Engineer", "Component Responsible", "Package Owner Team", "Software Project Quality Engineer"]],
+    ["Validation and Verification", ["Test & Validation Lead Engineer", "Integration and Verification Manager", "Integration and Verification Engineer", "Test Manager", "Test Engineer", "Function Test Owner", "Validation Engineer"]],
+    ["Electronic Engineering", ["EE Lead Engineer", "EE Designer", "PCB Designer", "EMC Engineer", "Test Manager (EE)", "Test Engineer (EE)", "IC Lead Engineer"]],
+    ["Quality", ["Quality Manager Project (QMP)", "Quality Manager 3PSW", "Quality Manager Product in Production (QMPP)", "Quality Manager Project Software (QMP - SW)", "Customer Product Quality Manager (CPQM)"]],
+    ["Supporting Processes", ["Problem Resolution Manager", "Defect Analysis Engineer", "Configuration Manager", "Change/Problem Requestor", "Change/Problem Manager", "Change/Problem Analyst", "Change/Problem Coordinator"]],
+    ["Mechanical Engineering", ["Mechanics Lead Engineer", "ME Engineer", "FEA Engineer"]],
+    ["Sensor Technology Engineering", ["Sensor Technology Lead Engineer", "Sensor Technology Engineer"]],
+    ["Lean Agile Role", ["Agile Team Member", "Product Manager", "Product Owner", "Release Train Architect", "Release Train Engineer", "Scrum Master"]]
+  ];
   app.innerHTML = `
-    ${renderWorkspaceIntro("Roles", "Role responsibilities clarify accountability across planning, development, verification, quality, safety, cybersecurity, and supplier collaboration.")}
-      <section class="info-block"><h2>Engineering Roles and Responsibilities</h2><div class="role-grid workspace-role-grid">
-        ${engineeringRoles.map(([role, responsibility]) => `<article class="role-card"><strong>${escapeHtml(role)}</strong><small>${escapeHtml(responsibility)}</small></article>`).join("")}
+    ${renderWorkspaceIntro("Roles", "Engineering roles are organized by discipline to clarify participation across development, verification, quality, supporting processes, and agile delivery.")}
+      <section class="info-block engineering-roles-section"><h2>Engineering Roles</h2><div class="engineering-discipline-grid">
+        ${disciplines.map(([discipline, roles]) => `<article class="engineering-discipline-card"><h3>${escapeHtml(discipline)}</h3><ul>${roles.map(role => `<li>${escapeHtml(role)}</li>`).join("")}</ul></article>`).join("")}
       </div></section>
     </div>`;
 }

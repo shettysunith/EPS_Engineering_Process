@@ -4168,6 +4168,14 @@ input {
 
 /* Image-based home map: preserve the supplied image and scale targets together. */
 .image-map-help { color:var(--muted); line-height:1.5; margin:0 0 14px; }
+.engineering-discipline-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; align-items:start; }
+.engineering-discipline-card { padding:8px; border:1px solid #98a9b6; border-radius:7px; background:linear-gradient(#e0f6ff,#c8edfb); box-shadow:0 8px 20px rgba(35,54,74,.08); }
+.engineering-discipline-card h3 { margin:0 0 14px; padding:8px 10px; border:1px solid #71818b; border-radius:1px; background:linear-gradient(165deg,#fff0f0 0%,#e5384b 37%,#81dbf3 76%,#b4ecfa 100%); color:#101820; font-size:18px; line-height:1.15; font-weight:800; }
+.engineering-discipline-card ul { margin:0 0 12px; padding-left:18px; color:#182332; font-size:14px; line-height:1.45; }
+.engineering-discipline-card li { margin-bottom:5px; padding-left:0; }
+.engineering-discipline-card li:last-child { margin-bottom:0; }
+@media(max-width:1180px) { .engineering-discipline-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:600px) { .engineering-discipline-grid { grid-template-columns:minmax(0,1fr); } }
 .reference-map-scroll { overflow-x:auto; border:1px solid var(--line); border-radius:10px; background:white; }
 .reference-process-map { position:relative; width:100%; min-width:0; aspect-ratio:1097 / 900; }
 .reference-process-map img { display:block; width:100%; height:auto; }
