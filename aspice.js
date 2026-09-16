@@ -311,6 +311,22 @@
 
   function renderOverview(query) {
     const content = `
+      <section class="matrix-section aspice-reference-section">
+        <h2>Automotive SPICE Reference Model</h2>
+        <a href="assets/aspice-reference-model.png" target="_blank" rel="noopener" aria-label="Open Automotive SPICE reference model at full size">
+          <img src="assets/aspice-reference-model.png" width="1131" height="633" alt="Automotive SPICE process reference model overview: system, software, hardware, machine learning, validation, management, supporting, improvement, reuse, acquisition and supply process groups.">
+        </a>
+      </section>
+      <section class="matrix-section aspice-reference-section">
+        <h2>The &quot;Plug-in&quot; concept</h2>
+        <a href="assets/aspice-plugin-concept.png" target="_blank" rel="noopener" aria-label="Open the Plug-in concept diagram at full size">
+          <img src="assets/aspice-plugin-concept.png" width="731" height="493" alt="The Plug-in concept: system engineering connects to hardware engineering, software engineering and domain-specific PAM extensions, with management, acquisition and supporting processes across both levels.">
+        </a>
+      </section>
+      <section class="matrix-section aspice-reference-document">
+        <h2>Automotive SPICE Process Reference Model</h2>
+        <p><a href="assets/Automotive-SPICE-PAM-v41.pdf" target="_blank" rel="noopener">Automotive SPICE Process Reference Model</a> <span>(PDF)</span></p>
+      </section>
       <section class="matrix-intro-band">
         <div><strong>Process dimension</strong><span>What engineering and support processes are performed?</span></div>
         <b aria-hidden="true">x</b>

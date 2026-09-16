@@ -4168,6 +4168,10 @@ input {
 
 /* Image-based home map: preserve the supplied image and scale targets together. */
 .image-map-help { color:var(--muted); line-height:1.5; margin:0 0 14px; }
+.aspice-reference-section h2, .aspice-reference-document h2 { margin:0 0 18px; }
+.aspice-reference-section img { display:block; width:100%; height:auto; }
+.aspice-reference-section a { display:block; }
+.aspice-reference-document a { color:var(--primary, #286191); text-decoration:underline; font-weight:600; }
 .engineering-discipline-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; align-items:start; }
 .engineering-discipline-card { padding:8px; border:1px solid #98a9b6; border-radius:7px; background:linear-gradient(#e0f6ff,#c8edfb); box-shadow:0 8px 20px rgba(35,54,74,.08); }
 .engineering-discipline-card h3 { margin:0 0 14px; padding:8px 10px; border:1px solid #71818b; border-radius:1px; background:linear-gradient(165deg,#fff0f0 0%,#e5384b 37%,#81dbf3 76%,#b4ecfa 100%); color:#101820; font-size:18px; line-height:1.15; font-weight:800; }
