@@ -4186,6 +4186,9 @@ input {
 .milestone-image-scroll { overflow-x:auto; background:#fff; }
 .milestone-image-map { position:relative; width:100%; min-width:0; }
 .milestone-image-map img { display:block; width:100%; height:auto; }
+.project-type-descriptions { margin-top:20px; }
+.project-type-descriptions a { display:block; }
+.project-type-descriptions img { display:block; width:100%; height:auto; }
 .milestone-image-link { position:absolute; display:block; cursor:pointer; border-radius:2px; }
 .milestone-image-link:hover,.milestone-image-link:focus-visible { background:rgba(255,215,95,.25); outline:3px solid #23364a; outline-offset:2px; }
 @media(max-width:600px) { .milestone-image-map { min-width:1000px; } }

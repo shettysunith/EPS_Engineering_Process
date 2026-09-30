@@ -645,6 +645,11 @@ function renderPhasesAndMilestonesPage() {
     <div class="workspace-page phases-page">
       <div class="breadcrumb"><a href="#/home">Home</a><span>/</span><span>Phases and Milestones</span></div>
       ${window.MaturityMap.renderRail()}
+      <section class="project-type-descriptions" aria-label="Project type descriptions">
+        <a href="assets/project-type-descriptions.png" target="_blank" rel="noopener" aria-label="Open P1, P2, and P3 project descriptions at full size">
+          <img src="assets/project-type-descriptions.png" width="1426" height="412" alt="P1: Base Projects — Base Development. Develop new products and technologies from internal innovation or customer ideas, establishing a generic product for customer-specific applications. P2: Application Projects — Customer Development — Application Engineering. Adapt existing products or technology to identified customer, vehicle, or platform needs requiring design or product validation and a PLC gate process. P3: DFM (Design for Manufacturability) Projects. Adapt proven designs for manufacturability, localization, cost optimization, or production constraints. Selected design maturities may be skipped or consolidated based on reuse, change impact, and risk assessment, while maintaining mandatory validation, compliance, and production-readiness activities." />
+        </a>
+      </section>
     </div>
   `;
 }

@@ -81,193 +81,601 @@
   }
 
   const maturities = [
-    makeMaturity(
-      "M0",
-      "Opportunity Discovery",
-      "Pre-development",
-      "Captures an initial opportunity, customer problem, or product idea and determines whether it is worth structured investigation.",
+    makeMaturity("M0", "Customer Award", "Acquisition / Quotation · P1 and P2",
+      "Confirms the customer award and establishes the agreed delivery scope, commercial and technical commitments, project ownership, and authorization to start the project. Applies to project types P1 and P2.",
       [
-        artifact("Opportunity signal", "Business or customer interface", "Describe the need, source, urgency, and expected value."),
-        artifact("Available market or customer evidence", "Business analysis", "Provide the known facts, assumptions, and evidence quality."),
-        artifact("Initial constraints", "Project and engineering leads", "Identify timing, cost, technical, regulatory, and resource boundaries.")
-      ],
+  {
+    "name": "Customer award or nomination",
+    "owner": "Customer interface",
+    "responsibility": "Provide the documented award, scope, conditions, and customer contacts."
+  },
+  {
+    "name": "Quotation and feasibility assessment",
+    "owner": "Sales and engineering leads",
+    "responsibility": "Provide the offered solution, estimates, assumptions, exclusions, and feasibility conclusions."
+  },
+  {
+    "name": "Customer requirements and delivery expectations",
+    "owner": "Requirements owner",
+    "responsibility": "Capture the requested functions, interfaces, acceptance needs, and delivery dates."
+  },
+  {
+    "name": "Business case and resource estimates",
+    "owner": "Business and project leads",
+    "responsibility": "Provide the cost, investment, staffing, and supplier assumptions supporting the award."
+  }
+],
       [
-        artifact("Opportunity statement", "Opportunity owner", "Summarize the problem, target user, intended value, and scope."),
-        artifact("Assumption and question log", "Business analysis", "Record unknowns that must be answered in the next maturity."),
-        artifact("Screening decision", "Decision authority", "Record whether the opportunity proceeds to business-case evaluation.")
-      ],
-      ["analysis", "project-management", "risk-management"]
-    ),
-    makeMaturity(
-      "M1",
-      "Business Case Approval",
-      "Pre-development",
-      "Confirms that the opportunity has a credible value proposition, feasible delivery path, and authorization for concept development.",
+  {
+    "name": "Accepted award and commitment record",
+    "owner": "Business owner",
+    "responsibility": "Record the agreed scope, conditions, open clarifications, and accountable owners."
+  },
+  {
+    "name": "Project charter and lifecycle plan",
+    "owner": "Project manager",
+    "responsibility": "Define the P1 or P2 route, deliverables, maturity dates, governance, and responsibilities."
+  },
+  {
+    "name": "Initial requirements and assumptions baseline",
+    "owner": "Requirements owner",
+    "responsibility": "Baseline the known customer needs and assign owners for unresolved requirements."
+  },
+  {
+    "name": "Risk and action register",
+    "owner": "Project manager",
+    "responsibility": "Record delivery risks, treatments, owners, and due dates."
+  }
+],
+      ["project-management","requirements-elicitation","risk-management","supplier-monitoring"],
+      {
+  "actions": [
+    "Review the award against the quotation and identify changed commitments.",
+    "Resolve scope, feasibility, delivery, and acceptance ambiguities with the customer.",
+    "Select the P1 or P2 lifecycle and assign the project team and maturity owners.",
+    "Plan resources, suppliers, milestones, and risk treatments.",
+    "Approve the project charter and baseline the award commitments for architecture work."
+  ],
+  "checklist": [
+    "Customer award and delivery scope are documented.",
+    "Quotation differences and open commitments have owners.",
+    "The project type, responsibilities, resources, and maturity dates are agreed.",
+    "Initial requirements, constraints, and risks are recorded.",
+    "The authorized project baseline is available to the development team."
+  ],
+  "roles": [
+    {
+      "role": "Maturity Owner",
+      "assignment": "Project manager",
+      "responsibility": "Coordinates award review, project setup, resources, and delivery commitments."
+    },
+    {
+      "role": "Artifact and Execution Owners",
+      "assignment": "Customer interface and engineering lead",
+      "responsibility": "Clarify customer expectations and confirm feasibility and acceptance assumptions."
+    },
+    {
+      "role": "Quality and Configuration",
+      "assignment": "Quality lead and configuration manager",
+      "responsibility": "Review M0 evidence, deviations, traceability, and baseline control."
+    },
+    {
+      "role": "Decision Authority",
+      "assignment": "Appointed review forum and customer approver where applicable",
+      "responsibility": "Approve the Customer Award decision, conditions, and downstream handover."
+    }
+  ]
+}),
+    makeMaturity("M1", "Architecture Freeze", "Concept Refinement · P1 and P2",
+      "Approves the product architecture, requirements allocation, and interface baseline for detailed design. Subsequent architecture changes are evaluated and controlled. Applies to project types P1 and P2.",
       [
-        artifact("Opportunity statement", "Opportunity owner", "Provide the approved scope and value hypothesis."),
-        artifact("Feasibility evidence", "Engineering lead", "Summarize technical options, constraints, dependencies, and major risks."),
-        artifact("Preliminary estimates", "Project lead", "Provide indicative timing, resources, cost, and investment assumptions.")
-      ],
+  {
+    "name": "Customer Award baseline",
+    "owner": "Project manager",
+    "responsibility": "Provide the M0 scope, project commitments, and customer clarifications."
+  },
+  {
+    "name": "System requirements baseline",
+    "owner": "Requirements owner",
+    "responsibility": "Provide reviewed functional, performance, interface, and applicable specialty requirements."
+  },
+  {
+    "name": "Architecture alternatives and feasibility evidence",
+    "owner": "System architect",
+    "responsibility": "Compare candidate structures, allocations, and critical technical risks."
+  },
+  {
+    "name": "Interface and discipline constraints",
+    "owner": "Discipline leads",
+    "responsibility": "Provide hardware, software, mechanical, supplier, and integration constraints."
+  }
+],
       [
-        artifact("Approved business case", "Business owner", "Document value, cost, schedule, assumptions, and approval conditions."),
-        artifact("Project charter", "Project lead", "Define objectives, scope, governance, milestones, and key responsibilities."),
-        artifact("Initial risk register", "Risk owner", "Record material risks, treatments, owners, and escalation needs.")
-      ],
-      ["project-management", "risk-management", "analysis"]
-    ),
-    makeMaturity(
-      "M2",
-      "Product Concept",
-      "Pre-development",
-      "Selects a product concept that can satisfy the approved business need and establishes a coherent starting point for development.",
+  {
+    "name": "Frozen system architecture",
+    "owner": "System architect",
+    "responsibility": "Baseline system elements, boundaries, interfaces, and rationale for the selected solution."
+  },
+  {
+    "name": "Allocated requirements and interface baseline",
+    "owner": "Requirements and interface owners",
+    "responsibility": "Link requirements to responsible elements and agree internal and external interfaces."
+  },
+  {
+    "name": "Integration and verification strategy",
+    "owner": "Integration and verification leads",
+    "responsibility": "Plan integration order, verification methods, environments, and responsibilities."
+  },
+  {
+    "name": "Architecture review and freeze record",
+    "owner": "Configuration manager",
+    "responsibility": "Retain review findings, accepted deviations, approval, and the controlled baseline identifier."
+  }
+],
+      ["system-requirements-analysis","system-architectural-design","hardware-software-interface","configuration-management","change-request-management"],
+      {
+  "actions": [
+    "Confirm the requirements baseline and architecture decision drivers.",
+    "Evaluate architecture alternatives and allocate requirements to product elements.",
+    "Review interfaces and cross-discipline feasibility with affected stakeholders.",
+    "Define integration and verification strategies and address critical review findings.",
+    "Approve the architecture freeze and place subsequent changes under change control."
+  ],
+  "checklist": [
+    "Requirements are allocated to architectural elements.",
+    "Interfaces, assumptions, and dependencies are agreed.",
+    "Architecture decisions have documented rationale and review evidence.",
+    "Integration and verification strategies address the selected architecture.",
+    "The frozen architecture and approved exceptions are version controlled."
+  ],
+  "roles": [
+    {
+      "role": "Maturity Owner",
+      "assignment": "System architect",
+      "responsibility": "Owns the architecture baseline, allocation, interfaces, and freeze recommendation."
+    },
+    {
+      "role": "Artifact and Execution Owners",
+      "assignment": "Discipline and integration leads",
+      "responsibility": "Review feasibility, interfaces, integration sequencing, and verification coverage."
+    },
+    {
+      "role": "Quality and Configuration",
+      "assignment": "Quality lead and configuration manager",
+      "responsibility": "Review M1 evidence, deviations, traceability, and baseline control."
+    },
+    {
+      "role": "Decision Authority",
+      "assignment": "Appointed review forum and customer approver where applicable",
+      "responsibility": "Approve the Architecture Freeze decision, conditions, and downstream handover."
+    }
+  ]
+}),
+    makeMaturity("M2", "Design Freeze", "Conceptualization · P1 and P2",
+      "Approves the detailed product design and configuration to be built and evaluated in design validation (DV). The design, interfaces, and planned validation configuration are controlled, with explicit disposition of remaining changes. Applies to P1 and P2.",
       [
-        artifact("Approved business case", "Business owner", "Provide the commercial boundaries and approval conditions."),
-        artifact("Customer and stakeholder needs", "Customer interface", "Clarify expected features, operating scenarios, and acceptance needs."),
-        artifact("Concept alternatives", "System architect", "Compare feasible concepts, major interfaces, costs, and risks.")
-      ],
+  {
+    "name": "Architecture Freeze baseline",
+    "owner": "System architect",
+    "responsibility": "Provide the approved M1 architecture, requirements allocations, and interfaces."
+  },
+  {
+    "name": "Detailed design package",
+    "owner": "Discipline design owners",
+    "responsibility": "Provide drawings, schematics, software design, bill of materials, and interface specifications as applicable."
+  },
+  {
+    "name": "Design review and analysis results",
+    "owner": "Engineering leads",
+    "responsibility": "Provide calculations, simulations, design checks, and identified risks."
+  },
+  {
+    "name": "DV plan and prototype configuration",
+    "owner": "Validation lead",
+    "responsibility": "Define test coverage, acceptance criteria, samples, environments, and schedule."
+  }
+],
       [
-        artifact("Selected product concept", "System architect", "Describe the selected solution concept and rationale."),
-        artifact("High-level product architecture", "System architect", "Define major elements, boundaries, and external interfaces."),
-        artifact("Feature, cost, and mission-profile targets", "Product owner", "Baseline the targets used by requirements engineering.")
-      ],
-      ["requirements-elicitation", "analysis", "system-architectural-design"]
-    ),
-    makeMaturity(
-      "M3",
-      "Requirements Baseline",
-      "Development",
-      "Establishes an agreed and reviewable requirements baseline that is feasible, traceable, and suitable for architecture development.",
+  {
+    "name": "Frozen product design baseline",
+    "owner": "Design owners and configuration manager",
+    "responsibility": "Identify the approved design revisions and product configuration."
+  },
+  {
+    "name": "Prototype build and release package",
+    "owner": "Engineering build owner",
+    "responsibility": "Release the controlled instructions and configuration for DV samples."
+  },
+  {
+    "name": "Approved DV plan",
+    "owner": "Validation lead",
+    "responsibility": "Baseline test cases, requirement links, methods, acceptance criteria, and responsibilities."
+  },
+  {
+    "name": "Design freeze review and action record",
+    "owner": "Project manager",
+    "responsibility": "Record approval, remaining deviations, owners, and closure dates."
+  }
+],
+      ["hardware-design","software-detailed-design-and-unit-construction","mee-component-design","configuration-management","change-request-management"],
+      {
+  "actions": [
+    "Complete detailed design and check consistency with the frozen architecture.",
+    "Review discipline designs and interfaces, including build and test feasibility.",
+    "Resolve critical design findings and evaluate remaining deviations.",
+    "Confirm DV coverage and the exact prototype and test configuration.",
+    "Freeze the design baseline and release the controlled DV build package."
+  ],
+  "checklist": [
+    "Detailed designs trace to the architecture and allocated requirements.",
+    "Design reviews are completed with critical findings resolved.",
+    "Design revisions and the DV build configuration are identifiable.",
+    "DV methods, acceptance criteria, samples, and responsibilities are agreed.",
+    "Post-freeze changes require impact assessment and approval."
+  ],
+  "roles": [
+    {
+      "role": "Maturity Owner",
+      "assignment": "Engineering design lead",
+      "responsibility": "Coordinates detailed design completion and the design freeze decision."
+    },
+    {
+      "role": "Artifact and Execution Owners",
+      "assignment": "Design owners and validation lead",
+      "responsibility": "Verify discipline designs and prepare representative DV samples and coverage."
+    },
+    {
+      "role": "Quality and Configuration",
+      "assignment": "Quality lead and configuration manager",
+      "responsibility": "Review M2 evidence, deviations, traceability, and baseline control."
+    },
+    {
+      "role": "Decision Authority",
+      "assignment": "Appointed review forum and customer approver where applicable",
+      "responsibility": "Approve the Design Freeze decision, conditions, and downstream handover."
+    }
+  ]
+}),
+    makeMaturity("M3", "DV Pass", "Conceptualization · P1 and P2",
+      "Confirms that design validation (DV) of the identified product configuration meets the agreed acceptance criteria. P1 concludes its depicted maturity route at M3; P2 transfers the validated design into sequential development and industrialization.",
       [
-        artifact("Selected product concept", "Product owner", "Provide the authorized concept and intended product scope."),
-        artifact("Stakeholder requirements", "Requirements owner", "Provide agreed needs, constraints, use cases, and acceptance expectations."),
-        artifact("Applicable standards and constraints", "Compliance owner", "Identify the requirements that apply to the product and project.")
-      ],
+  {
+    "name": "Design Freeze and DV sample baseline",
+    "owner": "Configuration manager",
+    "responsibility": "Identify the M2 design, sample revisions, software versions, and approved changes."
+  },
+  {
+    "name": "Approved DV plan and acceptance criteria",
+    "owner": "Validation lead",
+    "responsibility": "Provide agreed requirement coverage, procedures, and pass criteria."
+  },
+  {
+    "name": "DV execution results",
+    "owner": "Test engineers",
+    "responsibility": "Provide traceable test records, measurements, environments, and sample identification."
+  },
+  {
+    "name": "Defect, deviation, and change records",
+    "owner": "Problem and change owners",
+    "responsibility": "Provide failure analyses, corrections, retests, and unresolved exceptions."
+  }
+],
       [
-        artifact("System requirements baseline", "System requirements owner", "Approve complete, consistent, feasible, and verifiable requirements."),
-        artifact("Verification strategy", "Verification lead", "Define planned verification levels, methods, responsibilities, and environments."),
-        artifact("Requirements traceability baseline", "Requirements owner", "Connect stakeholder needs to system requirements and planned verification.")
-      ],
-      ["requirements-elicitation", "system-requirements-analysis", "functional-safety-management", "cyber-security-management"]
-    ),
-    makeMaturity(
-      "M4",
-      "Architecture Baseline",
-      "Development",
-      "Defines and agrees the system structure, allocation, interfaces, and key technical decisions needed for discipline-level design.",
+  {
+    "name": "DV completion report",
+    "owner": "Validation lead",
+    "responsibility": "Summarize coverage, results against criteria, exceptions, and the validation conclusion."
+  },
+  {
+    "name": "Validated product configuration",
+    "owner": "Configuration manager",
+    "responsibility": "Baseline the product revisions associated with the accepted evidence."
+  },
+  {
+    "name": "Defect closure and deviation decisions",
+    "owner": "Engineering and quality leads",
+    "responsibility": "Record corrective action verification and authorized residual deviations."
+  },
+  {
+    "name": "DV Pass and handover record",
+    "owner": "Project manager",
+    "responsibility": "Record acceptance and the P1 completion or P2 industrialization handover, including open obligations."
+  }
+],
+      ["system-qualification-test","software-qualification-test","verification-against-hardware-requirements","mee-test-against-mechanical-component-requirements","problem-resolution-management","product-release"],
+      {
+  "actions": [
+    "Verify that tested samples match the controlled DV configuration.",
+    "Complete planned DV activities and assess results against acceptance criteria.",
+    "Analyze failures, implement controlled corrections, and execute required retests.",
+    "Review coverage and residual deviations with engineering, quality, and customer representatives as applicable.",
+    "Approve DV Pass and record the P1 completion or P2 handover decision."
+  ],
+  "checklist": [
+    "DV evidence identifies the tested configuration and conditions.",
+    "Planned coverage is complete or exceptions are explicitly approved.",
+    "Acceptance criteria are satisfied with documented disposition of deviations.",
+    "Critical defects are closed and corrections are verified.",
+    "The DV Pass decision and route-specific handover are recorded."
+  ],
+  "roles": [
+    {
+      "role": "Maturity Owner",
+      "assignment": "Validation lead",
+      "responsibility": "Owns DV coverage, evidence completeness, and the pass recommendation."
+    },
+    {
+      "role": "Artifact and Execution Owners",
+      "assignment": "Test and engineering owners",
+      "responsibility": "Execute DV, analyze failures, implement corrections, and verify retests."
+    },
+    {
+      "role": "Quality and Configuration",
+      "assignment": "Quality lead and configuration manager",
+      "responsibility": "Review M3 evidence, deviations, traceability, and baseline control."
+    },
+    {
+      "role": "Decision Authority",
+      "assignment": "Appointed review forum and customer approver where applicable",
+      "responsibility": "Approve the DV Pass decision, conditions, and downstream handover."
+    }
+  ]
+}),
+    makeMaturity("M4", "Sequential Dev/Industrialization", "Industrialization · P2 and P3",
+      "Confirms readiness of the product and manufacturing process for production validation. P2 carries forward the DV-approved design; P3 starts from an accepted incoming product and development evidence package. Both routes establish controlled production processes, tooling, tests, and supplier readiness.",
       [
-        artifact("System requirements baseline", "System requirements owner", "Provide the approved functional and non-functional requirements."),
-        artifact("Technical constraints and risks", "System architect", "Provide limitations, assumptions, critical risks, and decision drivers."),
-        artifact("Safety and cybersecurity requirements", "Specialty engineering owners", "Provide applicable integrity, safety, and security constraints.")
-      ],
+  {
+    "name": "Validated product and handover package",
+    "owner": "Engineering lead",
+    "responsibility": "For P2 provide the M3 baseline; for P3 review and accept the incoming design, validation evidence, and outstanding obligations."
+  },
+  {
+    "name": "Manufacturing concept and capacity plan",
+    "owner": "Industrial engineering lead",
+    "responsibility": "Provide the process flow, site assumptions, capacity, equipment, and tooling needs."
+  },
+  {
+    "name": "Supplier and purchased-part readiness",
+    "owner": "Supplier quality and purchasing",
+    "responsibility": "Provide part status, tooling schedules, supplier risks, and delivery commitments."
+  },
+  {
+    "name": "Production quality and test requirements",
+    "owner": "Manufacturing quality lead",
+    "responsibility": "Provide inspection needs, process risks, test coverage, and production validation expectations."
+  }
+],
       [
-        artifact("System architecture baseline", "System architect", "Define elements, interfaces, allocation, behavior, and rationale."),
-        artifact("Allocated discipline requirements", "Discipline leads", "Accept allocated requirements for software, hardware, and mechanical design."),
-        artifact("Interface baseline", "Interface owner", "Approve internal and external interface definitions and ownership.")
-      ],
-      ["system-architectural-design", "hardware-software-interface", "software-requirements-analysis", "hardware-requirement-analysis", "mee-component-requirement-analysis"]
-    ),
-    makeMaturity(
-      "M5",
-      "Design Maturity",
-      "Development",
-      "Confirms that discipline architectures and detailed designs are sufficiently complete, reviewed, and controlled for implementation.",
+  {
+    "name": "Industrialized product and process baseline",
+    "owner": "Industrial engineering lead",
+    "responsibility": "Control the production configuration, process flow, tooling, equipment, and work instructions."
+  },
+  {
+    "name": "Production test and inspection package",
+    "owner": "Test engineering and quality",
+    "responsibility": "Release test methods, inspection instructions, controls, and acceptance criteria."
+  },
+  {
+    "name": "PV and PPAP readiness plan",
+    "owner": "Launch and quality leads",
+    "responsibility": "Agree trial builds, validation scope, submission requirements, owners, and schedule."
+  },
+  {
+    "name": "Industrialization readiness review",
+    "owner": "Project manager",
+    "responsibility": "Record readiness, capacity and supplier status, risks, and authorized open actions."
+  }
+],
+      ["project-management","supplier-monitoring","quality-assurance","configuration-management","change-request-management","product-release"],
+      {
+  "actions": [
+    "Accept the P2 or P3 product handover and assess evidence gaps.",
+    "Complete production-oriented development and control any product changes.",
+    "Prepare tooling, equipment, process flow, work instructions, and production tests.",
+    "Review supplier, capacity, training, and quality-control readiness.",
+    "Approve the trial-build baseline and plan the PV/PPAP activities."
+  ],
+  "checklist": [
+    "The incoming design and validation evidence are accepted for the selected route.",
+    "Product and process changes are evaluated and controlled.",
+    "Tooling, equipment, work instructions, and test systems are ready for planned trials.",
+    "Supplier and capacity risks have agreed owners and treatments.",
+    "PV/PPAP scope, trial configuration, and readiness decision are documented."
+  ],
+  "roles": [
+    {
+      "role": "Maturity Owner",
+      "assignment": "Industrial engineering lead",
+      "responsibility": "Owns process preparation, tooling, manufacturing readiness, and industrialization evidence."
+    },
+    {
+      "role": "Artifact and Execution Owners",
+      "assignment": "Launch, supplier quality, and test engineering leads",
+      "responsibility": "Coordinate trial builds, supplier readiness, and production test capability."
+    },
+    {
+      "role": "Quality and Configuration",
+      "assignment": "Quality lead and configuration manager",
+      "responsibility": "Review M4 evidence, deviations, traceability, and baseline control."
+    },
+    {
+      "role": "Decision Authority",
+      "assignment": "Appointed review forum and customer approver where applicable",
+      "responsibility": "Approve the Sequential Dev/Industrialization decision, conditions, and downstream handover."
+    }
+  ]
+}),
+    makeMaturity("M5", "PV/PPAP", "Product Validation / Series Production · P2 and P3",
+      "Confirms production validation (PV) and the applicable Production Part Approval Process (PPAP) disposition for the intended series-production configuration. The readiness decision is supported by production-representative evidence and customer-specific submission requirements. Applies to P2 and P3.",
       [
-        artifact("System architecture baseline", "System architect", "Provide approved allocation, interfaces, and architecture constraints."),
-        artifact("Allocated requirements", "Discipline requirements owners", "Provide testable requirements and traceability for each discipline."),
-        artifact("Design methods and constraints", "Discipline leads", "Provide applicable design rules, methods, and implementation boundaries.")
-      ],
+  {
+    "name": "Industrialization baseline",
+    "owner": "Industrial engineering lead",
+    "responsibility": "Provide the M4 product, process, equipment, tooling, and test configuration."
+  },
+  {
+    "name": "PV plan and production trial records",
+    "owner": "Production validation lead",
+    "responsibility": "Provide production-representative samples, trial conditions, coverage, and acceptance criteria."
+  },
+  {
+    "name": "PPAP submission requirements and evidence",
+    "owner": "Customer and supplier quality",
+    "responsibility": "Identify applicable customer requirements and assemble the agreed submission evidence."
+  },
+  {
+    "name": "Process performance and issue records",
+    "owner": "Manufacturing quality lead",
+    "responsibility": "Provide trial results, measurement evidence, defects, deviations, and corrective actions."
+  }
+],
       [
-        artifact("Software design baseline", "Software architect", "Approve software architecture, detailed design, interfaces, and open deviations."),
-        artifact("Hardware design baseline", "Hardware lead", "Approve hardware design, interfaces, analyses, and implementation constraints."),
-        artifact("Mechanical design baseline", "Mechanical lead", "Approve component design, tolerances, interfaces, and sample-build criteria.")
-      ],
-      ["software-architectural-design", "software-detailed-design-and-unit-construction", "hardware-design", "mee-component-design", "configuration-management"]
-    ),
-    makeMaturity(
-      "M6",
-      "Implementation Complete",
-      "Development",
-      "Confirms that planned product elements have been implemented or built and that unit-level evidence supports integration.",
+  {
+    "name": "PV completion and acceptance report",
+    "owner": "Production validation lead",
+    "responsibility": "Record production validation results, configuration, coverage, and exceptions."
+  },
+  {
+    "name": "PPAP package and customer disposition",
+    "owner": "Customer quality owner",
+    "responsibility": "Retain the submitted package and approval, conditional disposition, or outstanding requirements."
+  },
+  {
+    "name": "Series-production release record",
+    "owner": "Release authority",
+    "responsibility": "Authorize the defined product and process configuration with documented release conditions."
+  },
+  {
+    "name": "Production control and monitoring handover",
+    "owner": "Operations and quality leads",
+    "responsibility": "Transfer control plans, escalation paths, monitoring, and remaining actions."
+  }
+],
+      ["quality-assurance","supplier-monitoring","product-release","configuration-management","problem-resolution-management"],
+      {
+  "actions": [
+    "Validate the product using production-representative parts and processes.",
+    "Assess production trial results and resolve or disposition deviations.",
+    "Compile and review the applicable PPAP evidence against customer requirements.",
+    "Obtain and record the required customer disposition and internal release decision.",
+    "Handover the released configuration and monitoring responsibilities to series production."
+  ],
+  "checklist": [
+    "PV evidence represents the intended series-production configuration.",
+    "Validation and production acceptance criteria are satisfied or exceptions approved.",
+    "PPAP evidence and customer disposition are recorded as applicable.",
+    "Release conditions and outstanding actions have accountable owners.",
+    "Operations has accepted the control, monitoring, and escalation handover."
+  ],
+  "roles": [
+    {
+      "role": "Maturity Owner",
+      "assignment": "Launch and quality leads",
+      "responsibility": "Coordinate PV completion, PPAP submission, and production release readiness."
+    },
+    {
+      "role": "Artifact and Execution Owners",
+      "assignment": "Production, supplier quality, and customer quality owners",
+      "responsibility": "Provide trial evidence and coordinate part approval and production handover."
+    },
+    {
+      "role": "Quality and Configuration",
+      "assignment": "Quality lead and configuration manager",
+      "responsibility": "Review M5 evidence, deviations, traceability, and baseline control."
+    },
+    {
+      "role": "Decision Authority",
+      "assignment": "Appointed review forum and customer approver where applicable",
+      "responsibility": "Approve the PV/PPAP decision, conditions, and downstream handover."
+    }
+  ]
+}),
+    makeMaturity("M6", "End of Life", "Spare Parts / End of Life · P2 and P3",
+      "Approves the planned product phase-out and transition or closure of remaining supply and support obligations. Customer commitments, spare parts, service needs, tooling, inventory, and records are dispositioned before final closure. Applies to P2 and P3.",
       [
-        artifact("Released design baselines", "Discipline design owners", "Provide approved implementation definitions and revisions."),
-        artifact("Build and implementation plans", "Implementation leads", "Provide sequencing, environments, tools, resources, and acceptance checks."),
-        artifact("Interface definitions", "Interface owner", "Provide controlled interfaces required by implementation and unit verification.")
-      ],
+  {
+    "name": "End-of-life request and customer commitments",
+    "owner": "Product and customer owners",
+    "responsibility": "Provide phase-out timing, last-order expectations, service commitments, and approvals."
+  },
+  {
+    "name": "Production and service demand forecast",
+    "owner": "Operations and service owners",
+    "responsibility": "Assess final production, spare parts, repair needs, and remaining demand."
+  },
+  {
+    "name": "Inventory, tooling, and supplier status",
+    "owner": "Supply chain and industrial engineering",
+    "responsibility": "Identify stocks, work in progress, equipment, tools, and supplier obligations."
+  },
+  {
+    "name": "Open issues and controlled product records",
+    "owner": "Quality and configuration owners",
+    "responsibility": "Provide unresolved claims, support issues, released baselines, and applicable retention requirements."
+  }
+],
       [
-        artifact("Implemented units and samples", "Implementation leads", "Deliver identifiable product elements at the agreed revision."),
-        artifact("Unit verification evidence", "Verification owners", "Record reviews, static checks, unit tests, deviations, and results."),
-        artifact("Implementation issue status", "Problem-resolution owner", "Show open defects, containment, ownership, and integration impact.")
-      ],
-      ["software-detailed-design-and-unit-construction", "software-unit-verification", "hardware-design", "verification-against-hardware-design", "mee-component-sample-production"]
-    ),
-    makeMaturity(
-      "M7",
-      "Integration Readiness",
-      "Development",
-      "Confirms that verified elements can be integrated using controlled interfaces, environments, sequences, and acceptance criteria.",
-      [
-        artifact("Unit-verified product elements", "Discipline verification owners", "Provide accepted units, samples, versions, and verification results."),
-        artifact("Integration strategy and plan", "Integration lead", "Provide sequence, dependencies, environments, tests, and responsibilities."),
-        artifact("Interface baseline", "Interface owner", "Provide the approved interfaces and known deviations for integration.")
-      ],
-      [
-        artifact("Integrated product baseline", "Integration lead", "Identify the integrated configuration and all included elements."),
-        artifact("Integration test report", "Integration test owner", "Record execution, results, defects, deviations, and traceability."),
-        artifact("Resolved integration issues", "Problem-resolution owner", "Provide verified closure or accepted residual action plans.")
-      ],
-      ["software-integration-and-integration-test", "system-integration-and-integration-test", "hardware-software-interface", "problem-resolution-management"]
-    ),
-    makeMaturity(
-      "M8",
-      "Validation Sign-off",
-      "Development",
-      "Confirms that the integrated product satisfies its approved requirements and is acceptable for production-readiness preparation.",
-      [
-        artifact("Integrated product baseline", "Configuration owner", "Provide the exact product configuration submitted for qualification."),
-        artifact("Qualification and validation plan", "Verification lead", "Provide requirements coverage, methods, environments, and acceptance criteria."),
-        artifact("Requirements traceability", "Requirements owner", "Provide complete links between requirements, tests, results, and deviations.")
-      ],
-      [
-        artifact("Qualification and validation report", "Verification lead", "Summarize coverage, results, deviations, and acceptance."),
-        artifact("Validation sign-off", "Product and decision authority", "Record approval, conditions, residual risks, and restrictions."),
-        artifact("Residual issue plan", "Project lead", "Assign remaining actions, due dates, owners, and production impact.")
-      ],
-      ["system-qualification-test", "software-qualification-test", "verification-against-hardware-requirements", "functional-safety-management", "cyber-security-management"]
-    ),
-    makeMaturity(
-      "M9",
-      "Production Readiness",
-      "Series production",
-      "Confirms that product, manufacturing, supply, service, and quality arrangements are ready for controlled series-production entry.",
-      [
-        artifact("Validated product baseline", "Product release owner", "Provide the approved product definition and validation status."),
-        artifact("Manufacturing and supply readiness", "Operations and supplier owners", "Provide process, tooling, capacity, material, and supplier evidence."),
-        artifact("Pilot build results", "Production engineering", "Provide yield, capability, issue, rework, and acceptance results.")
-      ],
-      [
-        artifact("Production readiness approval", "Operations lead", "Record readiness status, conditions, open actions, and authority approval."),
-        artifact("Released production definition", "Configuration owner", "Baseline product, BOM, manufacturing, inspection, and packaging definitions."),
-        artifact("Service and support readiness", "Service owner", "Approve service information, training, diagnostics, and support arrangements.")
-      ],
-      ["product-release", "supplier-monitoring", "quality-assurance", "configuration-management", "calibration"]
-    ),
-    makeMaturity(
-      "M10",
-      "Launch and SOP",
-      "Series production",
-      "Authorizes launch and start of production, transfers ownership to operations, and establishes early-life monitoring and response.",
-      [
-        artifact("Production readiness approval", "Operations lead", "Provide approved readiness evidence and closure conditions."),
-        artifact("Launch plan", "Launch owner", "Provide timing, volumes, responsibilities, communications, and contingency actions."),
-        artifact("Release package", "Product release owner", "Provide the approved product, production, quality, service, and shipment records.")
-      ],
-      [
-        artifact("SOP authorization", "Decision authority", "Record authorization, effective date, conditions, and escalation path."),
-        artifact("Operations handover", "Project and operations leads", "Transfer responsibilities, records, risks, and remaining actions."),
-        artifact("Early-life monitoring plan", "Quality and operations", "Define launch metrics, review cadence, issue response, and exit criteria.")
-      ],
-      ["product-release", "quality-assurance", "problem-resolution-management", "change-request-management", "project-management"]
-    )
+  {
+    "name": "Approved phase-out and support plan",
+    "owner": "Product owner",
+    "responsibility": "Record last-order and last-build dates, communications, and remaining service ownership."
+  },
+  {
+    "name": "Spare parts and inventory disposition",
+    "owner": "Supply chain and service leads",
+    "responsibility": "Agree final supply, stock allocation, obsolescence, and disposal or transfer decisions."
+  },
+  {
+    "name": "Archived product and process baseline",
+    "owner": "Configuration manager",
+    "responsibility": "Retain approved records with retrieval ownership and access arrangements."
+  },
+  {
+    "name": "End-of-life closure and handover record",
+    "owner": "Decision authority",
+    "responsibility": "Record fulfillment or transfer of remaining obligations and approve the closure decision."
+  }
+],
+      ["project-management","supplier-monitoring","configuration-management","problem-resolution-management","product-release"],
+      {
+  "actions": [
+    "Agree the phase-out scope and timing with customer and internal stakeholders.",
+    "Plan final supply and spare parts against remaining support commitments.",
+    "Disposition inventory, tooling, equipment, and supplier obligations.",
+    "Resolve or transfer open quality and service issues to named owners.",
+    "Archive controlled records and approve end-of-life closure or residual support handover."
+  ],
+  "checklist": [
+    "Customer phase-out commitments and communications are agreed.",
+    "Final production and spare parts arrangements cover remaining obligations.",
+    "Inventory, tooling, and supplier dispositions are approved.",
+    "Open service and quality obligations are closed or assigned to continuing owners.",
+    "Records remain retrievable and the end-of-life decision is recorded."
+  ],
+  "roles": [
+    {
+      "role": "Maturity Owner",
+      "assignment": "Product lifecycle owner",
+      "responsibility": "Coordinates phase-out timing, customer commitments, and closure approval."
+    },
+    {
+      "role": "Artifact and Execution Owners",
+      "assignment": "Operations, service, and supply chain leads",
+      "responsibility": "Manage final supply, spare parts, inventory, tooling, and support handover."
+    },
+    {
+      "role": "Quality and Configuration",
+      "assignment": "Quality lead and configuration manager",
+      "responsibility": "Review M6 evidence, deviations, traceability, and baseline control."
+    },
+    {
+      "role": "Decision Authority",
+      "assignment": "Appointed review forum and customer approver where applicable",
+      "responsibility": "Approve the End of Life decision, conditions, and downstream handover."
+    }
+  ]
+})
   ];
 
   const maturityById = new Map(maturities.map((maturity) => [maturity.id, maturity]));
@@ -286,14 +694,21 @@
   }
 
   function renderRail() {
-    // Pixel positions in the supplied 1242 x 415 image. M11 has no link.
-    const milestoneX = [30,110,225,412,517,619,694,758,822,898,1078];
+    // Each occurrence links to the same maturity page across the three project routes.
+    const projectRows = [
+      { type: "P1", y: 274, blocks: [[0,208],[1,360],[2,510],[3,642]] },
+      { type: "P2", y: 356, blocks: [[0,208],[1,360],[2,510],[3,642],[4,765],[5,886],[6,1003]] },
+      { type: "P3", y: 438, blocks: [[4,767],[5,886],[6,1003]] }
+    ];
     return `
       <section class="milestone-image-section" aria-label="Product development phases and milestones">
         <div class="milestone-image-scroll" role="region" aria-label="Interactive maturity diagram" tabindex="0">
           <div class="milestone-image-map">
-            <img src="assets/phases-and-milestones.png" width="1242" height="415" alt="Product development phases, gates, and maturity blocks M0 through M11. M0 through M10 open the existing maturity pages. M11 is shown for reference only." />
-            ${maturities.map((maturity, index) => `<a class="milestone-image-link" href="${maturityHref(maturity.id)}" style="left:${milestoneX[index]/1242*100}%;top:${247/415*100}%;width:${39/1242*100}%;height:${65/415*100}%;" aria-label="Open ${maturity.code}: ${escapeHtml(maturity.title)}" title="${maturity.code}: ${escapeHtml(maturity.title)}"></a>`).join('')}
+            <img src="assets/phases-and-milestones.png" width="1069" height="511" alt="Gates G0 to G5 and maturity routes: P1 Customer Award M0 through DV Pass M3; P2 Customer Award M0 through End of Life M6; P3 Sequential Dev/Industrialization M4 through End of Life M6. Select a maturity flag to open its definition, artifacts, actions, and readiness checklist." />
+            ${projectRows.map(row => row.blocks.map(([index,x]) => {
+              const maturity = maturities[index];
+              return `<a class="milestone-image-link" href="${maturityHref(maturity.id)}" style="left:${x/1069*100}%;top:${row.y/511*100}%;width:${32/1069*100}%;height:${54/511*100}%;" aria-label="${row.type}: Open ${maturity.code} - ${escapeHtml(maturity.title)}" title="${row.type}: ${maturity.code} - ${escapeHtml(maturity.title)}"></a>`;
+            }).join('')).join('')}
           </div>
         </div>
       </section>`;
@@ -446,7 +861,7 @@
 
         <div class="template-notice">
           <strong>Default template content</strong>
-          <span>Replace these example criteria, roles, and artifacts with approved lifecycle information when it becomes available.</span>
+          <span>Draft guidance aligned to the updated M0–M6 diagram. Review the proposed criteria, roles, and artifacts against your approved project lifecycle before use.</span>
         </div>
 
         <div class="maturity-detail-layout">
