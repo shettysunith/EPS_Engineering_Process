@@ -647,7 +647,29 @@ function renderPhasesAndMilestonesPage() {
       ${window.MaturityMap.renderRail()}
       <section class="project-type-descriptions" aria-label="Project type descriptions">
         <a href="assets/project-type-descriptions.png" target="_blank" rel="noopener" aria-label="Open P1, P2, and P3 project descriptions at full size">
-          <img src="assets/project-type-descriptions.png" width="1425" height="386" alt="P1: Base Projects — Base Development. Develop new products and technologies from internal innovation or customer ideas, establishing a generic product for customer-specific applications. P2: Application Projects — Customer Development — Application Engineering. Adapt existing products or technology to identified customer, vehicle, or platform needs requiring design or product validation and a PLC gate process. P3: DFM (Design for Manufacturability) Projects. Adapt proven designs for manufacturability, localization, cost optimization, or production constraints. Selected design maturities may be skipped or consolidated based on reuse, change impact, and risk assessment, while maintaining mandatory validation, compliance, and production-readiness activities." />
+          <div class="project-description-row">
+            <div class="project-type-badge"><span>PROJECT TYPE</span><b>P1</b></div>
+            <div class="project-description-copy">
+              <strong>P1: Base Projects: &gt; Base Development</strong>
+              <p>Development of new products and technologies - either out of internal innovation or out of customer idea</p>
+              <p>Scope of a Base Project is to establish a technical and commercial generic product which can be used for customer specific application projects</p>
+            </div>
+          </div>
+          <div class="project-description-row">
+            <div class="project-type-badge"><span>PROJECT TYPE</span><b>P2</b></div>
+            <div class="project-description-copy">
+              <strong>P2: Application Projects: &gt; Customer Development &gt; Application Engineering</strong>
+              <p>Application of an existing product or technology to the individual needs of a customer. Product, customer, car-model or platform are identified.</p>
+              <p>All projects that require a new Design/Product Validation / a PLC Gate process (e.g. customer triggered changes, Cost Reduction Process activities)</p>
+            </div>
+          </div>
+          <div class="project-description-row">
+            <div class="project-type-badge"><span>PROJECT TYPE</span><b>P3</b></div>
+            <div class="project-description-copy">
+              <strong>P3: DFM (Design for Manufacturability)Projects: &gt; Skipping product design maturity levels</strong>
+              <p>Existing or proven product designs adapted for manufacturability, localization, cost optimization, or production constraints. Selected development maturity levels may be skipped or consolidated based on reuse level, change impact, and risk assessment, while maintaining mandatory validation, compliance, and production-readiness activities.</p>
+            </div>
+          </div>
         </a>
       </section>
     </div>

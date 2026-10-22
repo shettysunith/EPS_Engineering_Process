@@ -696,18 +696,18 @@
   function renderRail() {
     // Each occurrence links to the same maturity page across the three project routes.
     const projectRows = [
-      { type: "P1", y: 274, blocks: [[0,208],[1,360],[2,510],[3,642]] },
-      { type: "P2", y: 356, blocks: [[0,208],[1,360],[2,510],[3,642],[4,765],[5,886],[6,1003]] },
-      { type: "P3", y: 438, blocks: [[4,767],[5,886],[6,1003]] }
+      { type: "P1", y: 365, blocks: [[0,275],[1,478],[2,678],[3,854]] },
+      { type: "P2", y: 475, blocks: [[0,275],[1,478],[2,678],[3,854],[4,1033],[5,1192],[6,1345]] },
+      { type: "P3", y: 582, blocks: [[4,1033],[5,1192],[6,1345]] }
     ];
     return `
       <section class="milestone-image-section" aria-label="Product development phases and milestones">
         <div class="milestone-image-scroll" role="region" aria-label="Interactive maturity diagram" tabindex="0">
           <div class="milestone-image-map">
-            <img src="assets/phases-and-milestones.png" width="1069" height="511" alt="Gates G0 to G5 and maturity routes: P1 Customer Award M0 through DV Pass M3; P2 Customer Award M0 through End of Life M6; P3 Sequential Dev/Industrialization M4 through End of Life M6. Select a maturity flag to open its definition, artifacts, actions, and readiness checklist." />
+            <img src="assets/phases-and-milestones.png" width="1422" height="682" alt="Gates G1 to G5 and maturity routes for P1, P2, and P3. Select an M0 to M6 maturity flag to open its definition, artifacts, actions, and readiness checklist." />
             ${projectRows.map(row => row.blocks.map(([index,x]) => {
               const maturity = maturities[index];
-              return `<a class="milestone-image-link" href="${maturityHref(maturity.id)}" style="left:${x/1069*100}%;top:${row.y/511*100}%;width:${32/1069*100}%;height:${54/511*100}%;" aria-label="${row.type}: Open ${maturity.code} - ${escapeHtml(maturity.title)}" title="${row.type}: ${maturity.code} - ${escapeHtml(maturity.title)}"></a>`;
+              return `<a class="milestone-image-link" data-code="${maturity.code}" href="${maturityHref(maturity.id)}" style="left:${x/1422*100}%;top:${row.y/682*100}%;width:${45/1422*100}%;height:${72/682*100}%;" aria-label="${row.type}: Open ${maturity.code} - ${escapeHtml(maturity.title)}" title="${row.type}: ${maturity.code} - ${escapeHtml(maturity.title)}"></a>`;
             }).join('')).join('')}
           </div>
         </div>

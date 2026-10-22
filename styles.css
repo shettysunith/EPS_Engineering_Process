@@ -4180,18 +4180,65 @@ input {
 .engineering-discipline-card li:last-child { margin-bottom:0; }
 @media(max-width:1180px) { .engineering-discipline-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:600px) { .engineering-discipline-grid { grid-template-columns:minmax(0,1fr); } }
+.phases-page .milestone-image-link { background:transparent; border:0; box-shadow:none; opacity:1; }
+.phases-page .milestone-image-link:hover,.phases-page .milestone-image-link:focus-visible { background:rgba(255,255,255,.08); outline:3px solid #fff; outline-offset:2px; }
+.phases-page .project-type-badge b { background:linear-gradient(105deg,#39358a,#84276a); }
 .reference-map-scroll { overflow-x:auto; border:1px solid var(--line); border-radius:10px; background:white; }
 .reference-process-map { position:relative; width:100%; min-width:0; aspect-ratio:1097 / 900; }
 .reference-process-map img { display:block; width:100%; height:auto; }
 .milestone-image-scroll { overflow-x:auto; background:#fff; }
-.milestone-image-map { position:relative; width:100%; min-width:0; }
+.milestone-image-map { position:relative; width:100%; min-width:1069px; }
 .milestone-image-map img { display:block; width:100%; height:auto; }
-.project-type-descriptions { margin-top:20px; }
-.project-type-descriptions a { display:block; }
-.project-type-descriptions img { display:block; width:100%; height:auto; }
+.project-type-descriptions { margin-top:20px; border:1px solid #172939; background:#fff; }
+.project-type-descriptions > a { display:grid; gap:24px; padding:30px 36px; color:#101010; text-decoration:none; font-family:Arial,Helvetica,sans-serif; }
+.project-description-row { display:grid; grid-template-columns:114px minmax(0,1fr); align-items:start; gap:14px; }
+.project-type-badge { display:grid; gap:7px; padding-top:2px; }
+.project-type-badge span { padding:5px 3px; border:1px solid #172939; background:#e1e1e1; color:#101010; text-align:center; font-size:13px; }
+.project-type-badge b { position:relative; display:block; padding:7px 20px 7px 0; background:#f2aa84; color:#fff; text-align:center; font-size:15px; clip-path:polygon(0 0,100% 0,82% 50%,100% 100%,0 100%); }
+.project-description-copy { padding:6px 8px; border:1px solid #172939; background:#e1e1e1; font-size:15px; line-height:1.4; }
+.project-description-copy strong { font-size:inherit; font-weight:700; }
+.project-description-copy p { margin:0; color:inherit; font-size:inherit; line-height:inherit; }
+@media(max-width:700px) {
+  .project-type-descriptions > a { padding:18px 14px; gap:22px; }
+  .project-description-row { grid-template-columns:minmax(0,1fr); gap:10px; }
+  .project-type-badge { width:114px; }
+}
 .milestone-image-link { position:absolute; display:block; cursor:pointer; border-radius:2px; }
 .milestone-image-link:hover,.milestone-image-link:focus-visible { background:rgba(255,215,95,.25); outline:3px solid #23364a; outline-offset:2px; }
-@media(max-width:600px) { .milestone-image-map { min-width:1000px; } }
+.phases-page {
+  --company-indigo:#39358a;
+  --company-plum:#84276a;
+  position:relative;
+  isolation:isolate;
+  padding:26px;
+  border-radius:16px;
+  background:linear-gradient(120deg,var(--company-indigo) 0%,#55327e 48%,var(--company-plum) 100%);
+  box-shadow:0 20px 45px rgba(57,53,138,.24);
+}
+.phases-page::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:inherit;
+  pointer-events:none;
+}
+.phases-page .breadcrumb { color:rgba(255,255,255,.86); }
+.phases-page .breadcrumb a { color:#fff; }
+.phases-page .milestone-image-section,
+.phases-page .project-type-descriptions {
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.48);
+  border-radius:10px;
+  background:rgba(255,255,255,.97);
+  box-shadow:0 12px 28px rgba(31,20,70,.24);
+}
+.phases-page .project-type-descriptions { margin-top:22px; }
+.phases-page .project-type-descriptions > a { background:linear-gradient(135deg,rgba(57,53,138,.04),rgba(132,39,106,.10)); }
+.phases-page .project-description-copy { border-color:rgba(57,53,138,.56); background:rgba(255,255,255,.88); }
+.phases-page .project-type-badge span { border-color:#39358a; background:#ecebfb; color:#302c73; }
+.phases-page .project-type-badge b { background:linear-gradient(105deg,#39358a,#84276a); }
 .reference-process-map .reference-map-quick { position:absolute; left:82.0419%; top:1.1111%; width:15.4968%; }
 .reference-process-map .reference-map-business { position:absolute; left:82.0419%; top:28.3333%; width:15.4968%; }
 .reference-process-map .reference-map-top { position:absolute; left:3.2817%; top:0; width:74.7493%; }
