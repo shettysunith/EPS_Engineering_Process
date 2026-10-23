@@ -827,6 +827,8 @@ function route() {
     app.innerHTML = window.AspiceMatrix.renderRoute(hash, searchInput.value);
   } else if (hash === "#/phases-and-milestones") {
     renderPhasesAndMilestonesPage();
+  } else if (hash.startsWith("#/phases-and-milestones/g") && window.GateMap) {
+    app.innerHTML = window.GateMap.renderRoute(hash);
   } else if (hash.startsWith("#/phases-and-milestones/") || hash.startsWith("#/maturity/")) {
     app.innerHTML = window.MaturityMap.renderRoute(hash);
   } else if (hash.startsWith("#/process/")) {

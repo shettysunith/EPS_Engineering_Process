@@ -4182,6 +4182,12 @@ input {
 @media(max-width:600px) { .engineering-discipline-grid { grid-template-columns:minmax(0,1fr); } }
 .phases-page .milestone-image-link { background:transparent; border:0; box-shadow:none; opacity:1; }
 .phases-page .milestone-image-link:hover,.phases-page .milestone-image-link:focus-visible { background:rgba(255,255,255,.08); outline:3px solid #fff; outline-offset:2px; }
+.phases-page .gate-image-link { position:absolute; display:block; cursor:pointer; border-radius:2px; background:transparent; border:0; box-shadow:none; opacity:1; }
+.phases-page .gate-image-link:hover,.phases-page .gate-image-link:focus-visible { background:rgba(255,255,255,.10); outline:3px solid #fff; outline-offset:2px; }
+.gate-list { display:grid; gap:9px; margin:0; padding-left:22px; color:#4c5d70; line-height:1.5; }
+.gate-list li::marker { color:var(--maturity-color); }
+.gate-section .maturity-table th:first-child,.gate-section .maturity-table td:first-child { width:24%; }
+.gate-notice { border-left-color:var(--maturity-color); }
 .phases-page .project-type-badge b { background:linear-gradient(105deg,#39358a,#84276a); }
 .reference-map-scroll { overflow-x:auto; border:1px solid var(--line); border-radius:10px; background:white; }
 .reference-process-map { position:relative; width:100%; min-width:0; aspect-ratio:1097 / 900; }

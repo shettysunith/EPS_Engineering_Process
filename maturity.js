@@ -704,7 +704,15 @@
       <section class="milestone-image-section" aria-label="Product development phases and milestones">
         <div class="milestone-image-scroll" role="region" aria-label="Interactive maturity diagram" tabindex="0">
           <div class="milestone-image-map">
-            <img src="assets/phases-and-milestones.png" width="1422" height="682" alt="Gates G1 to G5 and maturity routes for P1, P2, and P3. Select an M0 to M6 maturity flag to open its definition, artifacts, actions, and readiness checklist." />
+            <img src="assets/phases-and-milestones.png" width="1422" height="682" alt="Gates G0 to G5 and maturity routes for P1, P2, and P3. Select a gate or M0 to M6 maturity flag to open its definition, artifacts, actions, and readiness checklist." />
+            ${[
+              ["G0", 42, 46, 274, 59],
+              ["G1", 458, 124, 82, 70],
+              ["G2", 659, 124, 82, 70],
+              ["G3", 835, 124, 82, 70],
+              ["G4", 1000, 124, 82, 70],
+              ["G5", 1160, 124, 82, 70]
+            ].map(([code, x, y, width, height]) => `<a class="gate-image-link" data-code="${code}" href="#/phases-and-milestones/${code.toLowerCase()}" style="left:${x/1422*100}%;top:${y/682*100}%;width:${width/1422*100}%;height:${height/682*100}%;" aria-label="Open ${code} stage gate" title="${code} stage gate"></a>`).join("")}
             ${projectRows.map(row => row.blocks.map(([index,x]) => {
               const maturity = maturities[index];
               return `<a class="milestone-image-link" data-code="${maturity.code}" href="${maturityHref(maturity.id)}" style="left:${x/1422*100}%;top:${row.y/682*100}%;width:${45/1422*100}%;height:${72/682*100}%;" aria-label="${row.type}: Open ${maturity.code} - ${escapeHtml(maturity.title)}" title="${row.type}: ${maturity.code} - ${escapeHtml(maturity.title)}"></a>`;
