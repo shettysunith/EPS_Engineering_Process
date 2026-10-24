@@ -678,6 +678,98 @@
 })
   ];
 
+  // Book3.xlsx is the source of truth for the updated M0-M5 maturity names and
+  // output artifacts. Keep the page model compact while preserving the existing
+  // detail-page sections and navigation.
+  const book3Roles = {
+    requirements: ["Requirements Manager", "System Engineering", "Owns requirements completeness, traceability, and approval evidence."],
+    systems: ["Systems Engineer", "System Engineering", "Owns system definition, interfaces, architecture, and technical consistency."],
+    technical: ["Technical Lead", "System Engineering", "Coordinates technical decisions and cross-functional closure."],
+    safety: ["Project Functional Safety Manager", "System Engineering", "Owns functional-safety planning, analysis, and evidence."],
+    ee: ["EE Lead Engineer", "Electronic Engineering", "Owns electronic design, verification, and release evidence."],
+    me: ["ME Engineer", "Mechanical Engineering", "Owns mechanical definition, analysis, and release evidence."],
+    software: ["SW Solution Manager", "Software Engineering", "Owns software scope, architecture, integration, and release evidence."],
+    config: ["Configuration Manager", "Supporting Processes", "Controls baselines, revisions, and configuration records."],
+    quality: ["Quality Manager Project (QMP)", "Quality", "Confirms process compliance, review evidence, and quality readiness."],
+    validation: ["Test & Validation Lead Engineer", "Validation and Verification", "Owns verification, validation, test readiness, and reports."],
+    supplier: ["Quality Manager Project (QMP)", "Quality", "Owns supplier sourcing, qualification, and supplier release evidence."],
+    customerQuality: ["Customer Product Quality Manager (CPQM)", "Quality", "Owns customer quality acceptance and product validation evidence."]
+  };
+  const book3Role = (key) => {
+    const [role, assignment, responsibility] = book3Roles[key];
+    return { role, assignment, responsibility };
+  };
+  const book3Artifact = (name, key) => ({ name, owner: book3Roles[key][0], responsibility: book3Roles[key][2] });
+  const book3Input = (name, key) => book3Artifact(name, key);
+  const book3Outputs = [
+    `BOM: Bill of Material (initial)|Deviation List|Feasibility Study|Functional Safety Concept|Hazard Analysis (initial)|Impact Analysis (initial)|System Architecture (initial)|System Requirements Specification|Technical Safety Requirements|Technical Quotation Package|HW Schematic|ME Drawing and Data`,
+    `CM Plan: Configuration Management Plan|FSM 1 Project Setup Review|Control Plan (prototype)|Embedded Test Software Concept and Requirements|FTA: Fault Tree Analysis|DIA: Development Interface Agreement|DFA: Dependent Failure Analysis|Special Characteristics List (SE)|System Test Schedule|Technical Safety Concept|ISO26262 Methods Documentation|EE Architecture|EE Component Specification|EE Design FMEA|EE Requirements|EE Test Strategy|HW Component Qualification Report|3D Model (concept)|ME Drawing and Data|ME Design FMEA|Special Characteristics List (ME)|ME Requirements|ME Test Strategy|SW Architecture|SW/Algo Integration Strategy|SW/Algo Requirements Specification|SW/Algo Test Strategy|SW Safety Analysis|SW Supplier Monitoring Plan|Algo Release Note`,
+    `BOM (completed)|HSI: Hardware /Software Interface|DFM and Feasibility Analysis (manufacturability of design approved)|System Integration Test Environment|System Integration Test Specification|System Test Automation Code|System Test Automation Release Note|System Test Environment|System Test Specification|Service Part Concept|Supplier RFQ Package|FSM Review Report (FSM2)|Order for Long Lead Parts/Tooling|Sourcing Decision|System Integration Test Report|System Test Report|EE Architecture|EE Change List|EE Design Report|Schematic|PCB Drawing and Data|EE Test Environment|FEA: Failure Effect Analysis Report|FMEDA (for safety relevant products)|EE Test Report|EE Test Specifications|FEM Analysis Report|ME Tolerance Calculation|ME Test Report|ME Test Specifications|ME Delivery Review and Release|SW Unit Design and Units (to support DV and EMC)|SW Verified, Issues and Risks Identified|SW & Calibration Release Note|3rd Party SW (List of Open Issues)|Free Open Source SW (License Compliance Check)|SW Configuration Described|SW Info in PPTS`,
+    `BQR: Build Q Gate Report|DV: Design Validation Report|FSM Review Report (FSM3)|PTS: Production Process Test Specification|DTP: Data to Production|SW Units (PV Version)`,
+    `FSM Review Report (FSM4)|IMDS Record (released)|Process Audit Report|Supplier PSW (released)|ISIR (checked)|IMDS Record|Recycling Passport|SW Units (final version)|SW Configuration for Final Series Verified|3rd Party SW: Final Release Review`,
+    `CQM: Component Qualification Matrix|Product Validation (PV) Report|PSW (signed by Customer)|Supplier PSW`
+  ];
+  const book3OutputRole = (name) => {
+    const n = name.toLowerCase();
+    if (n.includes("psw") || n.includes("cqm") || n.includes("product validation") || n.includes("qualification matrix")) return "quality";
+    if (n.includes("sw") || n.includes("algo")) return "software";
+    if (n.includes("ee") || n.includes("pcb") || n.includes("schematic")) return "ee";
+    if (n.includes("me ") || n.includes("fem") || n.includes("3d model") || n.includes("drawing")) return "me";
+    if (n.includes("safety") || n.includes("fault tree") || n.includes("fmeda") || n.includes("fsm")) return "safety";
+    if (n.includes("test") || n.startsWith("dv:") || n.startsWith("bqr:")) return "validation";
+    if (n.includes("supplier") || n.includes("sourcing") || n.includes("rfq") || n.includes("long lead")) return "supplier";
+    if (n.includes("configuration") || n.includes("cm plan") || n.startsWith("dtp:")) return "config";
+    if (n.includes("isir") || n.includes("imds") || n.includes("process audit") || n.includes("qualification")) return "quality";
+    if (n.includes("requirement")) return "requirements";
+    return "systems";
+  };
+  const book3Titles = ["Prototype Defined", "Prototype Readiness", "Development Approved", "Material Verified/Validated", "PPAP Readiness", "Material Approved"];
+  const book3Stages = ["G0 · Opportunity / Quote", "G1 · Product Conceptualization", "G2 · Design Freeze", "G3 · Design Validation", "G4 · Production Readiness", "G5 · Series Production"];
+  const book3Definitions = [
+    "The material is defined enough for quotation, customer information, prototype planning, and initial procurement.",
+    "The material is mature enough to be delivered to an external customer for a dedicated prototyping purpose and volume.",
+    "The design and supporting documentation are complete enough to start material sourcing, integration, and introduction activities.",
+    "Verification and validation evidence is available; purchased material is sourced, non-purchased design is mature for production planning, and the final component specification is fixed.",
+    "Tooling, equipment, process evidence, and supplier records are complete enough for limited-series production and PPAP activities.",
+    "Product validation is complete and the material is approved by the customer for series production."
+  ];
+  const book3Inputs = [
+    ["Approved opportunity and quotation package","Customer requirements and delivery expectations","Initial scope, assumptions, and feasibility","Project award and commercial conditions"],
+    ["M0 technical quotation package and initial BOM","System requirements and initial architecture","Functional safety concept and technical safety requirements","Initial HW schematic and ME drawing/data","Approved project setup and configuration baseline"],
+    ["M1 prototype readiness package","Approved system, EE, ME, and SW requirements","Architecture, FMEA, safety, and test strategies","Configuration baseline and interface agreements","Supplier and long-lead procurement assumptions"],
+    ["M2 development-approved design package","Integration and system test reports","Completed BOM, sourcing decision, and tooling orders","EE, ME, and SW design reports and release notes","Configuration baseline and safety evidence"],
+    ["M3 verified/validated material specification","Design validation and build quality reports","Production-process test specification and data-to-production package","Supplier sourcing and qualification evidence","PV-version software units"],
+    ["M4 PPAP-readiness package","Supplier PSW and checked ISIR","Product validation and process audit evidence","Final-series software and configuration evidence","Customer-specific quality and release requirements"]
+  ];
+  const book3InputRoles = [["technical","requirements","systems","quality"],["technical","requirements","safety","ee","config"],["technical","requirements","safety","config","supplier"],["technical","validation","supplier","systems","config"],["systems","validation","config","supplier","software"],["quality","supplier","validation","software","customerQuality"]];
+  const book3ResponsibleRoles = [["technical","requirements","systems","safety","config","quality"],["requirements","systems","safety","ee","me","software","validation","config","quality","supplier"],["systems","requirements","ee","me","software","validation","safety","supplier","config","quality"],["validation","quality","safety","systems","software","config","supplier"],["quality","supplier","safety","software","config","validation","customerQuality"],["customerQuality","quality","validation","supplier","config","systems"]];
+  const book3Actions = [
+    ["Confirm the awarded scope, quotation assumptions, and project route.","Capture customer requirements, interfaces, constraints, and acceptance expectations.","Prepare the initial BOM, architecture, safety concepts, and feasibility evidence.","Record deviations, risks, assumptions, and ownership in controlled records.","Review the technical quotation package and baseline the accepted outputs."],
+    ["Complete project setup, interface agreements, and configuration planning.","Refine system, electronic, mechanical, and software requirements into controlled baselines.","Complete architecture, FMEA, safety, and special-characteristic analyses.","Define prototype control plans, test strategies, schedules, and qualification evidence.","Review prototype readiness across all disciplines and suppliers.","Baseline the material definition and release the prototype package."],
+    ["Complete the design definition and freeze the approved architecture and interfaces.","Complete DFM, FMEA, tolerance, safety, and feasibility analysis.","Prepare completed BOMs, sourcing decisions, RFQ packages, and long-lead orders.","Build and qualify integration and system test environments and automation.","Review EE, ME, and SW design reports, test specifications, and release notes.","Record the M2 document update and baseline the development-approved package."],
+    ["Execute design verification and validation against approved requirements.","Confirm purchased material sourcing and production-planning readiness.","Complete the build quality review and resolve critical defects and deviations.","Release production-process test specifications and data-to-production package.","Review functional-safety evidence and PV-version software units.","Baseline the verified/validated material specification for PPAP readiness."],
+    ["Complete process audits, supplier release evidence, and material traceability records.","Verify ISIR, IMDS, recycling, and customer-specific quality documentation.","Release final-series software units and verify final configuration.","Complete the FSM4 review and resolve production-readiness findings.","Prepare the PPAP submission package and limited-series readiness decision.","Baseline PPAP evidence and hand over approved production controls."],
+    ["Complete product validation and confirm all customer acceptance criteria.","Review the component qualification matrix and supplier PPAP evidence.","Resolve remaining quality, validation, and production-release actions.","Obtain customer signature on the PSW and release the approved material baseline.","Record the G5 series-production decision and production handover inputs."]
+  ];
+  const book3Checklists = [
+    ["Award and quotation scope are approved.","Initial requirements and architecture are traceable.","Feasibility, safety, and impact analyses are recorded.","Initial BOM, schematic, and mechanical data are controlled.","Open deviations and risks have owners and disposition dates.","The Technical Quotation Package is baselined for the next maturity."],
+    ["System, EE, ME, and SW requirements are approved.","Architecture and safety analyses have review evidence.","Prototype test strategies and schedules are released.","Prototype control plan and special characteristics are defined.","Configuration and interface baselines are established.","Prototype package is ready for the agreed customer purpose and volume."],
+    ["Completed BOM and interfaces are approved.","Design-for-manufacture and safety analyses are accepted.","Sourcing and long-lead decisions are documented.","Integration and system test environments are available.","EE, ME, and SW release evidence is controlled.","Development approval and design-freeze decision are recorded."],
+    ["Design validation evidence covers approved requirements.","Build quality review is complete with critical actions closed.","Purchased material is sourced and non-purchased design is production-planning ready.","Production-process test specification is released.","Data-to-production and PV software units are controlled.","Final component specification is fixed and approved for the next gate."],
+    ["Process audit findings are closed or formally accepted.","Supplier PSW and ISIR evidence are released and checked.","IMDS and recycling records are complete.","Final software version and configuration are verified.","Functional-safety review evidence is approved.","PPAP package is complete for the production-readiness decision."],
+    ["Product validation report is approved.","Component qualification matrix is complete.","Customer-signed PSW is available.","Supplier PSW is released and traceable.","Open critical quality and validation actions are closed.","Material baseline is approved for series production."]
+  ];
+  const legacyM6 = maturities.find((maturity) => maturity.code === "M6");
+  maturities.splice(0, maturities.length, ...book3Titles.map((title, index) => {
+    const outputs = book3Outputs[index].split("|").map((name) => book3Artifact(name, book3OutputRole(name)));
+    return makeMaturity(`M${index}`, title, book3Stages[index], book3Definitions[index], book3Inputs[index].map((name, inputIndex) => book3Input(name, book3InputRoles[index][inputIndex] || book3InputRoles[index][0])), outputs, ["project-management","requirements-elicitation","configuration-management","quality-assurance","product-release"], { roles: book3ResponsibleRoles[index].map(book3Role), actions: book3Actions[index], checklist: book3Checklists[index] });
+  }));
+  if (legacyM6) {
+    legacyM6.title = "SPARE PARTS & EOL";
+    legacyM6.stage = "Post-production · Spare Parts / End of Life";
+    maturities.push(legacyM6);
+  }
+
   const maturityById = new Map(maturities.map((maturity) => [maturity.id, maturity]));
 
   function escapeHtml(value) {
@@ -781,7 +873,7 @@
       <section class="maturity-section">
         <div class="section-heading">
           <span>Governance</span>
-          <h2>Roles and responsibilities</h2>
+          <h2>Responsible roles</h2>
         </div>
         <div class="maturity-role-grid">
           ${roles
@@ -869,7 +961,7 @@
 
         <div class="template-notice">
           <strong>Default template content</strong>
-          <span>Draft guidance aligned to the updated M0–M6 diagram. Review the proposed criteria, roles, and artifacts against your approved project lifecycle before use.</span>
+          <span>Draft guidance aligned to the updated M0–M5 definitions and the retained M6 spare-parts and end-of-life page. Review the proposed criteria, roles, and artifacts against your approved project lifecycle before use.</span>
         </div>
 
         <div class="maturity-detail-layout">
