@@ -597,6 +597,25 @@ function renderSearchResults(query) {
   `;
 }
 
+function renderHomeSubPage() {
+  app.innerHTML = `
+    <div class="governance-page">
+      <div class="breadcrumb"><a href="#/home">Home</a><span>/</span><span>Home-Sub</span></div>
+      <header class="governance-hero">
+        <h1>Mapping of Governance decisions to Material status</h1>
+        <p>Project milestone decisions mapped to the corresponding material maturity status.</p>
+      </header>
+      <section class="governance-card governance-map-card" aria-label="Governance decisions and material status mapping">
+        <img class="governance-image" src="assets/governance-material-status.png" alt="Project milestones and material status mapping from G0 through post production and M0 through M6." />
+      </section>
+      <section class="governance-card governance-flyer-card" aria-labelledby="governance-flyer-heading">
+        <h2 id="governance-flyer-heading">Gate and material status work products</h2>
+        <img class="governance-image" src="assets/governance-flyer.png" alt="Gate releases, project work products, and material maturity outputs from G0 through M6." />
+      </section>
+    </div>
+  `;
+}
+
 function renderHome() {
   const query = searchInput.value;
   const resultHtml = renderSearchResults(query);
@@ -807,7 +826,7 @@ function updateActiveNav() {
   const isMaturity = location.hash.startsWith("#/phases-and-milestones/") || location.hash.startsWith("#/maturity/");
   const section = (location.hash || "#/home").replace("#/", "").split("/")[0];
   document.querySelectorAll("[data-nav]").forEach((link) => {
-    const shouldActivate = ["roles", "tools", "trainings", "organization-units", "phases-and-milestones", "review-system"].includes(section)
+    const shouldActivate = ["roles", "tools", "trainings", "organization-units", "phases-and-milestones", "review-system", "home-sub"].includes(section)
       ? link.dataset.nav === section
       : isAspice
       ? link.dataset.nav === "aspice"
@@ -821,7 +840,9 @@ function updateActiveNav() {
 function route() {
   updateActiveNav();
   const hash = location.hash || "#/home";
-  if (hash === "#/review-system" || hash.startsWith("#/review-system/")) {
+  if (hash === "#/home-sub") {
+    renderHomeSubPage();
+  } else if (hash === "#/review-system" || hash.startsWith("#/review-system/")) {
     app.innerHTML = window.ReviewSystem.renderRoute(hash);
   } else if (hash.startsWith("#/aspice")) {
     app.innerHTML = window.AspiceMatrix.renderRoute(hash, searchInput.value);
