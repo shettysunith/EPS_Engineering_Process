@@ -471,10 +471,10 @@ const imageProcessGroups = [
   {id:'software', title:'Software Engineering', ids:['software-requirements-analysis','software-architectural-design','software-detailed-design-and-unit-construction','software-unit-verification','software-integration-and-integration-test','software-qualification-test']}
 ];
 const imageHotspots = [
-  ['Project Management',36+286*820/1187,245+16*820/1187,880*820/1187,30*820/1187,'project-management'],
-  ['Risk Management',36+515*820/1187,245+53*820/1187,195*820/1187,25*820/1187,'risk-management'],
-  ['Change Management',36+743*820/1187,245+53*820/1187,195*820/1187,25*820/1187,'change-request-management'],
-  ['Problem Resolution Management',36+972*820/1187,245+53*820/1187,194*820/1187,25*820/1187,'problem-resolution-management'],
+  ['Project Management',36+286*820/1187,288+16*820/1187,880*820/1187,30*820/1187,'project-management'],
+  ['Risk Management',36+515*820/1187,288+53*820/1187,195*820/1187,25*820/1187,'risk-management'],
+  ['Change Management',36+743*820/1187,288+53*820/1187,195*820/1187,25*820/1187,'change-request-management'],
+  ['Problem Resolution Management',36+972*820/1187,288+53*820/1187,194*820/1187,25*820/1187,'problem-resolution-management'],
   // Engineering image coordinates (1242 x 446), scaled to the existing map.
   ...[
     ['Engineering Releases',48,55,222,27,'product-release'],
@@ -491,7 +491,7 @@ const imageHotspots = [
     ['Electronic Engineering',485,255,400,26,'@electronics'],
     ['Mechanical Engineering',492,284,384,26,'@mechanical'],
     ['Software Engineering',502,313,365,26,'@software']
-  ].map(([label,x,y,w,h,target]) => [label,36+x*820/1242,324+y*820/1242,w*820/1242,h*820/1242,target]),
+  ].map(([label,x,y,w,h,target]) => [label,36+x*820/1242,369+y*820/1242,w*820/1242,h*820/1242,target]),
   ...[
     ['Supplier Management',9,474,193,27,'supplier-monitoring'],
     ['Structured Problem Solving',9,696,193,27,'problem-resolution-management'],
@@ -514,7 +514,7 @@ function renderDiagram() {
       <div class="reference-process-map">
         <img class="reference-map-quick" src="assets/quick-links.png" width="229" height="312" alt="Quick Links: Update Information, Rule Manager, Training Courses, KPIs, and Rule Overview." />
         <img class="reference-map-business" src="assets/business-processes.png" width="210" height="758" alt="Company strategy, business review, innovation, supplier management, customer management, and continuous improvement." />
-        <img class="reference-map-top" src="assets/engineering-lifecycle-top.png" width="1293" height="412" alt="Engineering lifecycle gates and material maturity milestones." />
+        <img class="reference-map-top" src="assets/engineering-lifecycle-top.png" width="1225" height="484" alt="Engineering lifecycle gates G0 to G5 and material maturity milestones M0 to M6." />
         <img class="reference-map-management" src="assets/project-management-section.png" width="1187" height="97" alt="Project Management, Tailoring for Reuse, Gate Releases, Risk Management, Change Management, and Problem Resolution." />
         <img class="reference-map-engineering" src="assets/engineering-section.png" width="1242" height="446" alt="Engineering processes, Quality Assurance, Safety Management, Cyber Security Management, and the systems engineering V-model." />
         <img class="reference-map-operations" src="assets/operations-section.png" width="1404" height="210" alt="Operations: Gate Releases, New Product Launch Management, Industrial Engineering: Test Engineering, and Industrial Engineering: Process Engineering." />
