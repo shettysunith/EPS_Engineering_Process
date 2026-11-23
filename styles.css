@@ -806,6 +806,25 @@ input {
 .organization-esdm header { background: #65717f; }
 .organization-strategic header { background: #376637; }
 
+.adas-resource-page .detail-hero .hero-panel,
+.adas-resource-page .info-block { border-color: rgba(91, 45, 125, 0.32); }
+.adas-resource-page .info-block > h2 { color: #3b2d87; }
+.adas-program-grid { display: grid; grid-template-columns: repeat(2, minmax(260px, 1fr)); gap: 20px; }
+.adas-program-card { padding: 20px; border: 1px solid #cbb9dc; border-radius: 14px; background: linear-gradient(145deg, #f3effb, #fff); box-shadow: 0 8px 18px rgba(65, 38, 107, 0.12); }
+.adas-program-card h3 { margin: 0 0 8px; color: #3b2d87; font-size: 20px; }
+.adas-program-card h3 a { color: inherit; }
+.adas-program-card p { min-height: 44px; margin: 0 0 14px; color: #4c4d68; line-height: 1.45; }
+.adas-program-card dl { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 0 0 16px; }
+.adas-program-card dl div { padding: 8px; border-radius: 8px; background: #fff; text-align: center; }
+.adas-program-card dt { color: #66647e; font-size: 11px; text-transform: uppercase; }
+.adas-program-card dd { margin: 3px 0 0; color: #3b2d87; font-size: 20px; font-weight: 700; }
+.adas-program-card dd.gap-value { color: #a92667; }
+.adas-resource-table th { background: linear-gradient(110deg, #39348a, #a92667); }
+.adas-resource-table td:first-child { min-width: 180px; color: #3b2d87; }
+.adas-resource-table .gap-cell { color: #a92667; font-weight: 700; }
+.adas-resource-table .ok-cell { color: #28704f; font-weight: 700; }
+@media (max-width: 800px) { .adas-program-grid { grid-template-columns: 1fr; } }
+
 .organization-icon {
   position: relative;
   display: grid;
@@ -4222,6 +4241,19 @@ input {
 .engineering-discipline-card ul { margin:0 0 12px; padding-left:18px; color:#182332; font-size:14px; line-height:1.45; }
 .engineering-discipline-card li { margin-bottom:5px; padding-left:0; }
 .engineering-discipline-card li:last-child { margin-bottom:0; }
+.engineering-discipline-card h3 a,
+.engineering-discipline-card .card-link { color:inherit; text-decoration:none; }
+.engineering-discipline-card .card-link { display:inline-block; margin-top:8px; color:#174d79; font-size:13px; font-weight:700; }
+.engineering-discipline-card .card-link:hover,
+.engineering-discipline-card h3 a:hover { text-decoration:underline; }
+.roles-theme-page { margin: -8px -8px 0; padding: 20px; border-radius: 18px; background: linear-gradient(110deg, #39348a 0%, #6c2d78 50%, #a92667 100%); }
+.roles-theme-page .workspace-page { margin: 0; }
+.roles-theme-page .detail-hero .hero-panel { border-color: rgba(255,255,255,.55); box-shadow: 0 12px 28px rgba(20,14,60,.22); }
+.roles-theme-page .info-block { border-color: rgba(255,255,255,.62); box-shadow: 0 12px 28px rgba(20,14,60,.2); }
+.roles-theme-page .info-block > h2,
+.roles-theme-page .section-heading h2 { color: #332875; }
+.roles-theme-page .workspace-table th { background: linear-gradient(110deg, #39348a, #a92667); color: #fff; }
+.roles-theme-page .maturity-pager a { border-color: rgba(255,255,255,.55); background: rgba(255,255,255,.92); }
 @media(max-width:1180px) { .engineering-discipline-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:600px) { .engineering-discipline-grid { grid-template-columns:minmax(0,1fr); } }
 .phases-page .milestone-image-link { background:transparent; border:0; box-shadow:none; opacity:1; }

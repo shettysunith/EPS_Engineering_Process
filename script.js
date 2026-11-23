@@ -17,6 +17,55 @@ const specialtyRoles = {
   ]
 };
 
+const adasPrograms = [
+  {
+    id: "aras", name: "ARAS", label: "ARAS", description: "Baseline ADAS resource view for the ARAS program.",
+    functions: [
+      ["Program Management", [["Program Manager", 1, 0]]],
+      ["System Engineering", [["System Lead", 0, 0], ["System Engineer", 0, 0], ["System Architect", 0, 1], ["PFSM", 0, 0], ["PSPM", 0, 0]]],
+      ["Hardware Engineering", [["HW Lead", 0, 0], ["HW Architect", 0, 0], ["HW Engineer", 0, 0], ["PCB Layout Engineer (outsourced)", 0, 0]]],
+      ["Perception and Fusion", [["Radar Perception Lead", 0, 0], ["Radar Perception Expert", 1, 1], ["Environment Model", 0, 0], ["Driving Function Architect", 1, 0], ["Motion Planner & Controller", 1, 1]]],
+      ["Test and Validation", [["HIL Experts", 1, 1], ["Test Engineer", 2, 2], ["Vehicle Integration Lead", 1, 1], ["Vehicle Test Expert", 1, 1], ["Vehicle Test Engineers", 2, 2]]],
+      ["Process and Quality", [["Process & Quality Lead", 1, 1]]]
+    ]
+  },
+  {
+    id: "aras-x", name: "ARAS-X (Connectivity)", label: "ARAS-X", description: "Connectivity-enabled ARAS resource view.",
+    functions: [
+      ["Program Management", [["Program Manager", 1, 0]]],
+      ["System Engineering", [["System Lead", 1, 0], ["System Engineer", 1, 0], ["System Architect", 1, 1], ["PFSM", 1, 1], ["PSPM", 1, 1]]],
+      ["Hardware Engineering", [["HW Lead", 1, 0], ["HW Architect", 0, 1], ["HW Engineer", 0, 2], ["PCB Layout Engineer (outsourced)", 0, 1]]],
+      ["Perception and Fusion", [["Radar Perception Lead", 0, 0], ["Radar Perception Expert", 1, 1], ["Environment Model", 1, 1], ["Driving Function Architect", 1, 0], ["Motion Planner & Controller", 1, 1]]],
+      ["Test and Validation", [["HIL Experts", 1, 1], ["Test Engineer", 2, 2], ["Vehicle Integration Lead", 1, 1], ["Vehicle Test Expert", 1, 1], ["Vehicle Test Engineers", 2, 2]]],
+      ["Process and Quality", [["Process & Quality Lead", 1, 1]]]
+    ]
+  },
+  {
+    id: "adas-l2-dms", name: "ADAS L2 + DMS", label: "ADAS L2 + DMS", description: "Smart-camera ADAS L2 with driver monitoring resources.",
+    functions: [
+      ["Program Management", [["Program Manager", 1, 0]]],
+      ["System Engineering", [["System Lead", 1, 0], ["System Engineer", 2, 1], ["System Architect", 1, 1], ["PFSM", 1, 0], ["PSPM", 1, 1]]],
+      ["Hardware Engineering", [["HW Lead", 1, 0], ["HW Architect", 1, 1], ["HW Engineer", 3, 2], ["PCB Layout Engineer (outsourced)", 1, 1]]],
+      ["Perception and Fusion", [["Perception Lead", 1, 0], ["Deep Learning Experts", 4, 2], ["Calibration Chain", 1, 1], ["L3 Testing Perception", 1, 3], ["Environment Model", 1, 1], ["Driving Function Architect", 2, 1], ["Motion Planner & Controller", 2, 2], ["State Estimation", 2, 2]]],
+      ["Development Enablers", [["Data Pipeline", 1, 5], ["Development Enablers", 2, 1], ["MLOPS", 2, 1], ["Dev Enabler / L3 Test", 5, 3], ["SW Integrator + CI/CD", 2, 2]]],
+      ["Test and Validation", [["HIL Experts", 1, 1], ["Test Engineer", 3, 0], ["Vehicle Integration Lead", 1, 1], ["Vehicle Test Expert", 2, 2], ["Vehicle Test Engineers", 3, 1]]],
+      ["Process and Quality", [["Process & Quality Lead", 1, 1]]]
+    ]
+  },
+  {
+    id: "adas-l2-plus", name: "ADAS L2+", label: "ADAS L2+", description: "Higher-content ADAS L2+ resource view.",
+    functions: [
+      ["Program Management", [["Program Manager", 1, 1]]],
+      ["System Engineering", [["System Lead", 3, 2], ["System Engineer", 3, 2], ["System Architect", 1, 1], ["PFSM", 1, 1], ["PSPM", 1, 1]]],
+      ["Hardware Engineering", [["HW Lead", 1, 0], ["HW Architect", 1, 1], ["HW Engineer", 3, 2], ["PCB Layout Engineer (outsourced)", 1, 1]]],
+      ["Perception and Fusion", [["Perception Lead", 1, 0], ["Deep Learning Experts", 4, 3], ["Calibration Chain", 2, 2], ["L3 Testing Perception", 1, 3], ["Environment Model", 3, 3], ["Driving Function Architect", 2, 1], ["Motion Planner & Controller", 2, 2], ["State Estimation", 2, 2]]],
+      ["Development Enablers", [["Data Pipeline", 1, 5], ["Development Enablers", 2, 2], ["MLOPS", 2, 2], ["Dev Enabler / L3 Test", 5, 5], ["SW Integrator + CI/CD", 2, 2]]],
+      ["Test and Validation", [["HIL Experts", 1, 1], ["Test Engineer", 4, 0], ["Vehicle Integration Lead", 1, 1], ["Vehicle Test Expert", 2, 2], ["Vehicle Test Engineers", 3, 1]]],
+      ["Process and Quality", [["Process & Quality Lead", 1, 1]]]
+    ]
+  }
+];
+
 const defaultActivities = [
   "Confirm inputs, scope, and applicable process tailoring.",
   "Produce or update the required work products.",
@@ -334,8 +383,11 @@ function renderWorkspaceIntro(title, description) {
     `;
 }
 
-function renderRolesPage() {
-  const disciplines = [
+function slugify(value) {
+  return String(value).toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+const roleDisciplines = [
     ["System Engineering", ["Technical Lead", "System Lead Engineer", "Systems Engineer", "Project Functional Safety Manager", "Project Security and Privacy Manager", "PTS Engineer", "Requirements Manager", "Homologation Engineer"]],
     ["Software Engineering", ["SW Solution Manager", "ART/SW Solution Engineering Team", "SW Solution Train Architect", "SW Solution Train Engineer", "Component Responsible", "Package Owner Team", "Software Project Quality Engineer"]],
     ["Validation and Verification", ["Test & Validation Lead Engineer", "Integration and Verification Manager", "Integration and Verification Engineer", "Test Manager", "Test Engineer", "Function Test Owner", "Validation Engineer"]],
@@ -345,13 +397,35 @@ function renderRolesPage() {
     ["Mechanical Engineering", ["Mechanics Lead Engineer", "ME Engineer", "FEA Engineer"]],
     ["Sensor Technology Engineering", ["Sensor Technology Lead Engineer", "Sensor Technology Engineer"]],
     ["Lean Agile Role", ["Agile Team Member", "Product Manager", "Product Owner", "Release Train Architect", "Release Train Engineer", "Scrum Master"]]
-  ];
+];
+
+function roleDescription(role, discipline) {
+  return `The ${role} contributes to ${discipline.toLowerCase()} activities across the product lifecycle, applying the approved engineering methods, reviews, and work-product controls.`;
+}
+
+function roleResponsibilities(role) {
+  return `Own the ${role.toLowerCase()} responsibilities assigned to the project, coordinate with affected disciplines, maintain traceability and objective evidence, raise risks and deviations early, and support maturity and release decisions.`;
+}
+
+function renderRolesPage() {
   app.innerHTML = `
-    ${renderWorkspaceIntro("Roles", "Engineering roles are organized by discipline to clarify participation across development, verification, quality, supporting processes, and agile delivery.")}
+    <div class="roles-theme-page">${renderWorkspaceIntro("Roles", "Engineering roles are organized by discipline to clarify participation across development, verification, quality, supporting processes, and agile delivery.")}
       <section class="info-block engineering-roles-section"><h2>Engineering Roles</h2><div class="engineering-discipline-grid">
-        ${disciplines.map(([discipline, roles]) => `<article class="engineering-discipline-card"><h3>${escapeHtml(discipline)}</h3><ul>${roles.map(role => `<li>${escapeHtml(role)}</li>`).join("")}</ul></article>`).join("")}
+        ${roleDisciplines.map(([discipline, roles]) => `<article class="engineering-discipline-card"><h3><a href="#/roles/${slugify(discipline)}">${escapeHtml(discipline)}</a></h3><ul>${roles.map(role => `<li>${escapeHtml(role)}</li>`).join("")}</ul><a class="card-link" href="#/roles/${slugify(discipline)}">View descriptions and responsibilities →</a></article>`).join("")}
       </div></section>
-    </div>`;
+    </div></div>`;
+}
+
+function renderRoleDisciplinePage(disciplineId) {
+  const entry = roleDisciplines.find(([discipline]) => slugify(discipline) === disciplineId) || roleDisciplines[0];
+  const [discipline, roles] = entry;
+  app.innerHTML = `
+    <div class="roles-theme-page">${renderWorkspaceIntro(discipline, `Role descriptions and responsibilities for the ${discipline} discipline.`)}
+      <section class="info-block"><div class="section-heading"><span>Role catalogue</span><h2>${escapeHtml(discipline)}</h2></div><div class="table-scroll"><table class="workspace-table"><thead><tr><th>Role</th><th>Description</th><th>Responsibilities</th></tr></thead><tbody>
+        ${roles.map(role => `<tr><td><strong>${escapeHtml(role)}</strong></td><td>${escapeHtml(roleDescription(role, discipline))}</td><td>${escapeHtml(roleResponsibilities(role))}</td></tr>`).join("")}
+      </tbody></table></div></section>
+      <nav class="maturity-pager" aria-label="Role discipline navigation"><a href="#/roles"><small>Return</small><strong>All roles</strong></a></nav>
+    </div></div>`;
 }
 
 function renderToolsPage() {
@@ -385,9 +459,34 @@ function renderOrganizationUnitsPage() {
         ].map(([title, icon, items]) => `
           <article class="organization-card organization-${icon}">
             <header><span class="organization-icon ${icon}-icon" aria-hidden="true"></span><h2>${escapeHtml(title)}</h2></header>
-            <div class="organization-content"><ul>${items.map((item) => `<li>${item === "EV power train" ? `<a href="#/organization-units/ev-power-train">${escapeHtml(item)}</a>` : escapeHtml(item)}</li>`).join("")}</ul></div>
+            <div class="organization-content"><ul>${items.map((item) => `<li>${item === "EV power train" ? `<a href="#/organization-units/ev-power-train">${escapeHtml(item)}</a>` : item === "ADAS" ? `<a href="#/organization-units/adas">${escapeHtml(item)}</a>` : escapeHtml(item)}</li>`).join("")}</ul></div>
           </article>`).join("")}
       </section>
+    </div>`;
+}
+
+function adasTotals(program) {
+  const rows = program.functions.flatMap(([, roles]) => roles);
+  return { functions: program.functions.length, roles: rows.length, required: rows.reduce((sum, row) => sum + row[1], 0), gap: rows.reduce((sum, row) => sum + row[2], 0) };
+}
+
+function renderAdasPage() {
+  app.innerHTML = `
+    <div class="workspace-page adas-resource-page">
+      <div class="breadcrumb"><a href="#/home">Home</a><span>/</span><a href="#/organization-units">Organization Units</a><span>/</span><span>ADAS</span></div>
+      <section class="detail-hero"><div class="hero-panel"><h1>ADAS Resource Planning</h1><p>Program-level functions, role headcounts, and resource gaps for four ADAS programs.</p></div></section>
+      <section class="info-block"><h2>Program summary</h2><div class="adas-program-grid">${adasPrograms.map(program => { const totals = adasTotals(program); return `<article class="adas-program-card"><h3><a href="#/organization-units/adas/${program.id}">${escapeHtml(program.name)}</a></h3><p>${escapeHtml(program.description)}</p><dl><div><dt>Functions</dt><dd>${totals.functions}</dd></div><div><dt>Roles</dt><dd>${totals.roles}</dd></div><div><dt>Required</dt><dd>${totals.required}</dd></div><div><dt>Gap</dt><dd class="gap-value">${totals.gap}</dd></div></dl><a class="card-link" href="#/organization-units/adas/${program.id}">View detailed breakdown →</a></article>`; }).join("")}</div></section>
+    </div>`;
+}
+
+function renderAdasProgramPage(programId) {
+  const program = adasPrograms.find(item => item.id === programId) || adasPrograms[0];
+  app.innerHTML = `
+    <div class="workspace-page adas-resource-page">
+      <div class="breadcrumb"><a href="#/home">Home</a><span>/</span><a href="#/organization-units">Organization Units</a><span>/</span><a href="#/organization-units/adas">ADAS</a><span>/</span><span>${escapeHtml(program.name)}</span></div>
+      <section class="detail-hero"><div class="hero-panel"><h1>${escapeHtml(program.name)}</h1><p>${escapeHtml(program.description)} Required and gap headcounts are shown by function and role.</p></div></section>
+      <section class="info-block"><h2>Function and role headcount</h2><div class="table-scroll"><table class="workspace-table adas-resource-table"><thead><tr><th>Function</th><th>Role</th><th>Current / planned</th><th>Required</th><th>Gap</th></tr></thead><tbody>${program.functions.map(([fn, roles]) => roles.map((row, index) => `<tr>${index === 0 ? `<td rowspan="${roles.length}"><strong>${escapeHtml(fn)}</strong></td>` : ""}<td>${escapeHtml(row[0])}</td><td>${row[1]}</td><td>${row[1] + row[2]}</td><td class="${row[2] > 0 ? "gap-cell" : "ok-cell"}">${row[2]}</td></tr>`).join("")).join("")}</tbody></table></div></section>
+      <nav class="maturity-pager" aria-label="ADAS program navigation"><a href="#/organization-units/adas"><small>Return</small><strong>ADAS summary</strong></a></nav>
     </div>`;
 }
 
@@ -854,6 +953,8 @@ function route() {
     app.innerHTML = window.MaturityMap.renderRoute(hash);
   } else if (hash.startsWith("#/process/")) {
     renderDetail(hash.replace("#/process/", ""));
+  } else if (hash.startsWith("#/roles/")) {
+    renderRoleDisciplinePage(hash.replace("#/roles/", "").split(/[/?]/)[0]);
   } else if (hash === "#/roles") {
     renderRolesPage();
   } else if (hash === "#/tools") {
@@ -864,6 +965,10 @@ function route() {
     app.innerHTML = window.EvConfiguration.render();
   } else if (hash === "#/organization-units/ev-power-train/configuration-structure" && window.EvStructure) {
     app.innerHTML = window.EvStructure.render();
+  } else if (hash.startsWith("#/organization-units/adas/")) {
+    renderAdasProgramPage(hash.replace("#/organization-units/adas/", "").split(/[/?]/)[0]);
+  } else if (hash === "#/organization-units/adas") {
+    renderAdasPage();
   } else if (hash === "#/organization-units/ev-power-train") {
     renderEvPowerTrainPage();
   } else if (hash === "#/organization-units") {
