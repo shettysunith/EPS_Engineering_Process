@@ -823,6 +823,19 @@ input {
 .adas-resource-table td:first-child { min-width: 180px; color: #3b2d87; }
 .adas-resource-table .gap-cell { color: #a92667; font-weight: 700; }
 .adas-resource-table .ok-cell { color: #28704f; font-weight: 700; }
+.adas-org-tree { position: relative; padding: 4px 0 4px 28px; }
+.adas-org-tree::before { position: absolute; top: 34px; bottom: 18px; left: 12px; width: 2px; background: #cbb9dc; content: ""; }
+.adas-tree-root { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; padding: 13px 16px; border-radius: 10px; color: #fff; background: linear-gradient(110deg, #39348a, #a92667); box-shadow: 0 6px 14px rgba(65, 38, 107, .16); }
+.adas-tree-root::before { position: absolute; left: -18px; width: 18px; height: 2px; background: #cbb9dc; content: ""; }
+.adas-tree-function { position: relative; margin: 0 0 10px; padding: 0 0 0 16px; }
+.adas-tree-function::before { position: absolute; top: 18px; left: -16px; width: 16px; height: 2px; background: #cbb9dc; content: ""; }
+.tree-function-heading { display: flex; align-items: center; gap: 9px; padding: 10px 13px; border: 1px solid #cbb9dc; border-radius: 8px; color: #3b2d87; background: #f3effb; }
+.tree-toggle { color: #a92667; font-size: 16px; }
+.tree-node-meta { margin-left: auto; color: #6d6386; font-size: 12px; font-weight: 600; }
+.adas-tree-roles { margin: 4px 0 0 24px; border-left: 1px solid #ddd2e8; }
+.adas-tree-role { display: flex; justify-content: space-between; gap: 12px; padding: 7px 12px; border-bottom: 1px solid #eee9f3; color: #27344a; font-size: 13px; }
+.tree-role-count { color: #657087; white-space: nowrap; }
+.tree-role-count b { color: #a92667; }
 @media (max-width: 800px) { .adas-program-grid { grid-template-columns: 1fr; } }
 
 .organization-icon {
