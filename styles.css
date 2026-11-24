@@ -819,6 +819,22 @@ input {
 .adas-program-card dt { color: #66647e; font-size: 11px; text-transform: uppercase; }
 .adas-program-card dd { margin: 3px 0 0; color: #3b2d87; font-size: 20px; font-weight: 700; }
 .adas-program-card dd.gap-value { color: #a92667; }
+.chart-note { color: #5d6174; font-size: 13px; }
+.adas-chart-grid { display: grid; grid-template-columns: repeat(2, minmax(320px, 1fr)); gap: 14px; }
+.adas-chart-card { padding: 14px; border: 1px solid #d8d5df; border-radius: 12px; background: #fff; }
+.adas-chart-card header { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+.adas-chart-card h3 { margin: 0; color: #252b39; font-size: 16px; }
+.adas-chart-card header span { color: #4f5260; font-size: 12px; white-space: nowrap; }
+.adas-chart-legend { display: flex; gap: 14px; margin-bottom: 8px; color: #687080; font-size: 11px; }
+.legend-filled::before, .legend-missing::before { display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 2px; content: ""; }
+.legend-filled::before { background: #2b78d0; }
+.legend-missing::before { background: #ee6b3c; }
+.adas-bar-row { display: grid; grid-template-columns: 112px minmax(80px, 1fr) 38px; align-items: center; gap: 8px; margin: 7px 0; }
+.adas-bar-label { overflow: hidden; color: #5c6170; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.adas-bar-track { display: flex; height: 9px; overflow: hidden; border-radius: 3px; background: #f2f2f4; }
+.adas-bar-filled { background: #2b78d0; }
+.adas-bar-missing { background: #ee6b3c; }
+.adas-bar-value { color: #3d4350; font-size: 11px; text-align: right; }
 .adas-resource-table th { background: linear-gradient(110deg, #39348a, #a92667); }
 .adas-resource-table td:first-child { min-width: 180px; color: #3b2d87; }
 .adas-resource-table .gap-cell { color: #a92667; font-weight: 700; }
@@ -836,7 +852,39 @@ input {
 .adas-tree-role { display: flex; justify-content: space-between; gap: 12px; padding: 7px 12px; border-bottom: 1px solid #eee9f3; color: #27344a; font-size: 13px; }
 .tree-role-count { color: #657087; white-space: nowrap; }
 .tree-role-count b { color: #a92667; }
-@media (max-width: 800px) { .adas-program-grid { grid-template-columns: 1fr; } }
+.adas-org-chart { padding: 12px 6px 4px; }
+.org-chart-top { position: relative; display: grid; grid-template-columns: 1fr 1.35fr 1fr; align-items: center; gap: 28px; }
+.org-chart-card, .org-chart-root { position: relative; min-height: 100px; padding: 14px 16px; border-radius: 12px; box-shadow: 0 7px 16px rgba(48, 39, 78, .12); }
+.org-chart-card { border: 1px solid #c9cbd0; background: #f1f1f2; }
+.org-chart-card h4 { margin: 0 0 6px; color: #29313e; font-size: 14px; }
+.org-chart-card p { margin: 0 0 10px; color: #4f5663; font-size: 12px; line-height: 1.4; }
+.org-chart-roles { list-style:none; margin:0 0 10px; padding:0; display:grid; gap:4px; }
+.org-chart-roles li { display:flex; justify-content:space-between; gap:8px; color:#4f5663; font-size:11px; line-height:1.25; }
+.org-chart-roles li b { flex:0 0 auto; color:#a92667; font-size:11px; white-space:nowrap; }
+.org-chart-roles li.mandatory-role span { color:#a92667; font-weight:700; }
+.org-chart-empty { display:block; margin-bottom:10px; color:#7c8793; font-size:11px; font-style:italic; }
+.org-chart-card strong { color: #a92667; font-size: 12px; }
+.org-chart-card small { display:block; margin-top:7px; color:#5e6470; font-size:11px; line-height:1.35; }
+.org-chart-card.has-open { border-color:#d7a0bb; box-shadow:0 0 0 2px rgba(169,38,103,.12), 0 7px 16px rgba(48,39,78,.12); }
+.org-chart-root { background: #64a5e4; color: #102c4c; text-align: center; }
+.org-chart-root h3 { margin: 8px 0 8px; font-size: 17px; }
+.org-chart-root p { margin: 0; font-size: 12px; font-weight: 700; }
+.org-chart-quality { background: #f4a13a; }
+.org-chart-quality strong { color: #5c3100; }
+.org-chart-top::after { position: absolute; top: 122px; left: 18%; right: 18%; height: 2px; background: #8c8c8c; content: ""; }
+.org-chart-connector { height: 38px; margin: 0 11%; border-left: 2px solid #888; border-right: 2px solid #888; border-bottom: 2px solid #888; }
+.org-chart-disciplines { display: grid; grid-template-columns: repeat(5, minmax(130px, 1fr)); gap: 14px; }
+.org-chart-disciplines .org-chart-card { min-height: 170px; }
+.org-chart-disciplines .org-chart-card::before { position: absolute; top: -16px; left: 50%; width: 2px; height: 16px; background: #888; content: ""; }
+.org-chart-bottom { display:flex; justify-content:center; margin-top:14px; }
+.org-chart-bottom .org-chart-card { width:100%; max-width:300px; min-height:100px; }
+.org-chart-key { display: flex; flex-wrap: wrap; gap: 12px 22px; margin-top: 18px; color: #5e6470; font-size: 12px; }
+.adas-resource-table tr.mandatory-role td { background:#fde1ec; }
+.adas-resource-table tr.open-role td { border-bottom-color:#d38aad; }
+.adas-resource-table em { color:#a92667; font-size:10px; font-style:normal; font-weight:700; text-transform:uppercase; }
+.chart-card-meta { margin:0 0 8px; color:#5e6470; font-size:11px; }
+@media (max-width: 900px) { .org-chart-top { grid-template-columns: 1fr; gap: 12px; } .org-chart-top::after { display: none; } .org-chart-connector { display: none; } .org-chart-disciplines { grid-template-columns: repeat(2, minmax(150px, 1fr)); } }
+@media (max-width: 800px) { .adas-program-grid, .adas-chart-grid { grid-template-columns: 1fr; } }
 
 .organization-icon {
   position: relative;

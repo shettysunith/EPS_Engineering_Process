@@ -66,6 +66,1470 @@ const adasPrograms = [
   }
 ];
 
+adasPrograms.push({
+  id: "adas-l2-plus-plus", name: "ADAS L2++", label: "ADAS L2++", description: "Highest-content ADAS resource view with expanded perception, platform, and validation scope.",
+  functions: [
+    ["Program Management", [["Program Manager", 1, 1]]],
+    ["System Engineering", [["System Lead", 3, 2], ["System Engineer", 3, 2], ["System Architect", 1, 1], ["PFSM", 1, 1], ["PSPM", 1, 1]]],
+    ["Hardware Engineering", [["HW Lead", 1, 0], ["HW Architect", 1, 1], ["HW Engineer", 3, 2], ["PCB Layout Engineer (outsourced)", 1, 1]]],
+    ["Perception and Fusion", [["Perception Lead", 1, 0], ["Deep Learning Experts", 4, 3], ["Calibration Chain", 2, 2], ["L3 Testing Perception", 1, 3], ["Environment Model", 3, 3], ["Driving Function Architect", 2, 1], ["Motion Planner & Controller", 2, 2], ["State Estimation", 2, 2]]],
+    ["Development Enablers", [["Data Pipeline", 1, 5], ["Development Enablers", 2, 2], ["MLOPS", 2, 2], ["Dev Enabler / L3 Test", 5, 5], ["SW Integrator + CI/CD", 2, 2]]],
+    ["Test and Validation", [["HIL Experts", 1, 1], ["Test Engineer", 4, 0], ["Vehicle Integration Lead", 1, 1], ["Vehicle Test Expert", 2, 2], ["Vehicle Test Engineers", 3, 1]]],
+    ["Process and Quality", [["Process & Quality Lead", 1, 1]]]
+  ]
+});
+
+const workbookAdasPrograms = [
+  {
+    "id": "aras",
+    "name": "ARAS",
+    "label": "ARAS",
+    "description": "Resource matrix view from ADAS_Resource_Planning.xlsx.",
+    "functions": [
+      [
+        "Program Management",
+        [
+          [
+            "Program Manager",
+            1,
+            0,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "System",
+        [
+          [
+            "Technical Lead",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "System Engineer",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "System Architect",
+            1,
+            1,
+            0,
+            0,
+            true
+          ]
+        ]
+      ],
+      [
+        "Hardware",
+        [
+          [
+            "HW Lead",
+            1,
+            0,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "ASW",
+        [
+          [
+            "Radar Perception Expert",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "RF engineer",
+            1,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Driving Funciton Architect",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "Motion planner & Controller",
+            1,
+            1,
+            0,
+            0,
+            true
+          ]
+        ]
+      ],
+      [
+        "Platform SW",
+        [
+          [
+            "SW Architect",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "SW Developer (Outsourcing)",
+            0,
+            0,
+            2,
+            2,
+            true
+          ],
+          [
+            "SW Integrator + CI,CD",
+            1,
+            1,
+            0,
+            0,
+            true
+          ]
+        ]
+      ],
+      [
+        "Test & Validation",
+        [
+          [
+            "Vehicle Integration Lead",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "HIL Experts",
+            1,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Test Engineer",
+            2,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "Vehile test Expert",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "Vehicle test Engineers",
+            1,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "Process & QA",
+        [
+          [
+            "Process & Quality Lead",
+            1,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ]
+    ]
+  },
+  {
+    "id": "aras-x",
+    "name": "ARAS-X (Connectivity)",
+    "label": "ARAS-X (Connectivity)",
+    "description": "Resource matrix view from ADAS_Resource_Planning.xlsx.",
+    "functions": [
+      [
+        "Program Management",
+        [
+          [
+            "Program Manager",
+            1,
+            0,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "System",
+        [
+          [
+            "Technical Lead",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "System Engineer",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "System Architect",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "Functional Safety",
+            1,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Cyber Security",
+            1,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "Hardware",
+        [
+          [
+            "HW Lead",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "HW Archtect",
+            0,
+            0,
+            1,
+            1,
+            true
+          ],
+          [
+            "HW Engineer",
+            0,
+            0,
+            2,
+            2,
+            false
+          ],
+          [
+            "PCB Layout Engineer(Outsourced)",
+            0,
+            0,
+            1,
+            1,
+            false
+          ],
+          [
+            "Mech Engg",
+            0,
+            0,
+            1,
+            1,
+            true
+          ]
+        ]
+      ],
+      [
+        "ASW",
+        [
+          [
+            "Radar Perception Expert",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "RF engineer",
+            1,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Driving Funciton Architect",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "Environment Model",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "Motion planner & Controller",
+            1,
+            1,
+            0,
+            0,
+            true
+          ]
+        ]
+      ],
+      [
+        "Platform SW",
+        [
+          [
+            "SW Architect",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "SW Developer (Outsourcing)",
+            0,
+            0,
+            2,
+            2,
+            true
+          ],
+          [
+            "SW Integrator + CI,CD",
+            1,
+            1,
+            0,
+            0,
+            true
+          ]
+        ]
+      ],
+      [
+        "Test & Validation",
+        [
+          [
+            "Vehicle Integration Lead",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "HIL Experts",
+            1,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Test Engineer",
+            2,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "Vehile test Expert",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "Vehicle test Engineers",
+            2,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "Process & QA",
+        [
+          [
+            "Process & Quality Lead",
+            1,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ]
+    ]
+  },
+  {
+    "id": "adas-l2-dms",
+    "name": "ADAS L2 (Smart camera) + DMS",
+    "label": "ADAS L2 (Smart camera) + DMS",
+    "description": "Resource matrix view from ADAS_Resource_Planning.xlsx.",
+    "functions": [
+      [
+        "Program Management",
+        [
+          [
+            "Program Manager",
+            1,
+            0,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "System",
+        [
+          [
+            "Technical Lead",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "System Lead",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "System Engineer",
+            2,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "System Architect",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "Functional Safety",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "Cyber Security",
+            1,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "Hardware",
+        [
+          [
+            "HW Lead",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "HW Archtect",
+            0,
+            0,
+            1,
+            1,
+            true
+          ],
+          [
+            "HW Engineer",
+            3,
+            3,
+            2,
+            2,
+            false
+          ],
+          [
+            "PCB Layout Engineer(Outsourced)",
+            0,
+            0,
+            1,
+            1,
+            false
+          ],
+          [
+            "Mech Engg",
+            0,
+            0,
+            1,
+            1,
+            true
+          ]
+        ]
+      ],
+      [
+        "ASW",
+        [
+          [
+            "Perception Lead*",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "Deep Learning Engineer",
+            5,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "Calibration Chain",
+            1,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "L3 Testing Perception",
+            1,
+            1,
+            3,
+            3,
+            false
+          ],
+          [
+            "Driving Funciton Architect",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "DF Experts",
+            2,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "DF Developer",
+            2,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Environment Model",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "Motion planner & Controller",
+            2,
+            2,
+            0,
+            0,
+            true
+          ],
+          [
+            "State Estimation",
+            2,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "*Data Pipeline",
+            2,
+            0,
+            4,
+            4,
+            false
+          ],
+          [
+            "* Simulation",
+            2,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "*MLOPS",
+            2,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "*L3  Test",
+            5,
+            4,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "Platform SW",
+        [
+          [
+            "SW Architect",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "SW Developer (Outsourcing)",
+            0,
+            0,
+            6,
+            6,
+            true
+          ],
+          [
+            "SW Integrator + CI,CD",
+            2,
+            2,
+            0,
+            0,
+            true
+          ]
+        ]
+      ],
+      [
+        "Test & Validation",
+        [
+          [
+            "Vehicle Integration Lead",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "HIL Experts",
+            2,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Test Engineer",
+            3,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "Vehile test Expert",
+            2,
+            2,
+            0,
+            0,
+            true
+          ],
+          [
+            "Vehicle test Engineers",
+            3,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "Process & QA",
+        [
+          [
+            "Process & Quality Lead",
+            1,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ]
+    ]
+  },
+  {
+    "id": "adas-l2-plus",
+    "name": "ADAS L2+",
+    "label": "ADAS L2+",
+    "description": "Resource matrix view from ADAS_Resource_Planning.xlsx.",
+    "functions": [
+      [
+        "Program Management",
+        [
+          [
+            "Program Manager",
+            1,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "System",
+        [
+          [
+            "Technical Lead",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "System Lead",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "System Engineer",
+            3,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "System Architect",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "Functional Safety",
+            1,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Cyber Security",
+            1,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "Hardware",
+        [
+          [
+            "HW Lead",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "HW Archtect",
+            0,
+            0,
+            1,
+            1,
+            true
+          ],
+          [
+            "HW Engineer",
+            3,
+            3,
+            2,
+            2,
+            false
+          ],
+          [
+            "PCB Layout Engineer(Outsourced)",
+            0,
+            0,
+            1,
+            1,
+            false
+          ],
+          [
+            "Mech Engg",
+            0,
+            0,
+            1,
+            1,
+            true
+          ]
+        ]
+      ],
+      [
+        "ASW",
+        [
+          [
+            "Perception Lead*",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "Deep Learning Engineer",
+            5,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "Calibration Chain",
+            2,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "L3 Testing Perception",
+            1,
+            1,
+            3,
+            3,
+            false
+          ],
+          [
+            "Radar Perception Lead",
+            1,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Radar Perception Expert",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "RF engineer",
+            1,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Driving Funciton Architect",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "DF Experts",
+            2,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "DF Developer",
+            2,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Environment Model",
+            3,
+            3,
+            0,
+            0,
+            true
+          ],
+          [
+            "Motion planner & Controller",
+            2,
+            2,
+            0,
+            0,
+            true
+          ],
+          [
+            "State Estimation",
+            2,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "*Data Pipeline",
+            2,
+            0,
+            4,
+            4,
+            false
+          ],
+          [
+            "* Simulation",
+            2,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "*MLOPS",
+            2,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "*L3  Test",
+            5,
+            4,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "Platform SW",
+        [
+          [
+            "SW Architect",
+            2,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "SW Developer (Outsourcing)",
+            0,
+            0,
+            6,
+            6,
+            true
+          ],
+          [
+            "SW Integrator + CI,CD",
+            2,
+            2,
+            0,
+            0,
+            true
+          ]
+        ]
+      ],
+      [
+        "Test & Validation",
+        [
+          [
+            "Vehicle Integration Lead",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "HIL Experts",
+            2,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Test Engineer",
+            4,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "Vehile test Expert",
+            2,
+            2,
+            0,
+            0,
+            true
+          ],
+          [
+            "Vehicle test Engineers",
+            3,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "Process & QA",
+        [
+          [
+            "Process & Quality Lead",
+            1,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ]
+    ]
+  },
+  {
+    "id": "adas-l2-plus-plus",
+    "name": "ADAS L2++",
+    "label": "ADAS L2++",
+    "description": "Resource matrix view from ADAS_Resource_Planning.xlsx.",
+    "functions": [
+      [
+        "Program Management",
+        [
+          [
+            "Program Manager",
+            1,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "System",
+        [
+          [
+            "Technical Lead",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "System Lead",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "System Engineer",
+            3,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "System Architect",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "Functional Safety",
+            1,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Cyber Security",
+            1,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "Hardware",
+        [
+          [
+            "HW Lead",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "HW Archtect",
+            0,
+            0,
+            1,
+            1,
+            true
+          ],
+          [
+            "HW Engineer",
+            3,
+            3,
+            2,
+            2,
+            false
+          ],
+          [
+            "PCB Layout Engineer(Outsourced)",
+            0,
+            0,
+            1,
+            1,
+            false
+          ],
+          [
+            "Mech Engg",
+            0,
+            0,
+            1,
+            1,
+            true
+          ]
+        ]
+      ],
+      [
+        "ASW",
+        [
+          [
+            "Perception Lead*",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "Deep Learning Engineer",
+            5,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "Calibration Chain",
+            2,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "L3 Testing Perception",
+            1,
+            1,
+            3,
+            3,
+            false
+          ],
+          [
+            "Radar Perception Lead",
+            1,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Radar Perception Expert",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "RF engineer",
+            1,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Driving Funciton Architect",
+            1,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "DF Experts",
+            2,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "DF Developer",
+            2,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Environment Model",
+            3,
+            3,
+            0,
+            0,
+            true
+          ],
+          [
+            "Motion planner & Controller",
+            2,
+            2,
+            0,
+            0,
+            true
+          ],
+          [
+            "State Estimation",
+            2,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "*Data Pipeline",
+            2,
+            0,
+            4,
+            4,
+            false
+          ],
+          [
+            "* Simulation",
+            2,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "*MLOPS",
+            2,
+            2,
+            0,
+            0,
+            false
+          ],
+          [
+            "*L3  Test",
+            5,
+            4,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "Platform SW",
+        [
+          [
+            "SW Architect",
+            2,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "SW Developer (Outsourcing)",
+            0,
+            0,
+            6,
+            6,
+            true
+          ],
+          [
+            "SW Integrator + CI,CD",
+            2,
+            2,
+            0,
+            0,
+            true
+          ]
+        ]
+      ],
+      [
+        "Test & Validation",
+        [
+          [
+            "Vehicle Integration Lead",
+            1,
+            1,
+            0,
+            0,
+            true
+          ],
+          [
+            "HIL Experts",
+            2,
+            1,
+            0,
+            0,
+            false
+          ],
+          [
+            "Test Engineer",
+            4,
+            0,
+            0,
+            0,
+            false
+          ],
+          [
+            "Vehile test Expert",
+            2,
+            2,
+            0,
+            0,
+            true
+          ],
+          [
+            "Vehicle test Engineers",
+            3,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ],
+      [
+        "Process & QA",
+        [
+          [
+            "Process & Quality Lead",
+            1,
+            1,
+            0,
+            0,
+            false
+          ]
+        ]
+      ]
+    ]
+  }
+];
+adasPrograms.splice(0, adasPrograms.length, ...workbookAdasPrograms);
+
 const defaultActivities = [
   "Confirm inputs, scope, and applicable process tailoring.",
   "Produce or update the required work products.",
@@ -467,15 +1931,66 @@ function renderOrganizationUnitsPage() {
 
 function adasTotals(program) {
   const rows = program.functions.flatMap(([, roles]) => roles);
-  return { functions: program.functions.length, roles: rows.length, required: rows.reduce((sum, row) => sum + row[1], 0), gap: rows.reduce((sum, row) => sum + row[2], 0) };
+  const metrics = rows.map(adasRoleMetrics);
+  const calculated = { functions: program.functions.length, roles: rows.length, required: metrics.reduce((sum, row) => sum + row.needs, 0), gap: metrics.reduce((sum, row) => sum + row.open, 0), internalNeeds: metrics.reduce((sum, row) => sum + row.internalNeeds, 0), internalOpen: metrics.reduce((sum, row) => sum + row.internalOpen, 0), externalNeeds: metrics.reduce((sum, row) => sum + row.externalNeeds, 0), externalOpen: metrics.reduce((sum, row) => sum + row.externalOpen, 0) };
+  return calculated;
+}
+
+function adasRoleMetrics(row) {
+  const needs = Number(row[1] || 0);
+  const open = Number(row[2] || 0);
+  const hasSplit = row.length >= 5;
+  const internalNeeds = hasSplit ? Number(row[1] || 0) : needs;
+  const internalOpen = hasSplit ? Number(row[2] || 0) : open;
+  const externalNeeds = hasSplit ? Number(row[3] || 0) : (/outsource|external|data pipeline/i.test(String(row[0] || "")) ? needs : 0);
+  const externalOpen = hasSplit ? Number(row[4] || 0) : (/outsource|external|data pipeline/i.test(String(row[0] || "")) ? open : 0);
+  return { needs: internalNeeds + externalNeeds, open: internalOpen + externalOpen, internalNeeds, internalOpen, externalNeeds, externalOpen, mandatory: Boolean(row[5]) || /\*$/.test(String(row[0] || "")) };
+}
+
+function adasChart(program) {
+  const totals = adasTotals(program);
+  return `<article class="adas-chart-card"><header><h3><a href="#/organization-units/adas/${program.id}">${escapeHtml(program.name)}</a></h3><span>${totals.gap} open of ${totals.required} needed</span></header><div class="adas-chart-legend"><span class="legend-filled">Needed</span><span class="legend-missing">Open</span></div><p class="chart-card-meta">Internal ${totals.internalNeeds - totals.internalOpen}/${totals.internalNeeds} · External ${totals.externalNeeds - totals.externalOpen}/${totals.externalNeeds}</p>${program.functions.map(([discipline, roles]) => { const required = roles.reduce((s, r) => s + adasRoleMetrics(r).needs, 0); const gap = roles.reduce((s, r) => s + adasRoleMetrics(r).open, 0); const filled = required - gap; const width = required ? (filled / required) * 100 : 0; return `<div class="adas-bar-row"><span class="adas-bar-label">${escapeHtml(discipline)}</span><span class="adas-bar-track"><span class="adas-bar-filled" style="width:${width}%"></span><span class="adas-bar-missing" style="width:${100 - width}%"></span></span><span class="adas-bar-value">${filled}/${required}</span></div>`; }).join("")}</article>`;
+}
+
+function renderAdasHierarchy(program) {
+  const byName = new Map(program.functions);
+  const platformByProgram = {
+    "aras": [["Platform SW Lead", 1, 0], ["SW Developer (outsourced)", 0, 2], ["SW Architect", 1, 1]],
+    "aras-x": [["Platform SW Lead", 1, 1], ["SW Developer (outsourced)", 0, 2], ["SW Architect", 1, 1]],
+    "adas-l2-dms": [["Platform SW Lead", 1, 0], ["SW Developer (outsourced)", 0, 6], ["SW Architect", 1, 1]],
+    "adas-l2-plus": [["Platform SW Lead", 1, 1], ["SW Developer (outsourced)", 0, 6], ["SW Architect", 1, 1]],
+    "adas-l2-plus-plus": [["Platform SW Lead", 1, 1], ["SW Developer (outsourced)", 0, 6], ["SW Architect", 1, 1]]
+  };
+  const display = [
+    ["Program Management", "Program Management", byName.get("Program Management") || []],
+    ["System", "System", byName.get("System") || byName.get("System Engineering") || []],
+    ["Hardware", "HW & MECH", byName.get("Hardware") || byName.get("Hardware Engineering") || []],
+    ["ASW", "ASW: Perception Stack Partnership *", byName.get("ASW") || [...(byName.get("Perception and Fusion") || []), ...(byName.get("Development Enablers") || [])]],
+    ["Platform SW", "Platform SW", byName.get("Platform SW") || platformByProgram[program.id] || []],
+    ["Test and Validation", "Test & Validation", byName.get("Test & Validation") || byName.get("Test and Validation") || []],
+    ["Process and Quality", "Process & QA", byName.get("Process and Quality") || []]
+  ];
+  const card = (name, label) => {
+    const entry = display.find(item => item[0] === name);
+    const roles = entry ? entry[2] : [];
+    const planned = roles.reduce((s, r) => s + adasRoleMetrics(r).needs, 0);
+    const gap = roles.reduce((s, r) => s + adasRoleMetrics(r).open, 0);
+    const orderedRoles = roles.filter(r => adasRoleMetrics(r).needs > 0);
+    const roleText = orderedRoles.length ? `<ul class="org-chart-roles">${orderedRoles.map(r => { const m = adasRoleMetrics(r); return `<li class="${m.mandatory ? "mandatory-role" : ""}"><span>${escapeHtml(r[0])}</span><b>${m.needs}/${m.open}</b></li>`; }).join("")}</ul>` : "<span class=\"org-chart-empty\">No roles needed</span>";
+    const internalNeeds = roles.reduce((s, r) => s + adasRoleMetrics(r).internalNeeds, 0); const internalOpen = roles.reduce((s, r) => s + adasRoleMetrics(r).internalOpen, 0); const externalNeeds = roles.reduce((s, r) => s + adasRoleMetrics(r).externalNeeds, 0); const externalOpen = roles.reduce((s, r) => s + adasRoleMetrics(r).externalOpen, 0); const hasOpen = gap > 0;
+    return `<article class="org-chart-card${hasOpen ? " has-open" : ""}"><h4>${escapeHtml(label)}</h4><p>${roleText}</p><strong>Needs ${planned} · Open ${gap}</strong><small>Internal ${internalNeeds - internalOpen}/${internalNeeds} · External ${externalNeeds - externalOpen}/${externalNeeds}</small></article>`;
+  };
+  const top = display[0][2]; const quality = display[6][2];
+  return `<div class="adas-org-chart"><div class="org-chart-top"><article class="org-chart-card org-chart-side"><h4>Program Management</h4><p>${escapeHtml(top.map(r => r[0]).join(" · "))}</p><strong>${top.reduce((s, r) => s + r[1], 0)} planned · ${top.reduce((s, r) => s + r[2], 0)} open</strong></article><article class="org-chart-root"><h3>${escapeHtml(program.name)} Engineering</h3><p>${adasTotals(program).required} planned · ${adasTotals(program).gap} open</p></article><article class="org-chart-card org-chart-side"><h4>Process &amp; QA</h4><p>${escapeHtml(quality.map(r => r[0]).join(" · "))}</p><strong>${quality.reduce((s, r) => s + r[1], 0)} planned · ${quality.reduce((s, r) => s + r[2], 0)} open</strong></article></div><div class="org-chart-connector"></div><div class="org-chart-disciplines">${display.slice(1, 6).map(([name, label]) => card(name, label)).join("")}</div><div class="org-chart-key"><strong>Key</strong><span>Each card is a workbook discipline; ASW combines perception and data-enabler roles.</span><span>Planned = internal planned headcount</span><span>Open = remaining gap; workbook notation 0+(1) means internal 0, external 1</span></div></div>`;
 }
 
 function renderAdasPage() {
   app.innerHTML = `
     <div class="workspace-page adas-resource-page">
       <div class="breadcrumb"><a href="#/home">Home</a><span>/</span><a href="#/organization-units">Organization Units</a><span>/</span><span>ADAS</span></div>
-      <section class="detail-hero"><div class="hero-panel"><h1>ADAS Resource Planning</h1><p>Program-level functions, role headcounts, and resource gaps for four ADAS programs.</p></div></section>
-      <section class="info-block"><h2>Program summary</h2><div class="adas-program-grid">${adasPrograms.map(program => { const totals = adasTotals(program); return `<article class="adas-program-card"><h3><a href="#/organization-units/adas/${program.id}">${escapeHtml(program.name)}</a></h3><p>${escapeHtml(program.description)}</p><dl><div><dt>Functions</dt><dd>${totals.functions}</dd></div><div><dt>Roles</dt><dd>${totals.roles}</dd></div><div><dt>Required</dt><dd>${totals.required}</dd></div><div><dt>Gap</dt><dd class="gap-value">${totals.gap}</dd></div></dl><a class="card-link" href="#/organization-units/adas/${program.id}">View detailed breakdown →</a></article>`; }).join("")}</div></section>
+      <section class="detail-hero"><div class="hero-panel"><h1>ADAS Resource Planning</h1><p>Program-level needs and open resource counts for five ADAS programs, split between internal and external capacity.</p></div></section>
+      <section class="info-block"><h2>Program summary</h2><div class="adas-program-grid">${adasPrograms.map(program => { const totals = adasTotals(program); return `<article class="adas-program-card"><h3><a href="#/organization-units/adas/${program.id}">${escapeHtml(program.name)}</a></h3><p>${escapeHtml(program.description || "Resource matrix overview")}</p><dl><div><dt>Discipline</dt><dd>${totals.functions}</dd></div><div><dt>Roles</dt><dd>${totals.roles}</dd></div><div><dt>Internal needs / open</dt><dd>${totals.internalNeeds} / ${totals.internalOpen}</dd></div><div><dt>External needs / open</dt><dd>${totals.externalNeeds} / ${totals.externalOpen}</dd></div></dl><a class="card-link" href="#/organization-units/adas/${program.id}">View detailed breakdown →</a></article>`; }).join("")}</div></section>
+      <section class="info-block"><h2>Headcount by discipline</h2><p class="chart-note"><span class="legend-filled">Planned</span><span class="legend-missing">Open</span> Bar length represents planned headcount on a common scale. Workbook notation <strong>0+(1)</strong> means internal 0 and external 1.</p><div class="adas-chart-grid">${adasPrograms.map(adasChart).join("")}</div></section>
     </div>`;
 }
 
@@ -485,8 +2000,8 @@ function renderAdasProgramPage(programId) {
     <div class="workspace-page adas-resource-page">
       <div class="breadcrumb"><a href="#/home">Home</a><span>/</span><a href="#/organization-units">Organization Units</a><span>/</span><a href="#/organization-units/adas">ADAS</a><span>/</span><span>${escapeHtml(program.name)}</span></div>
       <section class="detail-hero"><div class="hero-panel"><h1>${escapeHtml(program.name)}</h1><p>${escapeHtml(program.description)} Required and gap headcounts are shown by function and role.</p></div></section>
-      <section class="info-block"><h2>Organization structure</h2><div class="adas-org-tree" role="tree" aria-label="${escapeHtml(program.name)} organization structure"><div class="adas-tree-root" role="treeitem" aria-level="1"><span class="tree-node-label">${escapeHtml(program.name)}</span><span class="tree-node-meta">${adasTotals(program).functions} functions</span></div>${program.functions.map(([fn, roles]) => `<div class="adas-tree-function" role="treeitem" aria-level="2"><div class="tree-function-heading"><span class="tree-toggle" aria-hidden="true">▾</span><strong>${escapeHtml(fn)}</strong><span class="tree-node-meta">${roles.length} roles</span></div><div class="adas-tree-roles">${roles.map(row => `<div class="adas-tree-role" role="treeitem" aria-level="3"><span>${escapeHtml(row[0])}</span><span class="tree-role-count">${row[1]} current / ${row[1] + row[2]} required${row[2] ? ` · <b>${row[2]} gap</b>` : " · covered"}</span></div>`).join("")}</div></div>`).join("")}</div></section>
-      <section class="info-block"><h2>Function and role headcount</h2><div class="table-scroll"><table class="workspace-table adas-resource-table"><thead><tr><th>Function</th><th>Role</th><th>Current / planned</th><th>Required</th><th>Gap</th></tr></thead><tbody>${program.functions.map(([fn, roles]) => roles.map((row, index) => `<tr>${index === 0 ? `<td rowspan="${roles.length}"><strong>${escapeHtml(fn)}</strong></td>` : ""}<td>${escapeHtml(row[0])}</td><td>${row[1]}</td><td>${row[1] + row[2]}</td><td class="${row[2] > 0 ? "gap-cell" : "ok-cell"}">${row[2]}</td></tr>`).join("")).join("")}</tbody></table></div></section>
+      <section class="info-block"><h2>Organization structure</h2>${renderAdasHierarchy(program)}</section>
+      <section class="info-block"><h2>Discipline and role headcount</h2><p class="chart-note">Only roles needed by this program are shown. Pink-highlighted roles are mandatory for execution. Open roles are highlighted in the hierarchy and table.</p><div class="table-scroll"><table class="workspace-table adas-resource-table"><thead><tr><th>Discipline</th><th>Role</th><th>Internal needs</th><th>Internal open</th><th>External needs</th><th>External open</th></tr></thead><tbody>${program.functions.map(([fn, allRoles]) => { const roles = allRoles.filter(row => adasRoleMetrics(row).needs > 0); return roles.map((row, index) => { const m = adasRoleMetrics(row); return `<tr class="${m.mandatory ? "mandatory-role" : ""} ${m.open > 0 ? "open-role" : ""}">${index === 0 ? `<td rowspan="${roles.length}"><strong>${escapeHtml(fn)}</strong></td>` : ""}<td>${escapeHtml(row[0])}${m.mandatory ? " <em>Mandatory</em>" : ""}</td><td>${m.internalNeeds}</td><td class="${m.internalOpen > 0 ? "gap-cell" : "ok-cell"}">${m.internalOpen}</td><td>${m.externalNeeds}</td><td class="${m.externalOpen > 0 ? "gap-cell" : "ok-cell"}">${m.externalOpen}</td></tr>`; }).join(""); }).join("")}</tbody></table></div></section>
       <nav class="maturity-pager" aria-label="ADAS program navigation"><a href="#/organization-units/adas"><small>Return</small><strong>ADAS summary</strong></a></nav>
     </div>`;
 }
