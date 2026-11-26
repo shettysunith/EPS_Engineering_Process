@@ -2263,6 +2263,47 @@ function renderSearchResults(query) {
 }
 
 function renderHomeSubPage() {
+  const gateNames = ["G0 – Opportunity Screen/Quote Approved", "G1 – Product Conceptualization", "G2 – Design Frozen", "G3 – Design Validation", "G4 – Production Readiness", "G5 – Series Production / Production Approved", "Post Production"];
+  const gateDescriptions = [
+    "The quotation package is released for submission to the customer.",
+    "The Convert the approved opportunity into a feasible product concept. Management has given the authorization to start the development project.",
+    "The development project is staffed, planned and ready to start.",
+    "The robust design covering the full functionality and efficient manufacturability is defined for all items.",
+    "Prove the line and supply chain can produce at quality and rate.",
+    "Ready for start of unlimited series production and are approved by the customer through PPAP. The plant is responsible for the production of the product.",
+    "The development project is finished. The BU continues to be responsible for the product. The plant is responsible for the production of the product."
+  ];
+  const materialNames = ["M0 – Prototype Defined", "M1 – Prototype Readiness", "M2 – Development Approved", "M3 – Material Verified / Validation", "M4 – PPAP Readiness", "M5 – Material Approved", "M6 – Spare Parts & EOL"];
+  const materialDescriptions = [
+    "The material is sufficiently defined for quotation, customer information, prototype planning, and preliminary procurement.",
+    "The material is mature enough to build and deliver prototypes for the agreed customer purpose and volume.",
+    "The design and documentation are complete enough to begin sourcing, detailed development, and introduction activities.",
+    "Sourcing and production-planning readiness is achieved, design activities are complete and the final component spec is ready.",
+    "Tooling and production equipment are available, and the material is ready for limited-series production and PPAP activities.",
+    "Product validation is complete and the material is approved for series production and customer delivery.",
+    "Material remains available for service-part production, customer support. End of Life: Material delivery obligations are complete; remaining responsibilities are limited to warranty, legal, or agreed support."
+  ];
+  const gates = [
+    "Nomination Letter (project key roles defined and committed)*|Project Risk List|Commercial Quotation Package|Service Part Concept|DFM and Feasibility Analysis|Quote (PCIS)|Quality Concept|Warranty Concept",
+    "Plant defined, NPL M nominated, project team completely staffed*|FSM 1 Project Setup Review|PAR: Project Approval|Manufacturing (Industrialization) Concept and Cost Estimation|Production Process Requirements|Operations Project Schedule|Build Q-Gate Report (BQR)|Control Plan (Prototype)|QA Plan|Reliability Estimation|List of Potential Suppliers|Sourcing Plan|Maturity Evaluation",
+    "Update of MLC40 Documents|Process FMEA|Warranty Concept|EMC Qualification Program|Reliability Qualification Program|Supplier Offers|Sourcing Contract (sourcing process)|Sourcing Decision & Documentation|Supplier Run@Rate Self Assessment|Equipment Documentation|SLC: Supplier Safe Launch Concept|SCR: Supplier Component Review|FSM2 Review Report",
+    "BOM (in plant SAP)*|Capital Request (approved)*|DV (passed)*|PCIS (for invests)|FSM3 Review Report|PTS (in plant SAP)|Operational Equipment List|Order for Long Lead Parts / Tooling|Ramp Up Plan Logistics|Production Ramp Up Plan|Safe Launch Plan|Service Part Concept",
+    "Control Plan (PPAP readiness)|Equipment Release Sheet (line released)|Process FMEA (PPAP readiness)|Supplier PPAP (released)|FSM4 Review Report|Logistics Concept (released)",
+    "Product Validation (PV) Report (passed)*|BQR (PPAP run)|Customer Product Documentation|Logistics Concept (approved by customer)|PPAP Documentation (accepted by customer)|PSW (signed by customer)",
+    "Process Capability Study (approved)*|Process Performance Data|0km ppm and Incident Status|Lesson Learned|Non Conformance Costs"
+  ];
+  const materials = [
+    "BOM: Bill of Material (initial)|Deviation List|Feasibility Study|Functional Safety Concept|Hazard Analysis (initial)|Impact Analysis (initial)|System Architecture (initial)|System Requirements Specification|Technical Safety Requirements|Technical Quotation Package|HW Schematic|ME Drawing and Data",
+    "CM Plan: Configuration Management Plan|FSM 1 Project Setup Review|Control Plan (prototype)|Embedded Test Software Concept and Requirements|FTA: Fault Tree Analysis|DIA (Development Interface Agreement)|DFA: Dependent Failure Analysis|Special Characteristics List (SE)|System Test Schedule|Technical Safety Concept|ISO26262 Methods Documentation|EE Architecture|EE Component Specification|EE Design FMEA|Special Characteristics List (EE)|EE Requirements|EE Test Strategy|HW Component Qualification Report|3D Model (concept)|ME Drawing and Data|ME Design FMEA|Special Characteristics List (ME)|ME Requirements|ME Test Strategy|SW Architecture|SW/Algo Integration Strategy|SW/Algo Requirements Specification|SW/Algo Test Strategy|SW Safety Analysis|SW Supplier Monitoring Plan|Algo Release Note",
+    "Update of M2 Documents|BOM (completed)*|HSI: Hardware / Software Interface|DFM and Feasibility Analysis (manufacturability of design approved)*|System Integration Test Environment|System Integration Test Specification|System Test Automation Code|System Test Automation Release Note|System Test Environment|System Test Specification|Service Part Concept|Supplier RFQ Package|FSM Review Report (FSM2)|Order for Long Lead Parts / Tooling|Sourcing Decision|System Integration Test Report|System Test Report|EE Architecture|EE Change List|EE Design Report|Schematic|PCB Drawing and Data|EE Test Environment|FEA: Failure Effect Analysis Report|FMEDA (for safety relevant products)|EE Test Report|EE Test Specifications|FEM Analysis Report|ME Tolerance Calculation|ME Test Report|ME Test Specifications|ME delivery review and release|SW Unit Design and Units (to support DV and EMC)|SW Verified, Issues and Risks identified|SW & Calibration Release Note|3rd Party SW (List of Open Issues)|Free Open Source SW (License Compliance Check)|SW Configuration described|SW Info in PPTS",
+    "BQR: Build Q-Gate Report|DV: Design Validation Report|FSM Review Report (FSM3)|PTS: Production Process Test Specification|DTP (Data to Production)|SW Units (PV Version)",
+    "FSM Review Report (FSM4)|IMDS Record (released)|Process Audit Report|Supplier PSW (released)|ISIR (checked)|IMDS Record|Recycling Passport|SW Units (final version)|SW Configuration for final Series verified|3rd Party SW: Final Release Review",
+    "CQM: Component Qualification Matrix|Product Validation (PV) Report|PSW (signed by Customer)|Supplier PSW",
+    ""
+  ];
+  const sharedInputs = "PALI: Project Action Item List|Project Plan|Project Risk List|Project Schedule|ePSR: Project Status Report|LSR: Launch Status Report|System Status Sheet|System Test Status Sheet|Domain Status Sheets (EE; ME; SW)|Review Protocols";
+  const list = value => value ? `<ul>${value.split("|").map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "<span>—</span>";
+  const matrix = (labels, entries, title) => `<div class="governance-table-scroll"><table class="governance-matrix"><caption>${escapeHtml(title)}</caption><thead><tr>${labels.map(label => `<th scope="col">${escapeHtml(label)}</th>`).join("")}</tr></thead><tbody><tr>${entries.map(items => `<td>${list(items)}</td>`).join("")}</tr></tbody></table></div>`;
   app.innerHTML = `
     <div class="governance-page">
       <div class="breadcrumb"><a href="#/home">Home</a><span>/</span><span>Home-Sub</span></div>
@@ -2271,11 +2312,17 @@ function renderHomeSubPage() {
         <p>Project milestone decisions mapped to the corresponding material maturity status.</p>
       </header>
       <section class="governance-card governance-map-card" aria-label="Governance decisions and material status mapping">
-        <img class="governance-image" src="assets/governance-material-status.png" alt="Project milestones and material status mapping from G0 through post production and M0 through M6." />
+        <div class="governance-stage-list"><div><h2>Project milestones</h2>${gateNames.map((name, i) => `<p><strong>${escapeHtml(name)}</strong><span>${escapeHtml(gateDescriptions[i])}</span></p>`).join("")}</div><div><h2>Material status</h2>${materialNames.map((name, i) => `<p><strong>${escapeHtml(name)}</strong><span>${escapeHtml(materialDescriptions[i])}</span></p>`).join("")}</div></div>
       </section>
       <section class="governance-card governance-flyer-card" aria-labelledby="governance-flyer-heading">
         <h2 id="governance-flyer-heading">Gate and material status work products</h2>
-        <img class="governance-image" src="assets/governance-flyer.png" alt="Gate releases, project work products, and material maturity outputs from G0 through M6." />
+        <div class="governance-matrix-surface">
+          <div class="governance-phase-strip"><span>Predevelopment</span><span>Development</span><span>Series production</span><span>Post production</span></div>
+          ${matrix(gateNames, gates, "Gates · Project work products")}
+          ${matrix(materialNames, materials, "Material levels · Domain work products (SYS, SW, Algo, HW, ME)")}
+          <aside class="governance-shared-input"><h3>Input for all milestones</h3>${list(sharedInputs)}<p>Continuous tasks: Change Management; Problem Solving.</p></aside>
+          <p class="governance-originals">Original references: <a href="assets/governance-material-status.png" target="_blank" rel="noopener">governance mapping</a> · <a href="assets/governance-flyer.png" target="_blank" rel="noopener">work-product matrix</a></p>
+        </div>
       </section>
     </div>
   `;

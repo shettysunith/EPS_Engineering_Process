@@ -487,6 +487,40 @@ input {
 }
 .governance-flyer-card h2 { color: #fff; }
 .governance-flyer-card .governance-image { width: 100%; min-width: 0; }
+.governance-page { padding:20px 24px 32px; }
+.governance-hero { padding:18px 24px; border-radius:12px; }
+.governance-card { margin-top:14px; padding:16px; border-radius:12px; }
+.governance-stage-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; padding:14px; background:linear-gradient(110deg,#39328a,#a52468); border-radius:8px; }
+.governance-stage-list > div { padding:18px 22px; background:#f6f3f8; border-radius:36px; }
+.governance-stage-list h2 { margin:0 0 12px; text-align:center; font-size:17px; color:#7130a2; text-transform:uppercase; }
+.governance-stage-list p { margin:0 0 11px; font-size:12px; line-height:1.35; }
+.governance-stage-list p:last-child { margin-bottom:0; }
+.governance-stage-list strong, .governance-stage-list span { display:block; }
+.governance-stage-list strong { color:#15151b; }
+.governance-stage-list span { color:#a01692; }
+.governance-flyer-card { overflow:visible; }
+.governance-flyer-card h2 { margin-bottom:10px; font-size:20px; }
+.governance-matrix-surface { padding:12px; border-radius:8px; background:#fff; color:#1b2432; }
+.governance-phase-strip { display:grid; grid-template-columns:1fr 4fr 1fr 1fr; gap:2px; margin-bottom:10px; text-align:center; text-transform:uppercase; font-size:11px; }
+.governance-phase-strip span { padding:7px 3px; background:#d6d6d6; }
+.governance-phase-strip span:nth-child(2) { background:#518ed0; }
+.governance-phase-strip span:nth-child(3) { background:#4c9e31; }
+.governance-phase-strip span:nth-child(4) { background:#ec702a; }
+.governance-table-scroll { overflow-x:auto; margin-bottom:12px; }
+.governance-matrix { width:100%; min-width:1120px; border-collapse:collapse; table-layout:fixed; font:11px/1.32 Arial,sans-serif; }
+.governance-matrix caption { padding:9px 10px; border:1px solid #9ba7bb; border-bottom:0; background:#e8eaf4; color:#2f2a78; text-align:left; font-size:13px; font-weight:700; }
+.governance-matrix th, .governance-matrix td { border:1px solid #aeb7c6; vertical-align:top; }
+.governance-matrix th { padding:7px 6px; background:#edeaf5; text-align:left; font-size:11px; }
+.governance-matrix td { padding:7px 6px; background:#f7f7f9; }
+.governance-matrix ul, .governance-shared-input ul { margin:0; padding-left:14px; }
+.governance-matrix li, .governance-shared-input li { margin:0 0 4px; overflow-wrap:anywhere; }
+.governance-shared-input { padding:10px 14px; border:1px solid #aeb7c6; background:#f7f7f9; font:11px/1.35 Arial,sans-serif; }
+.governance-shared-input h3 { margin:0 0 6px; color:#2f2a78; font-size:13px; }
+.governance-shared-input ul { columns:3; }
+.governance-shared-input p { margin:8px 0 0; }
+.governance-originals { margin:10px 0 0; font-size:11px; }
+.governance-originals a { color:#39328a; text-decoration:underline; }
+@media(max-width:750px) { .governance-stage-list { grid-template-columns:1fr; } .governance-stage-list > div { border-radius:20px; } .governance-shared-input ul { columns:1; } }
 
 .roles-icon {
   width: 26px;
