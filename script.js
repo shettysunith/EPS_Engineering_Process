@@ -1953,35 +1953,12 @@ function adasChart(program) {
 }
 
 function renderAdasHierarchy(program) {
+  const display = [["Program Management", "Program Management"], ["System", "System Engineering"], ["Hardware", "HW & MECH"], ["ASW", "ASW: Perception Stack Partnership *"], ["Platform SW", "Platform SW"], ["Test & Validation", "Test & Validation"], ["Process & QA", "Process & QA"]];
   const byName = new Map(program.functions);
-  const platformByProgram = {
-    "aras": [["Platform SW Lead", 1, 0], ["SW Developer (outsourced)", 0, 2], ["SW Architect", 1, 1]],
-    "aras-x": [["Platform SW Lead", 1, 1], ["SW Developer (outsourced)", 0, 2], ["SW Architect", 1, 1]],
-    "adas-l2-dms": [["Platform SW Lead", 1, 0], ["SW Developer (outsourced)", 0, 6], ["SW Architect", 1, 1]],
-    "adas-l2-plus": [["Platform SW Lead", 1, 1], ["SW Developer (outsourced)", 0, 6], ["SW Architect", 1, 1]],
-    "adas-l2-plus-plus": [["Platform SW Lead", 1, 1], ["SW Developer (outsourced)", 0, 6], ["SW Architect", 1, 1]]
-  };
-  const display = [
-    ["Program Management", "Program Management", byName.get("Program Management") || []],
-    ["System", "System", byName.get("System") || byName.get("System Engineering") || []],
-    ["Hardware", "HW & MECH", byName.get("Hardware") || byName.get("Hardware Engineering") || []],
-    ["ASW", "ASW: Perception Stack Partnership *", byName.get("ASW") || [...(byName.get("Perception and Fusion") || []), ...(byName.get("Development Enablers") || [])]],
-    ["Platform SW", "Platform SW", byName.get("Platform SW") || platformByProgram[program.id] || []],
-    ["Test and Validation", "Test & Validation", byName.get("Test & Validation") || byName.get("Test and Validation") || []],
-    ["Process and Quality", "Process & QA", byName.get("Process and Quality") || []]
-  ];
-  const card = (name, label) => {
-    const entry = display.find(item => item[0] === name);
-    const roles = entry ? entry[2] : [];
-    const planned = roles.reduce((s, r) => s + adasRoleMetrics(r).needs, 0);
-    const gap = roles.reduce((s, r) => s + adasRoleMetrics(r).open, 0);
-    const orderedRoles = roles.filter(r => adasRoleMetrics(r).needs > 0);
-    const roleText = orderedRoles.length ? `<ul class="org-chart-roles">${orderedRoles.map(r => { const m = adasRoleMetrics(r); return `<li class="${m.mandatory ? "mandatory-role" : ""}"><span>${escapeHtml(r[0])}</span><b>${m.needs}/${m.open}</b></li>`; }).join("")}</ul>` : "<span class=\"org-chart-empty\">No roles needed</span>";
-    const internalNeeds = roles.reduce((s, r) => s + adasRoleMetrics(r).internalNeeds, 0); const internalOpen = roles.reduce((s, r) => s + adasRoleMetrics(r).internalOpen, 0); const externalNeeds = roles.reduce((s, r) => s + adasRoleMetrics(r).externalNeeds, 0); const externalOpen = roles.reduce((s, r) => s + adasRoleMetrics(r).externalOpen, 0); const hasOpen = gap > 0;
-    return `<article class="org-chart-card${hasOpen ? " has-open" : ""}"><h4>${escapeHtml(label)}</h4><p>${roleText}</p><strong>Needs ${planned} · Open ${gap}</strong><small>Internal ${internalNeeds - internalOpen}/${internalNeeds} · External ${externalNeeds - externalOpen}/${externalNeeds}</small></article>`;
-  };
-  const top = display[0][2]; const quality = display[6][2];
-  return `<div class="adas-org-chart"><div class="org-chart-top"><article class="org-chart-card org-chart-side"><h4>Program Management</h4><p>${escapeHtml(top.map(r => r[0]).join(" · "))}</p><strong>${top.reduce((s, r) => s + r[1], 0)} planned · ${top.reduce((s, r) => s + r[2], 0)} open</strong></article><article class="org-chart-root"><h3>${escapeHtml(program.name)} Engineering</h3><p>${adasTotals(program).required} planned · ${adasTotals(program).gap} open</p></article><article class="org-chart-card org-chart-side"><h4>Process &amp; QA</h4><p>${escapeHtml(quality.map(r => r[0]).join(" · "))}</p><strong>${quality.reduce((s, r) => s + r[1], 0)} planned · ${quality.reduce((s, r) => s + r[2], 0)} open</strong></article></div><div class="org-chart-connector"></div><div class="org-chart-disciplines">${display.slice(1, 6).map(([name, label]) => card(name, label)).join("")}</div><div class="org-chart-key"><strong>Key</strong><span>Each card is a workbook discipline; ASW combines perception and data-enabler roles.</span><span>Planned = internal planned headcount</span><span>Open = remaining gap; workbook notation 0+(1) means internal 0, external 1</span></div></div>`;
+  const roleCard = row => { const m = adasRoleMetrics(row); return `<li class="org-tree-role${m.open > 0 ? " role-open" : ""}${m.mandatory ? " role-mandatory" : ""}"><span>${escapeHtml(row[0])}</span><b>${m.needs}/${m.open}</b></li>`; };
+  const disciplineCard = ([key, label]) => { const roles = byName.get(key) || []; const needed = roles.filter(r => adasRoleMetrics(r).needs > 0); const needs = needed.reduce((s,r) => s + adasRoleMetrics(r).needs,0); const open = needed.reduce((s,r) => s + adasRoleMetrics(r).open,0); return `<article class="org-tree-discipline${open ? " tree-open" : ""}"><header><h3>${escapeHtml(label)}</h3><span>${needs} needs · ${open} open</span></header><ul>${needed.length ? needed.map(roleCard).join("") : "<li class=\"org-tree-empty\">No roles needed</li>"}</ul></article>`; };
+  const totals = adasTotals(program);
+  return `<div class="org-tree"><div class="org-tree-root"><small>PROGRAM</small><h3>${escapeHtml(program.name)}</h3><p>${totals.required} needs · ${totals.gap} open</p></div><div class="org-tree-branch"></div><div class="org-tree-grid">${display.map(disciplineCard).join("")}</div><div class="org-tree-key"><strong>Key</strong><span>Role counts are shown as NEEDS / OPEN.</span><span>Pink role labels indicate mandatory execution roles.</span></div></div>`;
 }
 
 function renderAdasPage() {
@@ -1989,9 +1966,82 @@ function renderAdasPage() {
     <div class="workspace-page adas-resource-page">
       <div class="breadcrumb"><a href="#/home">Home</a><span>/</span><a href="#/organization-units">Organization Units</a><span>/</span><span>ADAS</span></div>
       <section class="detail-hero"><div class="hero-panel"><h1>ADAS Resource Planning</h1><p>Program-level needs and open resource counts for five ADAS programs, split between internal and external capacity.</p></div></section>
-      <section class="info-block"><h2>Program summary</h2><div class="adas-program-grid">${adasPrograms.map(program => { const totals = adasTotals(program); return `<article class="adas-program-card"><h3><a href="#/organization-units/adas/${program.id}">${escapeHtml(program.name)}</a></h3><p>${escapeHtml(program.description || "Resource matrix overview")}</p><dl><div><dt>Discipline</dt><dd>${totals.functions}</dd></div><div><dt>Roles</dt><dd>${totals.roles}</dd></div><div><dt>Internal needs / open</dt><dd>${totals.internalNeeds} / ${totals.internalOpen}</dd></div><div><dt>External needs / open</dt><dd>${totals.externalNeeds} / ${totals.externalOpen}</dd></div></dl><a class="card-link" href="#/organization-units/adas/${program.id}">View detailed breakdown →</a></article>`; }).join("")}</div></section>
-      <section class="info-block"><h2>Headcount by discipline</h2><p class="chart-note"><span class="legend-filled">Planned</span><span class="legend-missing">Open</span> Bar length represents planned headcount on a common scale. Workbook notation <strong>0+(1)</strong> means internal 0 and external 1.</p><div class="adas-chart-grid">${adasPrograms.map(adasChart).join("")}</div></section>
+      <section class="info-block"><h2>Program summary</h2><div class="adas-program-grid">${adasPrograms.map(program => { const totals = adasTotals(program); const rows = program.functions.flatMap(([, roles]) => roles); const mandatory = rows.filter(r => adasRoleMetrics(r).mandatory).length; const mandatoryMissing = rows.filter(r => adasRoleMetrics(r).mandatory && adasRoleMetrics(r).open > 0).length; return `<article class="adas-program-card"><h3><a href="#/organization-units/adas/${program.id}">${escapeHtml(program.name)}</a></h3><dl><div><dt>Internal needs / open</dt><dd>${totals.internalNeeds} / ${totals.internalOpen}</dd></div><div><dt>External needs / open</dt><dd>${totals.externalNeeds} / ${totals.externalOpen}</dd></div><div><dt>Mandatory roles</dt><dd>${mandatory}</dd></div><div><dt>Mandatory missing</dt><dd class="gap-value">${mandatoryMissing}</dd></div></dl><a class="card-link" href="#/organization-units/adas/${program.id}">View detailed breakdown →</a></article>`; }).join("")}</div></section>
+      <section class="info-block org-roles-entry"><h2>Organization roles</h2><p>Explore the disciplines, role descriptions, responsibilities, and expected work products used in ADAS planning.</p><a class="card-link" href="#/organization-units/adas/org-roles">Org Roles →</a></section>
     </div>`;
+}
+
+const adasRoleGroups = (() => {
+  const groups = new Map();
+  adasPrograms.forEach(program => program.functions.forEach(([discipline, roles]) => {
+    if (!groups.has(discipline)) groups.set(discipline, new Map());
+    roles.forEach(row => groups.get(discipline).set(row[0].trim(), row));
+  }));
+  // The resource views omit zero-need rows; the role catalogue retains them.
+  [["ASW", "ISP(Outsourced)"], ["ASW", "*Data Labelling(Outsourced)"]].forEach(([discipline, role]) => {
+    if (!groups.get(discipline).has(role)) groups.get(discipline).set(role, [role, 0, 0, 0, 0, false]);
+  });
+  return [...groups].map(([discipline, roles]) => [discipline, [...roles.values()]]);
+})();
+
+const adasRoleDetails = {
+  "Program Manager": ["Leads program delivery and coordinates decisions across disciplines.", "Program schedule, resources, budget, risks, and customer commitments.", "Set the delivery plan; track dependencies and actions; prepare gate decisions; escalate deviations.", "Program plan, schedule, resource plan, risk register, status reports, gate decision package."],
+  "Technical Lead": ["Leads the technical direction of the system.", "Cross-discipline requirements, architecture, integration, and technical decisions.", "Align system, hardware, and software solutions; resolve technical tradeoffs; review technical baselines.", "Technical roadmap, design decisions, architecture review records, integration issue log."],
+  "System Lead": ["Coordinates system engineering execution.", "System requirements, interfaces, architecture, and verification planning.", "Assign system work; review traceability and interfaces; coordinate technical reviews.", "System engineering plan, reviewed system baselines, interface and review records."],
+  "System Engineer": ["Develops and maintains system requirements and behavior.", "Stakeholder needs through system requirements and verification evidence.", "Analyze requirements; define interfaces and use cases; maintain traceability; support integration.", "System requirements specification, use cases, interface definitions, traceability matrix."],
+  "System Architect": ["Defines the system structure and allocates functions.", "System elements, interfaces, functional allocation, and architecture constraints.", "Develop architecture views; assess alternatives; allocate requirements; review design consistency.", "System architecture description, allocation matrix, interface control documents, design review."],
+  "Functional Safety": ["Coordinates functional safety engineering.", "Hazards, safety goals, safety requirements, and safety case evidence.", "Perform safety analyses; allocate safety requirements; review implementation and verification evidence.", "HARA, safety concept, safety requirements, FMEA/FTA, safety case."],
+  "Cyber Security": ["Coordinates product cybersecurity engineering.", "Threat analysis, security requirements, controls, and validation evidence.", "Perform threat and risk analysis; define controls; review security testing and residual risk.", "TARA, cybersecurity concept, security requirements, test evidence, risk disposition."],
+  "HW Lead": ["Leads hardware and mechanical development.", "Hardware requirements, electronics, mechanical interfaces, and design release.", "Plan HW work; coordinate specialists and suppliers; review design and verification readiness.", "Hardware plan, reviewed schematics, design baseline, verification status."],
+  "HW Archtect": ["Defines the hardware architecture.", "Electronic partitioning, interfaces, component selection, and constraints.", "Allocate HW requirements; develop architecture; review interfaces, feasibility, and risks.", "Hardware architecture, block diagrams, component selection record, interface specification."],
+  "HW Engineer": ["Designs and verifies electronic hardware.", "Circuits, components, PCB interfaces, and hardware tests.", "Prepare schematics; analyze electrical performance; support prototype bring-up and verification.", "Schematics, bill of materials, calculations, hardware test reports, change records."],
+  "PCB Layout Engineer(Outsourced)": ["Produces the PCB layout against approved design inputs.", "Board placement, routing, manufacturing rules, and layout release.", "Apply layout constraints; resolve design rule issues; support PCB review and fabrication handoff.", "PCB layout files, design rule check results, fabrication data, layout review record."],
+  "Mech Engg": ["Develops mechanical packaging and interfaces.", "Enclosure, mounting, thermal, tolerance, and manufacturability considerations.", "Design mechanical parts; check fit and tolerances; coordinate prototype and manufacturing feedback.", "3D models, drawings, tolerance analysis, mechanical verification reports."],
+  "Perception Lead*": ["Leads camera perception development.", "Perception requirements, model performance, datasets, and release readiness.", "Coordinate perception development; set performance targets; review evaluation and safety evidence.", "Perception plan, model baseline, performance reports, release recommendation."],
+  "Deep Learning Engineer": ["Develops and evaluates perception models.", "Training data, model architecture, optimization, and performance.", "Train and tune models; analyze failures; document experiments; support deployment constraints.", "Model artifacts, experiment records, evaluation reports, model documentation."],
+  "Calibration Chain": ["Defines and validates sensor calibration.", "Camera and sensor alignment, parameters, and calibration workflow.", "Develop calibration method; measure accuracy; manage parameters and regression checks.", "Calibration specification, parameter set, calibration reports, regression evidence."],
+  "ISP(Outsourced)": ["Develops image signal processing components under the agreed supplier scope.", "Image processing pipeline, tuning, and camera interface constraints.", "Tune image processing; verify output quality; resolve integration findings.", "ISP configuration, tuning records, image quality results, supplier delivery evidence."],
+  "L3 Testing Perception": ["Tests perception behavior in representative scenarios.", "Perception datasets, scenario coverage, and model validation.", "Define scenarios; execute tests; analyze misses and false detections; report regressions.", "Test cases, annotated results, defect reports, validation summary."],
+  "Radar Perception Lead": ["Leads radar perception development.", "Radar processing, object outputs, performance, and integration.", "Coordinate radar algorithms; review requirements and performance; manage interface issues.", "Radar perception plan, algorithm baseline, performance and review reports."],
+  "Radar Perception Expert": ["Develops radar signal and object perception.", "Radar detections, tracking, classification, and sensor interfaces.", "Design processing methods; tune performance; analyze scenario failures; support integration.", "Radar algorithm specifications, calibration data, evaluation reports."],
+  "RF engineer": ["Develops the RF aspects of radar sensing.", "Antenna, radio performance, interference, and RF verification.", "Analyze RF design; test performance; investigate interference; document compliance evidence.", "RF design analysis, measurements, test reports, issue records."],
+  "Driving Funciton Architect": ["Architects driving functions and their interfaces.", "Function behavior, control interactions, modes, and safety constraints.", "Define function architecture; allocate requirements; review interfaces and design tradeoffs.", "Function architecture, behavior models, interface specification, design decisions."],
+  "DF Experts": ["Defines and assesses driving function behavior.", "Feature logic, operational scenarios, and performance targets.", "Refine function requirements; assess scenarios; review algorithms and test outcomes.", "Function requirements, scenario catalogue, analysis and review records."],
+  "DF Developer": ["Implements driving function software.", "Feature logic, interfaces, and unit-level behavior.", "Implement and review code; write unit tests; resolve defects; maintain traceability.", "Source code, unit tests, code review records, defect fixes."],
+  "Environment Model": ["Builds the fused representation of the driving environment.", "Object, lane, and scene state from sensor inputs.", "Define fusion behavior; integrate sensor data; evaluate accuracy and uncertainty.", "Environment model specification, fusion implementation, validation reports."],
+  "Motion planner & Controller": ["Develops trajectory planning and vehicle control.", "Trajectory selection, control behavior, constraints, and safety limits.", "Design planning and control logic; tune behavior; verify scenario performance.", "Planning and control design, implementation, simulation results, verification evidence."],
+  "State Estimation": ["Estimates vehicle and environment state.", "Localization, motion state, uncertainty, and signal fusion.", "Develop estimation algorithms; assess sensor quality; verify stability and accuracy.", "Estimator design, parameter baseline, performance and test reports."],
+  "*Data Pipeline": ["Builds the data flow for training and validation.", "Ingestion, curation, versioning, quality, and dataset delivery.", "Automate data processing; validate quality; track dataset lineage and access.", "Pipeline code, dataset manifests, quality reports, lineage records."],
+  "*Data Labelling(Outsourced)": ["Provides annotated data for model training and evaluation.", "Annotation guidelines, supplier delivery, and label quality.", "Apply labelling rules; assess annotation quality; correct disputed labels.", "Annotated datasets, label quality reports, supplier acceptance records."],
+  "* Simulation": ["Provides scenario simulation capability.", "Simulation scenarios, models, execution, and correlation.", "Build scenarios; maintain simulation assets; compare simulated and real results.", "Scenario library, simulation models, execution reports, correlation evidence."],
+  "*MLOPS": ["Maintains the model development and release pipeline.", "Training automation, model registry, reproducibility, and deployment.", "Automate builds; version models and data; monitor evaluation gates; prepare releases.", "ML pipelines, model registry entries, reproducibility logs, release records."],
+  "*L3  Test": ["Executes L3-level testing and analysis.", "Integrated feature scenarios, test coverage, and result triage.", "Prepare test campaigns; execute and analyze runs; raise defects and track closure.", "Test plan, cases, run logs, defects, test summary."],
+  "SW Architect": ["Defines the platform software structure.", "Base software, interfaces, integration patterns, and technical constraints.", "Allocate software requirements; design interfaces; review component integration.", "Software architecture, interface definitions, allocation and design reviews."],
+  "SW Developer (Outsourcing)": ["Implements assigned platform software components.", "Base software and integration deliverables under agreed supplier scope.", "Implement and unit-test components; resolve findings; provide traceable delivery evidence.", "Source code, unit tests, integration package, review and defect records."],
+  "SW Integrator + CI,CD": ["Integrates software and maintains build automation.", "Builds, continuous integration, deployment, and release packaging.", "Maintain pipelines; integrate components; investigate build failures; baseline releases.", "CI/CD configuration, build logs, integration results, software release package."],
+  "Vehicle Integration Lead": ["Coordinates vehicle-level integration.", "Vehicle readiness, interfaces, configuration, and test entry criteria.", "Plan integration; align subsystem teams; resolve interface issues; approve test readiness.", "Vehicle integration plan, configuration record, issue log, readiness review."],
+  "HIL Experts": ["Develops and runs hardware-in-the-loop tests.", "HIL benches, plant models, automation, and test coverage.", "Maintain benches; create HIL tests; analyze failures and correlate results.", "HIL test environment, automated cases, execution logs, defect reports."],
+  "Test Engineer": ["Executes verification tests and reports results.", "Defined test cases, environments, coverage, and defects.", "Prepare and run tests; record evidence; investigate failures; maintain traceability.", "Test cases, execution records, defect reports, verification summary."],
+  "Vehile test Expert": ["Defines and evaluates vehicle test campaigns.", "Road or proving-ground scenarios, safety controls, and test results.", "Plan tests; review instrumentation; analyze outcomes; recommend corrective actions.", "Vehicle test plan, measurement data, test analysis, issue reports."],
+  "Vehicle test Engineers": ["Runs and documents vehicle tests.", "Vehicle setup, data collection, execution, and observations.", "Prepare vehicles; perform test runs; capture data; report anomalies and retests.", "Vehicle test logs, datasets, defect reports, retest evidence."],
+  "Process & Quality Lead": ["Leads process and quality assurance for the program.", "Process compliance, audits, quality risks, and release evidence.", "Plan quality activities; assess compliance; track corrective actions; support gate reviews.", "Quality plan, audit records, nonconformity log, corrective actions, release assessment."]
+};
+
+function adasRoleHref(discipline, role) {
+  return `#/organization-units/adas/org-roles/${slugify(discipline)}/${slugify(role)}`;
+}
+
+function renderAdasOrgRolesPage() {
+  app.innerHTML = `<div class="workspace-page adas-resource-page"><div class="breadcrumb"><a href="#/home">Home</a><span>/</span><a href="#/organization-units/adas">ADAS</a><span>/</span><span>Org Roles</span></div><section class="detail-hero"><div class="hero-panel"><h1>Org Roles</h1><p>Disciplines and roles in the ADAS resource matrix. Select a role for its scope, responsibilities, and expected work products.</p></div></section><section class="info-block"><div class="adas-org-role-grid">${adasRoleGroups.map(([discipline, roles]) => `<article class="adas-org-role-card"><h2>${escapeHtml(discipline)}</h2><ul>${roles.map(row => `<li><a href="${adasRoleHref(discipline,row[0].trim())}">${escapeHtml(row[0].trim())}</a></li>`).join("")}</ul></article>`).join("")}</div></section></div>`;
+}
+
+function renderAdasOrgRoleDetail(disciplineId, roleId) {
+  const group = adasRoleGroups.find(([name]) => slugify(name) === disciplineId);
+  const row = group?.[1].find(item => slugify(item[0].trim()) === roleId);
+  if (!row) { renderAdasOrgRolesPage(); return; }
+  const discipline = group[0], role = row[0].trim();
+  const [description, scope, responsibilities, workProducts] = adasRoleDetails[role] || [`Supports ${discipline} engineering activities.`, `${discipline} tasks assigned by the program.`, "Plan assigned work; coordinate interfaces; review results and resolve findings.", "Reviewed engineering outputs, traceability, issue records, and release evidence."];
+  app.innerHTML = `<div class="workspace-page adas-resource-page"><div class="breadcrumb"><a href="#/home">Home</a><span>/</span><a href="#/organization-units/adas">ADAS</a><span>/</span><a href="#/organization-units/adas/org-roles">Org Roles</a><span>/</span><span>${escapeHtml(role)}</span></div><section class="detail-hero"><div class="hero-panel"><h1>${escapeHtml(role)}</h1><p>${escapeHtml(discipline)}</p></div></section><section class="adas-role-detail-grid"><section class="info-block"><h2>Description</h2><p>${escapeHtml(description)}</p></section><section class="info-block"><h2>Scope</h2><p>${escapeHtml(scope)}</p></section><section class="info-block"><h2>Responsibilities</h2><p>${escapeHtml(responsibilities)}</p></section><section class="info-block"><h2>Work products expected</h2><p>${escapeHtml(workProducts)}</p></section></section><nav class="maturity-pager"><a href="#/organization-units/adas/org-roles"><small>Return</small><strong>Org Roles</strong></a></nav></div>`;
 }
 
 function renderAdasProgramPage(programId) {
@@ -2481,6 +2531,11 @@ function route() {
     app.innerHTML = window.EvConfiguration.render();
   } else if (hash === "#/organization-units/ev-power-train/configuration-structure" && window.EvStructure) {
     app.innerHTML = window.EvStructure.render();
+  } else if (hash.startsWith("#/organization-units/adas/org-roles/")) {
+    const [disciplineId, roleId] = hash.replace("#/organization-units/adas/org-roles/", "").split(/[/?]/);
+    renderAdasOrgRoleDetail(disciplineId, roleId);
+  } else if (hash === "#/organization-units/adas/org-roles") {
+    renderAdasOrgRolesPage();
   } else if (hash.startsWith("#/organization-units/adas/")) {
     renderAdasProgramPage(hash.replace("#/organization-units/adas/", "").split(/[/?]/)[0]);
   } else if (hash === "#/organization-units/adas") {
